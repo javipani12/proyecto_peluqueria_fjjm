@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,11 +27,9 @@ class HomeScreen extends StatelessWidget {
                     child: Center(child: Text('Iniciar sesion')),
                   ),
                   onPressed: () {
-                    /*Descomentar cuando este el archivo de login
                     final route = MaterialPageRoute(
                         builder: (context) => const LoginScreen());
                     Navigator.push(context, route);
-                    */
                   },
                 ),
                 const SizedBox(height: 10),
@@ -42,11 +41,10 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    /* Descomentar cuando este el archivo de registro  
                   final route = MaterialPageRoute(
                         builder: (context) => const RegisterScreen());
                     Navigator.push(context, route);
-                    */
+                  
                   },
                 ),
                 Row(

@@ -17,6 +17,10 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       home: const HomeScreen(),
       theme: AppThemes.lightTheme,
+      routes: {
+        'iniciarSesion':(context) => LoginScreen(),
+        'registrar':(context) => RegisterScreen()
+      },
     );
   }
 }
