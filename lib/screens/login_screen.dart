@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/routes/routes.dart';
 
-class SignInScreen extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
    
-  const SignInScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,8 @@ class SignInScreen extends StatelessWidget {
     final myFormKey = GlobalKey<FormState>();
 
     final Map<String, String> formValues = {
-      'email': 'defaultEmail',
-      'contrasenna': 'defaultPassword'
+      'email': '',
+      'password': ''
     };
 
     return Scaffold(
@@ -27,16 +27,17 @@ class SignInScreen extends StatelessWidget {
                 const FlutterLogo(size: 100),
                 const SizedBox(height: 30,),
                 CustomTextFormField(
-                  hintText: 'Example',
+                  hintText: 'Ejemplo@ejemplo.com',
                   suffixIcon: Icons.group,
                   formProperty: 'email',
                   formValues: formValues,
                 ),
                 const SizedBox(height: 30,),
                 CustomTextFormField(
-                  hintText: 'Example',
+                  hintText: 'Contraseña',
+                  suffixIcon: Icons.password_outlined,
                   obscureText: true,
-                  formProperty: 'contrasenna',
+                  formProperty: 'password',
                   formValues: formValues,
                 ),
                 const SizedBox(height: 30,),

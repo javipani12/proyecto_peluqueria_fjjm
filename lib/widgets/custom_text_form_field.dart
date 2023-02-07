@@ -33,12 +33,12 @@ class CustomTextFormField extends StatelessWidget {
           if( !formValues['email']!.contains("@")){
             return 'El email no es válido';
           }
-        } else {
-          if(formValues['contrasenna'] == value) {
-            if( formValues['contrasenna']!.isEmpty){
-              return 'La contraseña no es válida';
-            } 
-          }
+        }
+        
+        if(formValues['password'] == value) {
+          if( formValues['password']!.length == 0){
+            return 'La contraseña no es válida';
+          } 
         }
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,

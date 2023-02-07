@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       home: const HomeScreen(),
       theme: AppThemes.lightTheme,
       routes: {
-        'iniciarSesion':(context) => SignInScreen(),
-        'registrar':(context) => SignUpScreen()
+        'iniciarSesion':(context) => LoginScreen(),
+        'registrar':(context) => RegisterScreen()
       },
     );
   }

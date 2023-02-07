@@ -2,26 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/routes/routes.dart';
 
-class SignUpScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
    
-  const SignUpScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
     final myFormKey = GlobalKey<FormState>();
 
-    final Map<String, String> formValues = {
-      'nombre': 'defaultNombre',
-      'apellidos': 'defaultApellidos',
-      'sexoMasculino' : '1',
-      'sexoFemenino' : '0',
-      'email': 'defaultEmail',
-      'telefono' : 'defaultTelefono',
-      'contrasenna': 'defaultContrasenna',
-      'comprobarContrasenna': 'defaultContrasenna',
-      'aceptarPromociones' : '1',
-      'aceptarPrivacidad' : '1'
-
+    final Map<String, dynamic> formValues = {
+      'name': '',
+      'lastname': '',
+      'maleGender' : '',
+      'femaleGender' : '',
+      'email': '',
+      'phoneNumber' : '',
+      'password': '',
+      'checkPassword': '',
+      'acceptPublicity' : '',
+      'acceptPrivacy' : ''
     };
 
     return Scaffold(
@@ -37,23 +36,30 @@ class SignUpScreen extends StatelessWidget {
                 CustomTextFormFieldRegister(
                   hintText: 'Nombre',
                   suffixIcon: Icons.group,
-                  formProperty: 'nombre',
+                  formProperty: 'name',
                   formValues: formValues,
                 ),
                 const SizedBox(height: 30,),
                 CustomTextFormFieldRegister(
                   hintText: 'Apellidos',
                   suffixIcon: Icons.group,
-                  formProperty: 'apellidos',
+                  formProperty: 'lastname',
                   formValues: formValues,
                 ),
                 const SizedBox(height: 30,),
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: const Text('Seleccione un sexo:')),
                 CustomCheckboxFormFieldRegister(
                   titulo: 'Masculino',
-                  formProperty: 'sexo', 
+                  formProperty: 'maleGender', 
                   formValues: formValues,
                 ),
-                const SizedBox(height: 30,),
+                CustomCheckboxFormFieldRegister(
+                  titulo: 'Femenino',
+                  formProperty: 'femaleGender', 
+                  formValues: formValues,
+                ),
                 CustomTextFormFieldRegister(
                   hintText: 'Email',
                   suffixIcon: Icons.email_outlined,
@@ -65,7 +71,7 @@ class SignUpScreen extends StatelessWidget {
                 CustomTextFormFieldRegister(
                   hintText: 'Telefono',
                   suffixIcon: Icons.phone_android_outlined,
-                  formProperty: 'telefono',
+                  formProperty: 'phoneNumber',
                   email: TextInputType.emailAddress,
                   formValues: formValues,
                 ),
@@ -74,7 +80,7 @@ class SignUpScreen extends StatelessWidget {
                   hintText: 'Contraseña',
                   suffixIcon: Icons.password_outlined,
                   obscureText: true,
-                  formProperty: 'contrasenna',
+                  formProperty: 'password',
                   formValues: formValues,
                 ),
                 const SizedBox(height: 30,),
@@ -82,21 +88,18 @@ class SignUpScreen extends StatelessWidget {
                   hintText: 'Contraseña',
                   suffixIcon: Icons.password_outlined,
                   obscureText: true,
-                  formProperty: 'comprobarContrasenna',
+                  formProperty: 'checkPassword',
                   formValues: formValues,
                 ),
                 const SizedBox(height: 30,),
-                CustomTextFormFieldRegister(
-                  hintText: 'Example',
-                  obscureText: true,
-                  formProperty: 'aceptarPromociones',
+                CustomCheckboxFormFieldRegister(
+                  titulo: 'Aceptar política de privacidad',
+                  formProperty: 'acceptPrivacy', 
                   formValues: formValues,
                 ),
-                const SizedBox(height: 30,),
-                CustomTextFormFieldRegister(
-                  hintText: 'Example',
-                  obscureText: true,
-                  formProperty: 'aceptarPrivacidad',
+                CustomCheckboxFormFieldRegister(
+                  titulo: 'Aceptar envío de promociones',
+                  formProperty: 'acceptPublicity', 
                   formValues: formValues,
                 ),
                 const SizedBox(height: 30,),

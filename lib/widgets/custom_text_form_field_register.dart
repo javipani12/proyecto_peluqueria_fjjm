@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +33,51 @@ class CustomTextFormFieldRegister extends StatelessWidget{
       obscureText: obscureText,
       keyboardType: email,
       validator: (value) {
+        if( formValues['name'] == value ) {
 
+          if( formValues['name'].length == 0 ) {
+            return 'La longitud del nombre no es válida';
+          }
+
+          if ( formValues['name'].length > 20 ) {
+            return 'La longitud del nombre no puede ser mayor a 20';
+          }
+
+        } else if( formValues['lastname'] == value ) {
+
+          if( formValues['lastname'].length == 0 ) {
+            return 'La longitud de los apellidos no es válida';
+          }
+
+          if ( formValues['lastname'].length > 80 ) {
+            return 'La longitud de los apellidos no puede ser mayor a 80';
+          }
+
+        } else if(formValues['email'] == value){
+
+          if( !formValues['email']!.contains("@")){
+            return 'El email no es válido';
+          }
+          
+        } else if(formValues['phoneNumber'] == value){
+
+          if( formValues['phoneNumber'].length != 9){
+            return 'La longitud del número debe ser de nueve dígitos';
+          }
+
+        } else if(formValues['password'] == value){
+
+          if( formValues['password'].length < 8){
+            return 'La longitud mínima de la contraseña debe ser de ocho dígitos';
+          }
+
+        } else if(formValues['checkPassword'] == value){
+
+          if( formValues['checkPassword'] != formValues['password']){
+            return 'Las contraseñas no coinciden';
+          }
+
+        } 
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
@@ -63,22 +105,21 @@ class CustomCheckboxFormFieldRegister extends StatelessWidget {
   Widget build(BuildContext context) {
     return CheckboxListTileFormField(
       title: Text(titulo),
-      onSaved: (bool? value) {
-        print(value);
-      },
       onChanged: (value) => formValues[formProperty] = value,
       validator: (value) {
-        if( formValues['sexo'] == value ) {
-
-        } else {
-          if( formValues['aceptarPromociones'] == value ){
-
-          } else {
-            if( formValues['aceptarPrivacidad'] == value ){
-
-            }
-          }
+        
+        if(formValues['maleGender'] == true && formValues['femaleGender'] == true) {
+          return 'Solamente puedes seleccionar un género';
         }
+
+        if(formValues['maleGender'] == false && formValues['femaleGender'] == false) {
+          return 'Debes seleccionar un género';
+        }
+
+        if(formValues['acceptPrivacy'] == false) {
+          return 'Debes aceptar la política de privacidad';
+        }
+
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       contentPadding: const EdgeInsets.all(1),

@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     final route = MaterialPageRoute(
-                        builder: (context) => const SignInScreen());
+                        builder: (context) => const LoginScreen());
                     Navigator.push(context, route);
                   },
                 ),
@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                   final route = MaterialPageRoute(
-                        builder: (context) => const SignUpScreen());
+                        builder: (context) => const RegisterScreen());
                     Navigator.push(context, route);
                   
                   },
