@@ -15,8 +15,8 @@ class HomeScreen extends StatelessWidget {
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.network(
-                  'https://game-icons.net/icons/ffffff/000000/1x1/lorc/lightning-shield.png',
+                Image.asset(
+                  'assets/splash.jpg',
                   fit: BoxFit.cover,
                   width: 300,
                 ),
@@ -41,10 +41,9 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                  final route = MaterialPageRoute(
+                    final route = MaterialPageRoute(
                         builder: (context) => const RegisterScreen());
                     Navigator.push(context, route);
-                  
                   },
                 ),
                 Row(
