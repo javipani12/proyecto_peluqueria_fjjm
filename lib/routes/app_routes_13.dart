@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class AppRoutes {
   static final MenuOption = <MenuOptions>[
+    /* Hay que poner solo esos campos 
     MenuOptions(name: 'Pedir cita', screen: const PedirCitaScreen()),
-    MenuOptions(name: 'Reservas', screen: const MisReservasScreen()),
-    MenuOptions(name: 'Perfil', screen: const PerfilScreen()),
+*/
   ];
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {
     Map<String, Widget Function(BuildContext)> appRoutes = {};

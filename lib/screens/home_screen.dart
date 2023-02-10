@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -7,46 +8,42 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.black45,
+        color: Colors.black87,
         child: ListView(
           padding: EdgeInsets.only(top: 100),
           children: [
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.network(
-                  'https://game-icons.net/icons/ffffff/000000/1x1/lorc/lightning-shield.png',
+                Image.asset(
+                  'assets/splash.jpg',
                   fit: BoxFit.cover,
                   width: 300,
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   child: const SizedBox(
-                    width: 100,
+                    width: double.infinity,
                     child: Center(child: Text('Iniciar sesion')),
                   ),
                   onPressed: () {
-                    /*Descomentar cuando este el archivo de login
                     final route = MaterialPageRoute(
                         builder: (context) => const LoginScreen());
                     Navigator.push(context, route);
-                    */
                   },
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   child: const SizedBox(
-                    width: 100,
+                    width: double.infinity,
                     child: Center(
                       child: Text('Registrarme'),
                     ),
                   ),
                   onPressed: () {
-                    /* Descomentar cuando este el archivo de registro  
-                  final route = MaterialPageRoute(
+                    final route = MaterialPageRoute(
                         builder: (context) => const RegisterScreen());
                     Navigator.push(context, route);
-                    */
                   },
                 ),
                 Row(
