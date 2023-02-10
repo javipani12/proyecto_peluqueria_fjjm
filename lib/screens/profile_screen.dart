@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/edit_profile_screen.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/routes/routes.dart';
 
-class EditProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatelessWidget {
    
-  const EditProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {

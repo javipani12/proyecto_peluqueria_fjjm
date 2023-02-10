@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
     final Map<String, String> formValues = {
       'email': '',
       'password': ''
-    }; String> formValues = {'email': '', 'password': ''};
+    };
 
 
     return Scaffold(
@@ -59,7 +59,10 @@ class LoginScreen extends StatelessWidget {
                     print('Formulario no válido');
                     return;
                   } else {
-                    print(formValues);
+                    final route = MaterialPageRoute(
+                      builder: (context) => const AppointmentScreen()
+                    );
+                    Navigator.push(context, route);
                   }
                 },
                 child: const SizedBox(
