@@ -3,8 +3,8 @@ import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/routes/routes.dart';
 
 class RegisterScreen extends StatelessWidget {
+   
   const RegisterScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final myFormKey = GlobalKey<FormState>();

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: AppThemes.lightTheme,
       routes: {
         'iniciarSesion':(context) => LoginScreen(),
-        'registrar':(context) => RegisterScreen()
+        'registrar':(context) => RegisterScreen(),
       },
     );
   }

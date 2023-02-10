@@ -9,6 +9,7 @@ class buttonNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       elevation: 1,
       onTap: (index) {
         final paginas = MaterialPageRoute(
@@ -23,7 +24,7 @@ class buttonNavigationBar extends StatelessWidget {
           icon: Icon(Icons.wifi_tethering),
           label: "Mis Reservas",
         ),
-        // BottomNavigationBarItem(icon: Icon(Icons.phone), label: "llamanos"),
+        BottomNavigationBarItem(icon: Icon(Icons.phone), label: "llamanos"),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: "Perfil"),
       ],
     );

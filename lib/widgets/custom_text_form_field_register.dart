@@ -1,7 +1,9 @@
 import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextFormFieldRegister extends StatelessWidget {
+
+class CustomTextFormFieldRegister extends StatelessWidget{
+
   final String? hintText;
   final String? helperText;
   final IconData? suffixIcon;
@@ -105,10 +107,11 @@ class CustomCheckboxFormFieldRegister extends StatelessWidget {
   final Map<String, dynamic> formValues;
   final String titulo;
 
-  const CustomCheckboxFormFieldRegister(
-      {required this.formProperty,
-      required this.formValues,
-      required this.titulo});
+  const CustomCheckboxFormFieldRegister ({
+    required this.formProperty,
+    required this.formValues, 
+    required this.titulo
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -116,19 +119,11 @@ class CustomCheckboxFormFieldRegister extends StatelessWidget {
       title: Text(titulo),
       onChanged: (value) => formValues[formProperty] = value,
       validator: (value) {
-        if (formValues['maleGender'] == true &&
-            formValues['femaleGender'] == true) {
-          return 'Solamente puedes seleccionar un género';
-        }
 
-        if (formValues['maleGender'] == false &&
-            formValues['femaleGender'] == false) {
-          return 'Debes seleccionar un género';
-        }
-
-        if (formValues['acceptPrivacy'] == false) {
+        if(formValues['acceptPrivacy'] == false) {
           return 'Debes aceptar la política de privacidad';
         }
+        
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       contentPadding: const EdgeInsets.all(1),
