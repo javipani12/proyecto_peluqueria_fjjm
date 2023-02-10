@@ -86,7 +86,7 @@ class RegisterScreen extends StatelessWidget {
                 height: 30,
               ),
               CustomTextFormFieldRegister(
-                hintText: 'Contraseña',
+                hintText: 'Repetir contraseña',
                 suffixIcon: Icons.password_outlined,
                 obscureText: true,
                 formProperty: 'checkPassword',
@@ -119,8 +119,12 @@ class RegisterScreen extends StatelessWidget {
                   }
                 },
                 child: const SizedBox(
-                    width: double.infinity,
-                    child: Center(child: Text('Registrarse'))),
+                  width: double.infinity,
+                  child: Center(
+                    child: 
+                      Text('Registrarse')
+                  )
+                ),
               ),
             ],
           ),

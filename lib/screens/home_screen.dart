@@ -23,26 +23,28 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   child: const SizedBox(
-                    width: double.infinity,
+                    width: 200,
                     child: Center(child: Text('Iniciar sesion')),
                   ),
                   onPressed: () {
                     final route = MaterialPageRoute(
-                        builder: (context) => const EditProfileScreen());
+                        builder: (context) => const LoginScreen()
+                    );
                     Navigator.push(context, route);
                   },
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   child: const SizedBox(
-                    width: double.infinity,
+                    width: 200,
                     child: Center(
-                      child: Text('Registrarme'),
+                      child: Text('Registrarse'),
                     ),
                   ),
                   onPressed: () {
                     final route = MaterialPageRoute(
-                        builder: (context) => const RegisterScreen());
+                      builder: (context) => const RegisterScreen()
+                    );
                     Navigator.push(context, route);
                   },
                 ),

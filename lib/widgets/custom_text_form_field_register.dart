@@ -39,22 +39,22 @@ class CustomTextFormFieldRegister extends StatelessWidget{
         if (hintText == 'Nombre') {
           if (formValues['name'] == value) {
             if (formValues['name'].length == 0) {
-              return 'La longitud del nombre no es válida';
+              return 'La longitud no es válida';
             }
 
             if (formValues['name'].length > 20) {
-              return 'La longitud del nombre no puede ser mayor a 20';
+              return 'La longitud no puede ser mayor a 20';
             }
           }
         } else {
           if (hintText == 'Apellidos') {
             if (formValues['lastname'] == value) {
               if (formValues['lastname'].length == 0) {
-                return 'La longitud de los apellidos no es válida';
+                return 'La longitud no es válida';
               }
 
               if (formValues['lastname'].length > 80) {
-                return 'La longitud de los apellidos no puede ser mayor a 80';
+                return 'La longitud no puede ser mayor a 80';
               }
             }
           } else {
@@ -68,14 +68,14 @@ class CustomTextFormFieldRegister extends StatelessWidget{
               if (hintText == 'Telefono') {
                 if (formValues['phoneNumber'] == value) {
                   if (formValues['phoneNumber'].length != 9) {
-                    return 'La longitud del número debe ser de nueve dígitos';
+                    return 'El número debe contener nueve dígitos';
                   }
                 }
               } else {
                 if (hintText == 'Contraseña') {
                   if (formValues['password'] == value) {
                     if (formValues['password'].length < 8) {
-                      return 'La longitud mínima de la contraseña debe ser de ocho dígitos';
+                      return 'Longitud mínima de ocho dígitos';
                     }
                   } else {
                     if (formValues['checkPassword'] == value) {
