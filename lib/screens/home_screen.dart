@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.black45,
+        color: Colors.black87,
         child: ListView(
           padding: EdgeInsets.only(top: 100),
           children: [
@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   child: const SizedBox(
-                    width: 100,
+                    width: double.infinity,
                     child: Center(child: Text('Iniciar sesion')),
                   ),
                   onPressed: () {
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 ElevatedButton(
                   child: const SizedBox(
-                    width: 100,
+                    width: double.infinity,
                     child: Center(
                       child: Text('Registrarme'),
                     ),
