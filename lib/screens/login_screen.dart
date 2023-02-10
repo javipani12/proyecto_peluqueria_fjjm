@@ -48,7 +48,13 @@ class LoginScreen extends StatelessWidget {
                       print('Formulario no válido');
                       return;
                     } else {
+<<<<<<< Updated upstream
                       print(formValues);
+=======
+                      final route = MaterialPageRoute(
+                        builder: (context) => const PedirCitaScreen());
+                        Navigator.push(context, route);
+>>>>>>> Stashed changes
                     }
                   }, 
                   child: const SizedBox(
