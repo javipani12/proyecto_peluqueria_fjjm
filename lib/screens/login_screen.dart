@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/routes/routes.dart';
 
@@ -48,7 +49,9 @@ class LoginScreen extends StatelessWidget {
                       print('Formulario no válido');
                       return;
                     } else {
-                      print(formValues);
+                      final route = MaterialPageRoute(
+                        builder: (context) => const PedirCitaScreen());
+                    Navigator.push(context, route);
                     }
                   }, 
                   child: const SizedBox(
