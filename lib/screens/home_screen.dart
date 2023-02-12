@@ -58,11 +58,12 @@ class HomeScreen extends StatelessWidget {
                       width: 50,
                       color: Colors.white,
                       child: GestureDetector(
-                          onTap: () => print(1),
-                          child: Image.network(
-                            'https://logos-world.net/wp-content/uploads/2020/09/Google-Symbol.png',
-                            fit: BoxFit.cover,
-                          )),
+                        onTap: () => print(1),
+                        child: Image.network(
+                          'https://logos-world.net/wp-content/uploads/2020/09/Google-Symbol.png',
+                          fit: BoxFit.cover,
+                        )
+                      ),
                     ),
                     Container(
                       margin:

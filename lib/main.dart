@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:proyecto_peluqueria_fjjm/routes/app_routes.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 
@@ -17,10 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Material App',
       home: const HomeScreen(),
       theme: AppThemes.lightTheme,
-      routes: {
-        'iniciarSesion':(context) => LoginScreen(),
-        'registrar':(context) => RegisterScreen(),
-      },
+      routes: AppRoutes.getAppRoutes(),
     );
   }
 }
