@@ -23,28 +23,26 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   child: const SizedBox(
-                    width: 200,
+                    width: double.infinity,
                     child: Center(child: Text('Iniciar sesion')),
                   ),
                   onPressed: () {
                     final route = MaterialPageRoute(
-                        builder: (context) => const LoginScreen()
-                    );
+                        builder: (context) => const LoginScreen());
                     Navigator.push(context, route);
                   },
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                   child: const SizedBox(
-                    width: 200,
+                    width: double.infinity,
                     child: Center(
                       child: Text('Registrarse'),
                     ),
                   ),
                   onPressed: () {
                     final route = MaterialPageRoute(
-                      builder: (context) => const RegisterScreen()
-                    );
+                        builder: (context) => const RegisterScreen());
                     Navigator.push(context, route);
                   },
                 ),
@@ -56,13 +54,20 @@ class HomeScreen extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                       height: 50,
                       width: 50,
-                      color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 5,
+                        ),
+                      ),
                       child: GestureDetector(
                         onTap: () => print(1),
                         child: Image.network(
                           'https://logos-world.net/wp-content/uploads/2020/09/Google-Symbol.png',
                           fit: BoxFit.cover,
-                        )
+                        ),
                       ),
                     ),
                     Container(
@@ -70,13 +75,18 @@ class HomeScreen extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                       height: 50,
                       width: 50,
-                      color: Colors.blue.shade900,
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade900,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: GestureDetector(
-                          onTap: () => print(1),
-                          child: Image.network(
-                            'https://journals.opscidia.com/public/site/facebook-logo.png',
-                            fit: BoxFit.cover,
-                          )),
+                        onTap: () => print(1),
+                        child: Image.network(
+                          'https://journals.opscidia.com/public/site/facebook-logo.png',
+                          fit: BoxFit.contain,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ],
                 )

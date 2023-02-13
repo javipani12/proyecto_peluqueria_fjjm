@@ -1,9 +1,7 @@
 import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
 
-
-class CustomTextFormFieldRegister extends StatelessWidget{
-
+class CustomTextFormFieldRegister extends StatelessWidget {
   final String? hintText;
   final String? helperText;
   final IconData? suffixIcon;
@@ -37,57 +35,36 @@ class CustomTextFormFieldRegister extends StatelessWidget{
       keyboardType: keyboardType,
       validator: (value) {
         if (hintText == 'Nombre') {
-          if (formValues['name'] == value) {
-            if (formValues['name'].length == 0) {
-              return 'La longitud no es válida';
-            }
-
-            if (formValues['name'].length > 20) {
-              return 'La longitud no puede ser mayor a 20';
-            }
+          if (formValues['name'].length == 0) {
+            return 'La longitud no es válida';
           }
-        } else {
-          if (hintText == 'Apellidos') {
-            if (formValues['lastname'] == value) {
-              if (formValues['lastname'].length == 0) {
-                return 'La longitud no es válida';
-              }
 
-              if (formValues['lastname'].length > 80) {
-                return 'La longitud no puede ser mayor a 80';
-              }
-            }
-          } else {
-            if (hintText == 'Email') {
-              if (formValues['email'] == value) {
-                if (!formValues['email']!.contains("@")) {
-                  return 'El email no es válido';
-                }
-              }
-            } else {
-              if (hintText == 'Telefono') {
-                if (formValues['phoneNumber'] == value) {
-                  if (formValues['phoneNumber'].length != 9) {
-                    return 'El número debe contener nueve dígitos';
-                  }
-                }
-              } else {
-                if (hintText == 'Contraseña') {
-                  if (formValues['password'] == value) {
-                    if (formValues['password'].length < 8) {
-                      return 'Longitud mínima de ocho dígitos';
-                    }
-                  } else {
-                    if (formValues['checkPassword'] == value) {
-                      if (formValues['checkPassword'] !=
-                          formValues['password']) {
-                        return 'Las contraseñas no coinciden';
-                      }
-                    }
-                  }
-                }
-              }
-            }
+          if (formValues['name'].length > 20) {
+            return 'La longitud no puede ser mayor a 20';
+          }
+        } else if (hintText == 'Apellidos') {
+          if (formValues['lastname'].length == 0) {
+            return 'La longitud no es válida';
+          }
+
+          if (formValues['lastname'].length > 80) {
+            return 'La longitud no puede ser mayor a 80';
+          }
+        } else if (hintText == 'Email') {
+          if (!formValues['email']!.contains("@")) {
+            return 'El email no es válido';
+          }
+        } else if (hintText == 'Telefono') {
+          if (formValues['phoneNumber'].length != 9) {
+            return 'El número debe contener nueve dígitos';
+          }
+        } else if (hintText == 'Contraseña') {
+          if (formValues['password'].length < 8) {
+            return 'Longitud mínima de ocho dígitos';
+          }
+        } else if (hintText == 'Repetir contraseña') {
+          if (formValues['checkPassword'] != formValues['password']) {
+            return 'Las contraseñas no coinciden';
           }
         }
       },
@@ -107,11 +84,10 @@ class CustomCheckboxFormFieldRegister extends StatelessWidget {
   final Map<String, dynamic> formValues;
   final String titulo;
 
-  const CustomCheckboxFormFieldRegister ({
-    required this.formProperty,
-    required this.formValues, 
-    required this.titulo
-  });
+  const CustomCheckboxFormFieldRegister(
+      {required this.formProperty,
+      required this.formValues,
+      required this.titulo});
 
   @override
   Widget build(BuildContext context) {
@@ -119,11 +95,15 @@ class CustomCheckboxFormFieldRegister extends StatelessWidget {
       title: Text(titulo),
       onChanged: (value) => formValues[formProperty] = value,
       validator: (value) {
-
-        if(formValues['acceptPrivacy'] == false) {
-          return 'Debes aceptar la política de privacidad';
+        if (titulo.contains('promociones')) {
+          if (formValues['acceptPublicity'] == value) {
+            if (!formValues['acceptPublicity']) {}
+          }
+        } else if (formValues['acceptPrivacy'] == value) {
+          if (!formValues['acceptPrivacy']) {
+            return 'Debes aceptar la política de privacidad';
+          }
         }
-        
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       contentPadding: const EdgeInsets.all(1),
