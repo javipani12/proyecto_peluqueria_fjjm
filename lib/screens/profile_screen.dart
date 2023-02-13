@@ -10,7 +10,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    bottomNavigationBar: buttonNavigationBar(),
     appBar: AppBar(
+      automaticallyImplyLeading: false,
+      title: const Text('Flutter App'),
       actions: [
           IconButton(
             icon: const Icon(Icons.settings),
