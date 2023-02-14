@@ -13,7 +13,7 @@ class ProfileScreen extends StatelessWidget {
     bottomNavigationBar: buttonNavigationBar(),
     appBar: AppBar(
       automaticallyImplyLeading: false,
-      title: const Text('Flutter App'),
+      title: const Text('Perfil'),
       actions: [
           IconButton(
             icon: const Icon(Icons.settings),
