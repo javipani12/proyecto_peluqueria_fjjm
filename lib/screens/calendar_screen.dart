@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter/src/widgets/basic.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
@@ -112,9 +113,11 @@ class _CalendarScreen extends State<CalendarScreen> {
                     ),
                   ],
                 ),
-                TimePickerDialog(
-                    initialTime: TimeOfDay.now(),
-                    initialEntryMode: TimePickerEntryMode.dialOnly),
+                TextButton(
+                    onPressed: null,
+                    child: Text(
+                      '${TimeOfDay.now()}',
+                    )),
                 Container(
                     margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: button()),
