@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/routes/routes.dart';
 
 class LoginScreen extends StatelessWidget {
+   
   const LoginScreen({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
+    
     final myFormKey = GlobalKey<FormState>();
 
-    final Map<String, String> formValues = {'email': '', 'password': ''};
+    final Map<String, String> formValues = {
+      'email': '',
+      'password': ''
+    };
+
 
     return Scaffold(
       body: Form(
@@ -52,7 +59,10 @@ class LoginScreen extends StatelessWidget {
                     print('Formulario no válido');
                     return;
                   } else {
-                    print(formValues);
+                    final route = MaterialPageRoute(
+                      builder: (context) => const AppointmentScreen()
+                    );
+                    Navigator.push(context, route);
                   }
                 },
                 child: const SizedBox(
