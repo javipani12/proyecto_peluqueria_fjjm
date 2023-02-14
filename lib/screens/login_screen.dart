@@ -69,6 +69,17 @@ class LoginScreen extends StatelessWidget {
                     width: double.infinity,
                     child: Center(child: Text('Iniciar Sesión'))),
               ),
+              const SizedBox(height: 20,),
+              TextButton(
+                onPressed: () {
+                  
+                },
+                child: Container(
+                  alignment: AlignmentDirectional.center,
+                  padding: const EdgeInsets.only( right: 10),
+                  child: const Text('¿Has olvidado la contraseña?', style: TextStyle(decoration: TextDecoration.underline),)
+                ),
+              ),
             ],
           ),
         ),
