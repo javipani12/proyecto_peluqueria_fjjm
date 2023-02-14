@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   child: const SizedBox(
-                    width: double.infinity,
+                    width: 200,
                     child: Center(child: Text('Iniciar sesion')),
                   ),
                   onPressed: () {
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 ElevatedButton(
                   child: const SizedBox(
-                    width: double.infinity,
+                    width: 200,
                     child: Center(
                       child: Text('Registrarse'),
                     ),
