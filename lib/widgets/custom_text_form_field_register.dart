@@ -35,36 +35,57 @@ class CustomTextFormFieldRegister extends StatelessWidget {
       keyboardType: keyboardType,
       validator: (value) {
         if (hintText == 'Nombre') {
-          if (formValues['name'].length == 0) {
-            return 'La longitud no es válida';
-          }
+          if (formValues['name'] == value) {
+            if (formValues['name'].length == 0) {
+              return 'La longitud del nombre no es válida';
+            }
 
-          if (formValues['name'].length > 20) {
-            return 'La longitud no puede ser mayor a 20';
+            if (formValues['name'].length > 20) {
+              return 'La longitud del nombre no puede ser mayor a 20';
+            }
           }
-        } else if (hintText == 'Apellidos') {
-          if (formValues['lastname'].length == 0) {
-            return 'La longitud no es válida';
-          }
+        } else {
+          if (hintText == 'Apellidos') {
+            if (formValues['lastname'] == value) {
+              if (formValues['lastname'].length == 0) {
+                return 'La longitud de los apellidos no es válida';
+              }
 
-          if (formValues['lastname'].length > 80) {
-            return 'La longitud no puede ser mayor a 80';
-          }
-        } else if (hintText == 'Email') {
-          if (!formValues['email']!.contains("@")) {
-            return 'El email no es válido';
-          }
-        } else if (hintText == 'Telefono') {
-          if (formValues['phoneNumber'].length != 9) {
-            return 'El número debe contener nueve dígitos';
-          }
-        } else if (hintText == 'Contraseña') {
-          if (formValues['password'].length < 8) {
-            return 'Longitud mínima de ocho dígitos';
-          }
-        } else if (hintText == 'Repetir contraseña') {
-          if (formValues['checkPassword'] != formValues['password']) {
-            return 'Las contraseñas no coinciden';
+              if (formValues['lastname'].length > 80) {
+                return 'La longitud de los apellidos no puede ser mayor a 80';
+              }
+            }
+          } else {
+            if (hintText == 'Email') {
+              if (formValues['email'] == value) {
+                if (!formValues['email']!.contains("@")) {
+                  return 'El email no es válido';
+                }
+              }
+            } else {
+              if (hintText == 'Telefono') {
+                if (formValues['phoneNumber'] == value) {
+                  if (formValues['phoneNumber'].length != 9) {
+                    return 'La longitud del número debe ser de nueve dígitos';
+                  }
+                }
+              } else {
+                if (hintText == 'Contraseña') {
+                  if (formValues['password'] == value) {
+                    if (formValues['password'].length < 8) {
+                      return 'La longitud mínima de la contraseña debe ser de ocho dígitos';
+                    }
+                  } else {
+                    if (formValues['checkPassword'] == value) {
+                      if (formValues['checkPassword'] !=
+                          formValues['password']) {
+                        return 'Las contraseñas no coinciden';
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -95,14 +116,18 @@ class CustomCheckboxFormFieldRegister extends StatelessWidget {
       title: Text(titulo),
       onChanged: (value) => formValues[formProperty] = value,
       validator: (value) {
-        if (titulo.contains('promociones')) {
-          if (formValues['acceptPublicity'] == value) {
-            if (!formValues['acceptPublicity']) {}
-          }
-        } else if (formValues['acceptPrivacy'] == value) {
-          if (!formValues['acceptPrivacy']) {
-            return 'Debes aceptar la política de privacidad';
-          }
+        if (formValues['maleGender'] == true &&
+            formValues['femaleGender'] == true) {
+          return 'Solamente puedes seleccionar un género';
+        }
+
+        if (formValues['maleGender'] == false &&
+            formValues['femaleGender'] == false) {
+          return 'Debes seleccionar un género';
+        }
+
+        if (formValues['acceptPrivacy'] == false) {
+          return 'Debes aceptar la política de privacidad';
         }
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,

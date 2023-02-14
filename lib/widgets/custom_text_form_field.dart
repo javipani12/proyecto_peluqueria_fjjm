@@ -31,12 +31,12 @@ class CustomTextFormField extends StatelessWidget {
       validator: (value) {
         if (hintText == 'Email') {
           if (formValues['email'] == value) {
-            if (!formValues['email']!.contains("@") || !formValues['email']!.contains(".")) {
+            if (!formValues['email']!.contains("@")) {
               return 'El email no es válido';
             }
           }
         } else {
-          if (hintText == 'Contraseña') {
+          if (hintText == 'password') {
             if (formValues['password'] == value) {
               if (formValues['password']!.length == 0) {
                 return 'La contraseña no es válida';
