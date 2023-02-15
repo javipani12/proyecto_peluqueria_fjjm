@@ -9,7 +9,6 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myFormKey = GlobalKey<FormState>();
-
     final Map<String, dynamic> formValues = {
       'name': '',
       'lastname': '',
@@ -22,8 +21,13 @@ class EditProfileScreen extends StatelessWidget {
       'acceptPublicity' : '',
       'acceptPrivacy' : ''
     };
-
-    return Scaffold(
+     return Scaffold(
+    bottomNavigationBar: buttonNavigationBar(),
+    appBar: AppBar(
+      automaticallyImplyLeading: true,
+      title: const Text('Editar'),
+      
+      ),
       body: Form(
         key: myFormKey,
           child: SingleChildScrollView(
@@ -103,10 +107,7 @@ class EditProfileScreen extends StatelessWidget {
             ),
           ),
       ),
-      floatingActionButton: FloatingActionButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Icon(Icons.close),
-                ),
+      
     );
   }
 }
