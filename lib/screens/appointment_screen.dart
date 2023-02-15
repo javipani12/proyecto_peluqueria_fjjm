@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/barber_screen.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
+import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 
 class AppointmentScreen extends StatelessWidget {
    
   const AppointmentScreen({Key? key}) : super(key: key);
+
+  static final List<Peluqueria> listadoPeluquerias = Peluquerias.listaPeluquerias; 
   
   @override
   Widget build(BuildContext context) {
@@ -23,10 +26,12 @@ class AppointmentScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: GridView.count(
-        crossAxisCount: 1,
-        children: [ 
-          Padding(
+      body: ListView.builder(
+        itemCount: listadoPeluquerias.length,
+        itemBuilder: (context, index) {
+          Peluqueria peluqueria = listadoPeluquerias[index];
+
+          return Padding(
             padding: const EdgeInsets.only(right: 8.0, left: 8, top: 2),
             child: Card(
               clipBehavior: Clip.antiAlias,
@@ -35,28 +40,28 @@ class AppointmentScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const FadeInImage(
+                  FadeInImage(
                     width: double.infinity,
                     height: 260,
                     fit: BoxFit.cover,
                     placeholder: AssetImage('assets/jar-loading.gif'), 
                     fadeInDuration: Duration(milliseconds: 360),
-                    image: NetworkImage('https://www.salonsilvianovo.es/images/silvia-novo-peluqueria-unisex-estetica-fene.jpg'),
+                    image: peluqueria.foto,
                   ),
                   Container(
                     alignment: AlignmentDirectional.topStart,
                     padding: const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-                    child: Text('Peluquería'),
+                    child: Text(peluqueria.nombre),
                   ),
                   Container(
                     alignment: AlignmentDirectional.topStart,
                     padding: const EdgeInsets.only(left: 10),
-                    child: const Text('Descripción/Dirección peluquería'),
+                    child: Text(peluqueria.direccion),
                   ),
                   TextButton(
                   onPressed: () {
                     final route = MaterialPageRoute(
-                        builder: (context) => const BarberScreen());
+                        builder: (context) => BarberScreen(peluqueria: peluqueria,));
                     Navigator.push(context, route);
                   },
                   child: Container(
@@ -68,8 +73,7 @@ class AppointmentScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ]
+          );},
       ),    
     );
   }
