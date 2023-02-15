@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 final Map<String, dynamic> calendar = <String, dynamic>{
   'tipo': 'pista de padel',
@@ -12,4 +11,5 @@ final Map<String, String> pago = {
   'apellidos': 'Apellidos',
   'caducidad': '12/26',
   'cvv': '123',
+  'numero': '1222'
 };
