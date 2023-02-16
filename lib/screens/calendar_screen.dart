@@ -1,5 +1,6 @@
 import 'package:booking_calendar/booking_calendar.dart';
 import 'package:flutter/material.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/pago_screen.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -29,13 +30,13 @@ class _CalendarScreen extends State<CalendarScreen> {
         child: const Text('Reservar'),
         onPressed: () {
           calendar['dia'] = today;
-          /*
-          final route = MaterialPageRoute(builder: (context) => PagoScreen());
+
+          final route =
+              MaterialPageRoute(builder: (context) => const PagoScreen());
           Navigator.push(context, route);
           setState(() {
             pulsado = !pulsado;
           });
-          */
         },
       );
     }
@@ -113,7 +114,9 @@ class _CalendarScreen extends State<CalendarScreen> {
                     ),
                   ],
                 ),
-                _BookingCalendar(),
+                _table(),
+
+                /*_BookingCalendar(),*/
                 Container(
                     margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: button()),
@@ -126,6 +129,66 @@ class _CalendarScreen extends State<CalendarScreen> {
   }
 }
 
+class _table extends StatelessWidget {
+  const _table({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Table(
+      children: <TableRow>[
+        TableRow(children: <Widget>[
+          TextButton(
+            child: Text('Button 1'),
+            onPressed: () {},
+          ),
+          TextButton(
+            child: Text('Button 2'),
+            onPressed: () {},
+          ),
+          TextButton(
+            child: Text('Button 2'),
+            onPressed: () {},
+          ),
+        ]),
+        TableRow(
+          children: <Widget>[
+            TextButton(
+              child: Text('Button 3'),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: Text('Button 4'),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: Text('Button 4'),
+              onPressed: () {},
+            ),
+          ],
+        ),
+        TableRow(
+          children: <Widget>[
+            TextButton(
+              child: Text('Button 5'),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: Text('Button 6'),
+              onPressed: () {},
+            ),
+            TextButton(
+              child: Text('Button 6'),
+              onPressed: () {},
+            ),
+          ],
+        )
+      ],
+    );
+  }
+}
+/*
 class _BookingCalendar extends StatefulWidget {
   const _BookingCalendar({
     super.key,
@@ -135,7 +198,7 @@ class _BookingCalendar extends StatefulWidget {
   State<_BookingCalendar> createState() => _BookingCalendarState();
 }
 
-Stream<dynamic>? getBookingStreamMock(
+Stream<dynamic> getBookingStreamMock(
     {required DateTime end, required DateTime start}) {
   return Stream.value([]);
 }
@@ -143,7 +206,7 @@ Stream<dynamic>? getBookingStreamMock(
 final now = DateTime.now();
 
 Future<dynamic> uploadBookingMock({required BookingService newBooking}) async {
-  await Future.delayed(const Duration(seconds: 1));
+  await Future.value(const Duration(seconds: 1));
   converted.add(DateTimeRange(
       start: newBooking.bookingStart, end: newBooking.bookingEnd));
 }
@@ -155,7 +218,7 @@ List<DateTimeRange> convertStreamResultMock({required dynamic streamResult}) {
   ///take care this is only mock, so if you add today as disabledDays it will still be visible on the first load
   ///disabledDays will properly work with real data
   DateTime first = now;
-  DateTime tomorrow = now.add(Duration(days: 1));
+  DateTime tomorrow = DateTime.utc(2030, 3, 14);
 
   converted.add(
       DateTimeRange(start: first, end: now.add(const Duration(minutes: 30))));
@@ -170,7 +233,7 @@ List<DateTimeRange> generatePauseSlots() {
   return [
     DateTimeRange(
         start: DateTime(now.year, now.month, now.day, 12, 0),
-        end: DateTime(now.year, now.month, now.day, 13, 0))
+        end: DateTime(now.year, now.month, now.day, 20, 0))
   ];
 }
 
@@ -188,11 +251,14 @@ class _BookingCalendarState extends State<_BookingCalendar> {
       getBookingStream: getBookingStreamMock,
       uploadBooking: uploadBookingMock,
       pauseSlots: generatePauseSlots(),
+
       // startingDayOfWeek: StartingDayOfWeek.monday,
       wholeDayIsBookedWidget:
           const Text('Sorry, for this day everything is booked'),
-      //disabledDates: [DateTime(2023, 1, 20)],
-      //disabledDays: [6, 7],
+      disabledDates: [DateTime(2023, 4, 20)],
+      disabledDays: [6, 7],
     );
   }
 }
+*/
+

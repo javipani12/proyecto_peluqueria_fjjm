@@ -2,6 +2,7 @@ import 'package:proyecto_peluqueria_fjjm/routes/menu_options.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/call_us_screen.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/reservations_screen.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
+import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -18,7 +19,7 @@ class AppRoutes {
 
     MenuOptions(
       name: 'Llamanos', 
-      screen: const CallUsScreen()
+      screen: CallUsScreen(peluquerias: Peluquerias.listaPeluquerias,)
     ),
 
     MenuOptions(
