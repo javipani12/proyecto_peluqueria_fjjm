@@ -3,8 +3,8 @@ import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/routes/routes.dart';
 
 class RegisterScreen extends StatelessWidget {
-   
   const RegisterScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final myFormKey = GlobalKey<FormState>();
@@ -86,7 +86,7 @@ class RegisterScreen extends StatelessWidget {
                 height: 30,
               ),
               CustomTextFormFieldRegister(
-                hintText: 'Repetir contraseña',
+                hintText: 'Contraseña',
                 suffixIcon: Icons.password_outlined,
                 obscureText: true,
                 formProperty: 'checkPassword',
@@ -119,12 +119,8 @@ class RegisterScreen extends StatelessWidget {
                   }
                 },
                 child: const SizedBox(
-                  width: double.infinity,
-                  child: Center(
-                    child: 
-                      Text('Registrarse')
-                  )
-                ),
+                    width: double.infinity,
+                    child: Center(child: Text('Registrarse'))),
               ),
             ],
           ),
