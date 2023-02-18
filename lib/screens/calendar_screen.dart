@@ -45,7 +45,6 @@ class _CalendarScreen extends State<CalendarScreen> {
           setState(() {
             servicios -= 1;
             horas.remove(hora);
-            horas.removeAt(posicion);
           });
         },
       );
