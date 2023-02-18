@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
-import 'package:proyecto_peluqueria_fjjm/routes/routes.dart';
 
-class LoginScreen extends StatelessWidget {
+class ResetPasswordScreen extends StatelessWidget {
    
-  const LoginScreen({Key? key}) : super(key: key);
+  const ResetPasswordScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -14,16 +13,14 @@ class LoginScreen extends StatelessWidget {
 
     final Map<String, String> formValues = {
       'email': '',
-      'password': ''
     };
-
 
     return Scaffold(
       body: Form(
         key: myFormKey,
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: _CamposFormularioInicioSesion(formValues: formValues, myFormKey: myFormKey),
+          child: _CampoRestablecerContrasenna(formValues: formValues, myFormKey: myFormKey),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -34,8 +31,8 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class _CamposFormularioInicioSesion extends StatelessWidget {
-  const _CamposFormularioInicioSesion({
+class _CampoRestablecerContrasenna extends StatelessWidget {
+  const _CampoRestablecerContrasenna({
     Key? key,
     required this.formValues,
     required this.myFormKey,
@@ -60,6 +57,10 @@ class _CamposFormularioInicioSesion extends StatelessWidget {
           ),
         ),
         const SizedBox(
+          height: 40,
+        ),
+        const Text('Introduce el email asociado a tu cuenta'),
+        const SizedBox(
           height: 30,
         ),
         CustomTextFormField(
@@ -72,16 +73,6 @@ class _CamposFormularioInicioSesion extends StatelessWidget {
         const SizedBox(
           height: 30,
         ),
-        CustomTextFormField(
-          hintText: 'Contraseña',
-          suffixIcon: Icons.password_outlined,
-          obscureText: true,
-          formProperty: 'password',
-          formValues: formValues,
-        ),
-        const SizedBox(
-          height: 30,
-        ),
         ElevatedButton(
           onPressed: () {
             FocusScope.of(context).requestFocus(FocusNode());
@@ -90,28 +81,14 @@ class _CamposFormularioInicioSesion extends StatelessWidget {
               return;
             } else {
               final route = MaterialPageRoute(
-                builder: (context) => const AppointmentScreen()
+                builder: (context) => const LoginScreen()
               );
               Navigator.push(context, route);
             }
           },
           child: const SizedBox(
               width: double.infinity,
-              child: Center(child: Text('Iniciar Sesión'))),
-        ),
-        const SizedBox(height: 20,),
-        TextButton(
-          onPressed: () {
-            final route = MaterialPageRoute(
-              builder: (context) => const ResetPasswordScreen()
-            );
-            Navigator.push(context, route);
-          },
-          child: Container(
-            alignment: AlignmentDirectional.center,
-            padding: const EdgeInsets.only( right: 10),
-            child: const Text('¿Has olvidado la contraseña?', style: TextStyle(decoration: TextDecoration.underline),)
-          ),
+              child: Center(child: Text('Restablecer contraseña'))),
         ),
       ],
     );
