@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/barber_screen.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 
 class AppointmentScreen extends StatelessWidget {
-   
   const AppointmentScreen({Key? key}) : super(key: key);
 
-  static final List<Peluqueria> listadoPeluquerias = Peluquerias.listaPeluquerias; 
-  
+  static final List<Peluqueria> listadoPeluquerias =
+      Peluquerias.listaPeluquerias;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,13 +21,14 @@ class AppointmentScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: 10.0),
             child: CircleAvatar(
-                maxRadius: 20,
-                backgroundImage: NetworkImage('https://img.europapress.es/fotoweb/fotonoticia_20220720184850_420.jpg'),
+              maxRadius: 20,
+              backgroundImage: NetworkImage(
+                  'https://img.europapress.es/fotoweb/fotonoticia_20220720184850_420.jpg'),
             ),
           ),
         ],
       ),
-      body: _ListadoPeluquerias(listadoPeluquerias: listadoPeluquerias),    
+      body: _ListadoPeluquerias(listadoPeluquerias: listadoPeluquerias),
     );
   }
 }
@@ -50,16 +52,15 @@ class _ListadoPeluquerias extends StatelessWidget {
           padding: const EdgeInsets.only(right: 8.0, left: 8, top: 2),
           child: Card(
             clipBehavior: Clip.antiAlias,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15)
-            ),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Column(
               children: [
                 FadeInImage(
                   width: double.infinity,
                   height: 260,
                   fit: BoxFit.cover,
-                  placeholder: AssetImage('assets/jar-loading.gif'), 
+                  placeholder: AssetImage('assets/jar-loading.gif'),
                   fadeInDuration: Duration(milliseconds: 360),
                   image: peluqueria.foto,
                 ),
@@ -74,21 +75,28 @@ class _ListadoPeluquerias extends StatelessWidget {
                   child: Text(peluqueria.direccion),
                 ),
                 TextButton(
-                onPressed: () {
-                  final route = MaterialPageRoute(
-                      builder: (context) => BarberScreen(peluqueria: peluqueria,));
-                  Navigator.push(context, route);
-                },
-                child: Container(
-                  alignment: AlignmentDirectional.centerEnd,
-                  padding: const EdgeInsets.only(right: 10),
-                  child: const Text('Pedir cita aquí', style: TextStyle(decoration: TextDecoration.underline),)
+                  onPressed: () {
+                    // Guarda El nombre de la peluqueria en una variable Global
+                    info['peluqueria'] = peluqueria;
+                    final route = MaterialPageRoute(
+                        builder: (context) => BarberScreen(
+                              peluqueria: peluqueria,
+                            ));
+                    Navigator.push(context, route);
+                  },
+                  child: Container(
+                      alignment: AlignmentDirectional.centerEnd,
+                      padding: const EdgeInsets.only(right: 10),
+                      child: const Text(
+                        'Pedir cita aquí',
+                        style: TextStyle(decoration: TextDecoration.underline),
+                      )),
                 ),
-              ),
               ],
             ),
           ),
-        );},
+        );
+      },
     );
   }
 }
