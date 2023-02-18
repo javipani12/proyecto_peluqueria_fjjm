@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'models.dart';
 
-class ServicioS{
+class Servicios{
 
   static final List<Servicio> listaServicios = [
     Servicio(
-      nombre: 'Daniel', 
-      descripcion: 'Tu Servicio de siempre', 
-      foto: NetworkImage('https://hips.hearstapps.com/es.h-cdn.co/fotoes/images/media/imagenes/reportajes/Servicios-de-pelicula/3139792-2-esl-ES/Servicios-de-pelicula.jpg')
+      nombre: 'Corte de pelo', 
+      precio: 10.5,
+      foto: NetworkImage('https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/cortar-pelo-sanear-1642094588.jpg')
     ),
     Servicio(
-      nombre: 'Rosa', 
-      descripcion: '100% de mis clientas satisfechas', 
-      foto: NetworkImage('http://peluqueriabeatrizhuarte.com/wp-content/uploads/virginia-crespo.jpg')
+      nombre: 'Tinte', 
+      precio: 20.1, 
+      foto: NetworkImage('https://img.remediosdigitales.com/839528/woman-getting-her-hair-dyed-at-home-by-hairstylist/450_1000.jpg')
     ),
 
     Servicio(
-      nombre: 'Gonzalo', 
-      descripcion: 'Especialista en tintes y mechas', 
-      foto: NetworkImage('https://www.eldiadelarioja.es/media/IMG/2022/CDDD201D-D78C-ADE5-4FD2DDB1C70604D0.JPG')
+      nombre: 'Peinado',
+      precio: 7.5, 
+      foto: NetworkImage('https://img.freepik.com/foto-gratis/peluquero-peinando-cabello-cliente_23-2148940850.jpg')
     ),
     Servicio(
-      nombre: 'Virginia', 
-      descripcion: 'Los cortes clásicos son mi especialidad', 
-      foto: NetworkImage('https://www.prolaboral.com/37334/uniforme-peluquera-garys-cinta-6358.jpg')
+      nombre: 'Recorte de barba', 
+      precio: 5.5, 
+      foto: NetworkImage('https://rhombusgents.com/blog/wp-content/uploads/2019/03/recortar-barba-cabecera.png')
     ),
   ];
 

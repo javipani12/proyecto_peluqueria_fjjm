@@ -4,10 +4,11 @@ import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 
 class ServicesScreen extends StatefulWidget {
+  
+  final Peluqueria peluqueria;
+  final List<Peluquero> peluquerosSeleccionados;
    
-  const ServicesScreen({Key? key, }) : super(key: key);
-
-  //final Peluqueria peluqueria;
+  const ServicesScreen({Key? key, required this.peluqueria, required this.peluquerosSeleccionados }) : super(key: key);
 
   @override
   State<ServicesScreen> createState() => _ServicesScreenState();
@@ -16,12 +17,13 @@ class ServicesScreen extends StatefulWidget {
 class _ServicesScreenState extends State<ServicesScreen> {
 
   bool _sliderEnable = false;
-  static List<Servicio> _listaServicios = _ServiciosSeleccionados;
-  static List<Servicio> _ServiciosSeleccionados = [];
-  static List<Color> _coloresServiciosSeleccionados = List.generate(_listaServicios.length, (index) => Colors.black);
+  static List<Servicio> listaServicios = Servicios.listaServicios;
+  static List<Servicio> serviciosSeleccionados = [];
+  static List<Color> coloresServiciosSeleccionados = List.generate(listaServicios.length, (index) => Colors.black);
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
@@ -32,30 +34,30 @@ class _ServicesScreenState extends State<ServicesScreen> {
           SizedBox(height: 20,),
           SwitchListTile( // Puede ser true o false, no tiene valores nulos
             activeColor: AppThemes.primary,
-            title: const Text('Seleccionar todos/as'),
+            title: const Text('Seleccionar todos'),
             value: _sliderEnable, 
             onChanged: (value) {
               _sliderEnable = value;
               setState(() {
                 if(_sliderEnable){
-
-                  _ServiciosSeleccionados.clear();
-                  for(int i = 0; i < _listaServicios.length; i++){
-                    _ServiciosSeleccionados.add(_listaServicios[i]);
+                  
+                  serviciosSeleccionados.clear();
+                  for(int i = 0; i < listaServicios.length; i++){
+                    serviciosSeleccionados.add(listaServicios[i]);
                   }
-                  for(int i = 0; i < _coloresServiciosSeleccionados.length; i++){
-                    _coloresServiciosSeleccionados[i] = Colors.green;
+                  for(int i = 0; i < coloresServiciosSeleccionados.length; i++){
+                    coloresServiciosSeleccionados[i] = Colors.green;
                   }
 
                 } else {
 
-                  _ServiciosSeleccionados.clear();
-                  for(int i = 0; i < _coloresServiciosSeleccionados.length; i++){
-                    _coloresServiciosSeleccionados[i] = Colors.black;
+                  serviciosSeleccionados.clear();
+                  for(int i = 0; i < coloresServiciosSeleccionados.length; i++){
+                    coloresServiciosSeleccionados[i] = Colors.black;
                   }
 
                 }
-                print(_ServiciosSeleccionados);
+                print(serviciosSeleccionados);
               });
             },
           ),
@@ -63,9 +65,9 @@ class _ServicesScreenState extends State<ServicesScreen> {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: _listaServicios.length,
+              itemCount: listaServicios.length,
               itemBuilder: (BuildContext context, int index) {
-                final servicio = _listaServicios[index];                
+                final servicio = listaServicios[index];                
                 return Container(
                   width: 130,
                   height: 190,
@@ -75,21 +77,21 @@ class _ServicesScreenState extends State<ServicesScreen> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            if(!_ServiciosSeleccionados.contains(servicio)) {
+                            if(!serviciosSeleccionados.contains(servicio)) {
 
-                              _ServiciosSeleccionados.add(servicio);
-                              for(int i = 0; i < _listaServicios.length; i++){
-                                if(_listaServicios[i] == servicio){
-                                  _coloresServiciosSeleccionados[i] = Colors.green;
+                              serviciosSeleccionados.add(servicio);
+                              for(int i = 0; i < listaServicios.length; i++){
+                                if(listaServicios[i] == servicio){
+                                  coloresServiciosSeleccionados[i] = Colors.green;
                                 }
                               }
 
                             } else {
 
-                              _ServiciosSeleccionados.remove(servicio);
-                              for(int i = 0; i < _listaServicios.length; i++){
-                                if(_listaServicios[i] == servicio){
-                                  _coloresServiciosSeleccionados[i] = Colors.black;
+                              serviciosSeleccionados.remove(servicio);
+                              for(int i = 0; i < listaServicios.length; i++){
+                                if(listaServicios[i] == servicio){
+                                  coloresServiciosSeleccionados[i] = Colors.black;
                                 }
                               }
 
@@ -100,7 +102,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                           clipBehavior: Clip.antiAlias,
                           borderRadius: BorderRadius.circular(20),
                           child: FadeInImage(
-                            placeholder: AssetImage('assets/jar-loading.gif'),
+                            placeholder: const AssetImage('assets/jar-loading.gif'),
                             image: servicio.foto,
                             width: 130,
                             height: 190,
@@ -114,15 +116,15 @@ class _ServicesScreenState extends State<ServicesScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: _coloresServiciosSeleccionados[index]),
+                        style: TextStyle(color: coloresServiciosSeleccionados[index]),
                       ),
                       const SizedBox(height: 5,),
                       Text(
-                        servicio.descripcion,
+                        servicio.precio.toString(),
                         maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: _coloresServiciosSeleccionados[index]),
+                        style: TextStyle(color: coloresServiciosSeleccionados[index]),
                       )
                     ]
                   ),
@@ -138,11 +140,16 @@ class _ServicesScreenState extends State<ServicesScreen> {
               ),
             ),
             onPressed: () {
-              /*Screen de servicios a la que le pasaremos la peluqueria y la lista de Servicios
-              final route = MaterialPageRoute(
-                  builder: (context) => const ());
-              Navigator.push(context, route);
-              */
+              if( serviciosSeleccionados.length == 0 ) {
+                alertaServicios(context);
+              } else {
+                /*Screen de servicios a la que le pasaremos la peluqueria y la lista de Servicios
+                final route = MaterialPageRoute(
+                    builder: (context) => const ());
+                Navigator.push(context, route);
+                */
+              }
+              
             },
           ),
           SizedBox(height: 90,)
@@ -150,4 +157,32 @@ class _ServicesScreenState extends State<ServicesScreen> {
       )
     );
   }
+}
+
+void alertaServicios(BuildContext context){
+  showDialog(
+    barrierDismissible: false, // Nos permite pulsar fuera de la alerta
+    context: context,
+    builder: ((context) {
+      return AlertDialog(
+        title: const Text('¡Atención!'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusDirectional.circular(20)
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Text('Debes seleccionar al menos un servicio'),
+            SizedBox(height: 20,),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context), 
+            child: const Text('OK')
+          )
+        ],
+      );
+    })
+  );
 }
