@@ -15,14 +15,21 @@ class SummaryScreen extends StatelessWidget {
       return list;
     }
 
-    /* List servicio() {
+    List servicio() {
       List list = [];
       for (int i = 0; i < info['servicios'].length; i++) {
-        list.add(info['servicios']);
+        list.add(info['servicios'][i].nombre);
       }
       return list;
     }
-    */
+
+    List horas() {
+      List list = [];
+      for (int i = 0; i < info['hora'].length; i++) {
+        list.add(info['hora'][i].hour);
+      }
+      return list;
+    }
 
     return Scaffold(
       bottomNavigationBar: buttonNavigationBar(),
@@ -46,9 +53,9 @@ class SummaryScreen extends StatelessWidget {
           SizedBox(height: 20),
           Text("Peluquero: ${peluqueros()}"),
           SizedBox(height: 20),
-          Text("Servicio"),
+          Text("Servicio ${servicio()}"),
           SizedBox(height: 20),
-          Text("Hora"),
+          Text("Hora ${horas()}"),
           SizedBox(height: 20),
           ElevatedButton.icon(
               onPressed: () {

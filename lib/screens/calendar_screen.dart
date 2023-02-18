@@ -16,33 +16,7 @@ class _CalendarScreen extends State<CalendarScreen> {
   bool pulsado = false;
   List<bool> list = List.filled(9, false, growable: true);
   int servicios = 2;
-  ElevatedButton button() {
-    if (pulsado) {
-      return ElevatedButton(
-        style: ElevatedButton.styleFrom(primary: Colors.grey),
-        child: const Text('Cancelar'),
-        onPressed: () {
-          setState(() {
-            pulsado = !pulsado;
-          });
-        },
-      );
-    } else {
-      return ElevatedButton(
-        child: const Text('Reservar'),
-        onPressed: () {
-          info['dia'] = today;
-
-          final route =
-              MaterialPageRoute(builder: (context) => const SummaryScreen());
-          Navigator.push(context, route);
-          setState(() {
-            pulsado = !pulsado;
-          });
-        },
-      );
-    }
-  }
+  static List<TimeOfDay> horas = [];
 
   TextButton hora(TimeOfDay hora, int posicion) {
     if (list[posicion]) {
@@ -58,7 +32,7 @@ class _CalendarScreen extends State<CalendarScreen> {
             list[posicion] = false;
             servicios += 1;
 
-            print(servicios);
+            horas.add(hora);
           });
         },
       );
@@ -68,12 +42,10 @@ class _CalendarScreen extends State<CalendarScreen> {
         onPressed: () {
           list[posicion] = true;
 
-          final route =
-              MaterialPageRoute(builder: (context) => const SummaryScreen());
-          Navigator.push(context, route);
           setState(() {
             servicios -= 1;
-            print(servicios);
+            horas.remove(hora);
+            horas.removeAt(posicion);
           });
         },
       );
@@ -159,9 +131,25 @@ class _CalendarScreen extends State<CalendarScreen> {
                   ],
                 ),
                 /*BookingCalendar(),*/
-                Container(
-                    margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: button()),
+                ElevatedButton(
+                  child: const SizedBox(
+                    width: 200,
+                    child: Center(
+                      child: Text('Continuar'),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (horas.length == 0) {
+                      alertaCalendario(context);
+                    } else {
+                      //Guarda en un a varable  global las horas
+                      info['hora'] = horas;
+                      final route = MaterialPageRoute(
+                          builder: (context) => const SummaryScreen());
+                      Navigator.push(context, route);
+                    }
+                  },
+                ),
               ]),
             ),
           ],
@@ -169,4 +157,31 @@ class _CalendarScreen extends State<CalendarScreen> {
       ),
     );
   }
+}
+
+void alertaCalendario(BuildContext context) {
+  showDialog(
+      barrierDismissible: false, // Nos permite pulsar fuera de la alerta
+      context: context,
+      builder: ((context) {
+        return AlertDialog(
+          title: const Text('¡Atención!'),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.circular(20)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text('Debes seleccionar las horas indicadas'),
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'))
+          ],
+        );
+      }));
 }
