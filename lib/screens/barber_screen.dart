@@ -18,7 +18,7 @@ class _BarberScreenState extends State<BarberScreen> {
   bool _sliderEnable = false;
   static List<Peluquero> _listaPeluqueros = Peluqueros.listaPeluqueros;
   static List<Peluquero> _peluquerosSeleccionados = [];
-  Color seleccionado = Colors.black;
+  static List<Color> _coloresPeluquerosSeleccionados = List.generate(_listaPeluqueros.length, (index) => Colors.black);
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +38,22 @@ class _BarberScreenState extends State<BarberScreen> {
               _sliderEnable = value;
               setState(() {
                 if(_sliderEnable){
+
                   _peluquerosSeleccionados.clear();
                   for(int i = 0; i < _listaPeluqueros.length; i++){
                     _peluquerosSeleccionados.add(_listaPeluqueros[i]);
                   }
-                  seleccionado = Color.fromARGB(255, 18, 184, 3);
+                  for(int i = 0; i < _coloresPeluquerosSeleccionados.length; i++){
+                    _coloresPeluquerosSeleccionados[i] = Colors.green;
+                  }
+
                 } else {
+
                   _peluquerosSeleccionados.clear();
-                  seleccionado = Colors.black;
+                  for(int i = 0; i < _coloresPeluquerosSeleccionados.length; i++){
+                    _coloresPeluquerosSeleccionados[i] = Colors.black;
+                  }
+
                 }
                 print(_peluquerosSeleccionados);
               });
@@ -68,11 +76,23 @@ class _BarberScreenState extends State<BarberScreen> {
                         onTap: () {
                           setState(() {
                             if(!_peluquerosSeleccionados.contains(peluquero)) {
+
                               _peluquerosSeleccionados.add(peluquero);
-                              seleccionado = Color.fromARGB(255, 18, 184, 3);
+                              for(int i = 0; i < _listaPeluqueros.length; i++){
+                                if(_listaPeluqueros[i] == peluquero){
+                                  _coloresPeluquerosSeleccionados[i] = Colors.green;
+                                }
+                              }
+
                             } else {
+
                               _peluquerosSeleccionados.remove(peluquero);
-                              seleccionado = Colors.black;
+                              for(int i = 0; i < _listaPeluqueros.length; i++){
+                                if(_listaPeluqueros[i] == peluquero){
+                                  _coloresPeluquerosSeleccionados[i] = Colors.black;
+                                }
+                              }
+
                             }
                           });
                         },
@@ -94,7 +114,7 @@ class _BarberScreenState extends State<BarberScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: seleccionado),
+                        style: TextStyle(color: _coloresPeluquerosSeleccionados[index]),
                       ),
                       const SizedBox(height: 5,),
                       Text(
@@ -102,7 +122,7 @@ class _BarberScreenState extends State<BarberScreen> {
                         maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: seleccionado),
+                        style: TextStyle(color: _coloresPeluquerosSeleccionados[index]),
                       )
                     ]
                   ),
