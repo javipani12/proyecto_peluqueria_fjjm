@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
-import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 
-class BarberScreen extends StatefulWidget {
-
+class ServicesScreen extends StatefulWidget {
+  
   final Peluqueria peluqueria;
-
-  const BarberScreen({Key? key, required this.peluqueria}) : super(key: key);
+  final List<Peluquero> peluquerosSeleccionados;
+   
+  const ServicesScreen({Key? key, required this.peluqueria, required this.peluquerosSeleccionados }) : super(key: key);
 
   @override
-  State<BarberScreen> createState() => _BarberScreenState();
+  State<ServicesScreen> createState() => _ServicesScreenState();
 }
 
-class _BarberScreenState extends State<BarberScreen> {
+class _ServicesScreenState extends State<ServicesScreen> {
 
   bool _sliderEnable = false;
-  static List<Peluquero> listaPeluqueros = Peluqueros.listaPeluqueros;
-  static List<Peluquero> peluquerosSeleccionados = [];
-  static List<Color> coloresPeluquerosSeleccionados = List.generate(listaPeluqueros.length, (index) => Colors.black);
+  static List<Servicio> listaServicios = Servicios.listaServicios;
+  static List<Servicio> serviciosSeleccionados = [];
+  static List<Color> coloresServiciosSeleccionados = List.generate(listaServicios.length, (index) => Colors.black);
 
   @override
   Widget build(BuildContext context) {
@@ -27,37 +27,37 @@ class _BarberScreenState extends State<BarberScreen> {
     return Scaffold(
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
-        title: const Text('Flutter App'),
+        title: const Text('Servicios'),
       ),
       body: Column(
         children: [
-          const SizedBox(height: 20,),
+          SizedBox(height: 20,),
           SwitchListTile( // Puede ser true o false, no tiene valores nulos
             activeColor: AppThemes.primary,
-            title: const Text('Seleccionar todos/as'),
+            title: const Text('Seleccionar todos'),
             value: _sliderEnable, 
             onChanged: (value) {
               _sliderEnable = value;
               setState(() {
                 if(_sliderEnable){
-
-                  peluquerosSeleccionados.clear();
-                  for(int i = 0; i < listaPeluqueros.length; i++){
-                    peluquerosSeleccionados.add(listaPeluqueros[i]);
+                  
+                  serviciosSeleccionados.clear();
+                  for(int i = 0; i < listaServicios.length; i++){
+                    serviciosSeleccionados.add(listaServicios[i]);
                   }
-                  for(int i = 0; i < coloresPeluquerosSeleccionados.length; i++){
-                    coloresPeluquerosSeleccionados[i] = Colors.green;
+                  for(int i = 0; i < coloresServiciosSeleccionados.length; i++){
+                    coloresServiciosSeleccionados[i] = Colors.green;
                   }
 
                 } else {
 
-                  peluquerosSeleccionados.clear();
-                  for(int i = 0; i < coloresPeluquerosSeleccionados.length; i++){
-                    coloresPeluquerosSeleccionados[i] = Colors.black;
+                  serviciosSeleccionados.clear();
+                  for(int i = 0; i < coloresServiciosSeleccionados.length; i++){
+                    coloresServiciosSeleccionados[i] = Colors.black;
                   }
 
                 }
-                print(peluquerosSeleccionados);
+                print(serviciosSeleccionados);
               });
             },
           ),
@@ -65,9 +65,9 @@ class _BarberScreenState extends State<BarberScreen> {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: listaPeluqueros.length,
+              itemCount: listaServicios.length,
               itemBuilder: (BuildContext context, int index) {
-                final peluquero = listaPeluqueros[index];                
+                final servicio = listaServicios[index];                
                 return Container(
                   width: 130,
                   height: 190,
@@ -77,21 +77,21 @@ class _BarberScreenState extends State<BarberScreen> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            if(!peluquerosSeleccionados.contains(peluquero)) {
+                            if(!serviciosSeleccionados.contains(servicio)) {
 
-                              peluquerosSeleccionados.add(peluquero);
-                              for(int i = 0; i < listaPeluqueros.length; i++){
-                                if(listaPeluqueros[i] == peluquero){
-                                  coloresPeluquerosSeleccionados[i] = Colors.green;
+                              serviciosSeleccionados.add(servicio);
+                              for(int i = 0; i < listaServicios.length; i++){
+                                if(listaServicios[i] == servicio){
+                                  coloresServiciosSeleccionados[i] = Colors.green;
                                 }
                               }
 
                             } else {
 
-                              peluquerosSeleccionados.remove(peluquero);
-                              for(int i = 0; i < listaPeluqueros.length; i++){
-                                if(listaPeluqueros[i] == peluquero){
-                                  coloresPeluquerosSeleccionados[i] = Colors.black;
+                              serviciosSeleccionados.remove(servicio);
+                              for(int i = 0; i < listaServicios.length; i++){
+                                if(listaServicios[i] == servicio){
+                                  coloresServiciosSeleccionados[i] = Colors.black;
                                 }
                               }
 
@@ -102,8 +102,8 @@ class _BarberScreenState extends State<BarberScreen> {
                           clipBehavior: Clip.antiAlias,
                           borderRadius: BorderRadius.circular(20),
                           child: FadeInImage(
-                            placeholder: AssetImage('assets/jar-loading.gif'),
-                            image: peluquero.foto,
+                            placeholder: const AssetImage('assets/jar-loading.gif'),
+                            image: servicio.foto,
                             width: 130,
                             height: 190,
                             fit: BoxFit.cover,
@@ -112,19 +112,19 @@ class _BarberScreenState extends State<BarberScreen> {
                       ),
                       const SizedBox(height: 5,),
                       Text(
-                        peluquero.nombre,
+                        servicio.nombre,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: coloresPeluquerosSeleccionados[index]),
+                        style: TextStyle(color: coloresServiciosSeleccionados[index]),
                       ),
                       const SizedBox(height: 5,),
                       Text(
-                        peluquero.descripcion,
+                        servicio.precio.toString(),
                         maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: coloresPeluquerosSeleccionados[index]),
+                        style: TextStyle(color: coloresServiciosSeleccionados[index]),
                       )
                     ]
                   ),
@@ -140,14 +140,16 @@ class _BarberScreenState extends State<BarberScreen> {
               ),
             ),
             onPressed: () {
-              if(peluquerosSeleccionados.length == 0) {
-                alertaPeluqueros(context);
+              if( serviciosSeleccionados.length == 0 ) {
+                alertaServicios(context);
               } else {
-                //Screen de servicios a la que le pasaremos la peluqueria y la lista de peluqueros
+                /*Screen de servicios a la que le pasaremos la peluqueria y la lista de Servicios
                 final route = MaterialPageRoute(
-                        builder: (context) => ServicesScreen(peluquerosSeleccionados: peluquerosSeleccionados, peluqueria: widget.peluqueria,));
-                    Navigator.push(context, route);
-                }
+                    builder: (context) => const ());
+                Navigator.push(context, route);
+                */
+              }
+              
             },
           ),
           SizedBox(height: 90,)
@@ -157,7 +159,7 @@ class _BarberScreenState extends State<BarberScreen> {
   }
 }
 
-void alertaPeluqueros(BuildContext context){
+void alertaServicios(BuildContext context){
   showDialog(
     barrierDismissible: false, // Nos permite pulsar fuera de la alerta
     context: context,
@@ -170,7 +172,7 @@ void alertaPeluqueros(BuildContext context){
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: const [
-            Text('Debes seleccionar al menos un peluquero/a'),
+            Text('Debes seleccionar al menos un servicio'),
             SizedBox(height: 20,),
           ],
         ),
