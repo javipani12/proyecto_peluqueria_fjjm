@@ -35,6 +35,7 @@ class RegisterScreen extends StatelessWidget {
   }
 }
 
+
 class _CamposFormularioRegistro extends StatelessWidget {
   const _CamposFormularioRegistro({
     Key? key,
