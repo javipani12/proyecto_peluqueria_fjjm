@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
-import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 
-class BarberScreen extends StatefulWidget {
+class ServicesScreen extends StatefulWidget {
    
-  const BarberScreen({Key? key, required this.peluqueria}) : super(key: key);
+  const ServicesScreen({Key? key, }) : super(key: key);
 
-  final Peluqueria peluqueria;
+  //final Peluqueria peluqueria;
 
   @override
-  State<BarberScreen> createState() => _BarberScreenState();
+  State<ServicesScreen> createState() => _ServicesScreenState();
 }
 
-class _BarberScreenState extends State<BarberScreen> {
+class _ServicesScreenState extends State<ServicesScreen> {
 
   bool _sliderEnable = false;
-  static List<Peluquero> _listaPeluqueros = Peluqueros.listaPeluqueros;
-  static List<Peluquero> _peluquerosSeleccionados = [];
-  static List<Color> _coloresPeluquerosSeleccionados = List.generate(_listaPeluqueros.length, (index) => Colors.black);
+  static List<Servicio> _listaServicios = _ServiciosSeleccionados;
+  static List<Servicio> _ServiciosSeleccionados = [];
+  static List<Color> _coloresServiciosSeleccionados = List.generate(_listaServicios.length, (index) => Colors.black);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
-        title: const Text('Flutter App'),
+        title: const Text('Servicios'),
       ),
       body: Column(
         children: [
@@ -40,23 +39,23 @@ class _BarberScreenState extends State<BarberScreen> {
               setState(() {
                 if(_sliderEnable){
 
-                  _peluquerosSeleccionados.clear();
-                  for(int i = 0; i < _listaPeluqueros.length; i++){
-                    _peluquerosSeleccionados.add(_listaPeluqueros[i]);
+                  _ServiciosSeleccionados.clear();
+                  for(int i = 0; i < _listaServicios.length; i++){
+                    _ServiciosSeleccionados.add(_listaServicios[i]);
                   }
-                  for(int i = 0; i < _coloresPeluquerosSeleccionados.length; i++){
-                    _coloresPeluquerosSeleccionados[i] = Colors.green;
+                  for(int i = 0; i < _coloresServiciosSeleccionados.length; i++){
+                    _coloresServiciosSeleccionados[i] = Colors.green;
                   }
 
                 } else {
 
-                  _peluquerosSeleccionados.clear();
-                  for(int i = 0; i < _coloresPeluquerosSeleccionados.length; i++){
-                    _coloresPeluquerosSeleccionados[i] = Colors.black;
+                  _ServiciosSeleccionados.clear();
+                  for(int i = 0; i < _coloresServiciosSeleccionados.length; i++){
+                    _coloresServiciosSeleccionados[i] = Colors.black;
                   }
 
                 }
-                print(_peluquerosSeleccionados);
+                print(_ServiciosSeleccionados);
               });
             },
           ),
@@ -64,9 +63,9 @@ class _BarberScreenState extends State<BarberScreen> {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: _listaPeluqueros.length,
+              itemCount: _listaServicios.length,
               itemBuilder: (BuildContext context, int index) {
-                final peluquero = _listaPeluqueros[index];                
+                final servicio = _listaServicios[index];                
                 return Container(
                   width: 130,
                   height: 190,
@@ -76,21 +75,21 @@ class _BarberScreenState extends State<BarberScreen> {
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            if(!_peluquerosSeleccionados.contains(peluquero)) {
+                            if(!_ServiciosSeleccionados.contains(servicio)) {
 
-                              _peluquerosSeleccionados.add(peluquero);
-                              for(int i = 0; i < _listaPeluqueros.length; i++){
-                                if(_listaPeluqueros[i] == peluquero){
-                                  _coloresPeluquerosSeleccionados[i] = Colors.green;
+                              _ServiciosSeleccionados.add(servicio);
+                              for(int i = 0; i < _listaServicios.length; i++){
+                                if(_listaServicios[i] == servicio){
+                                  _coloresServiciosSeleccionados[i] = Colors.green;
                                 }
                               }
 
                             } else {
 
-                              _peluquerosSeleccionados.remove(peluquero);
-                              for(int i = 0; i < _listaPeluqueros.length; i++){
-                                if(_listaPeluqueros[i] == peluquero){
-                                  _coloresPeluquerosSeleccionados[i] = Colors.black;
+                              _ServiciosSeleccionados.remove(servicio);
+                              for(int i = 0; i < _listaServicios.length; i++){
+                                if(_listaServicios[i] == servicio){
+                                  _coloresServiciosSeleccionados[i] = Colors.black;
                                 }
                               }
 
@@ -102,7 +101,7 @@ class _BarberScreenState extends State<BarberScreen> {
                           borderRadius: BorderRadius.circular(20),
                           child: FadeInImage(
                             placeholder: AssetImage('assets/jar-loading.gif'),
-                            image: peluquero.foto,
+                            image: servicio.foto,
                             width: 130,
                             height: 190,
                             fit: BoxFit.cover,
@@ -111,19 +110,19 @@ class _BarberScreenState extends State<BarberScreen> {
                       ),
                       const SizedBox(height: 5,),
                       Text(
-                        peluquero.nombre,
+                        servicio.nombre,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: _coloresPeluquerosSeleccionados[index]),
+                        style: TextStyle(color: _coloresServiciosSeleccionados[index]),
                       ),
                       const SizedBox(height: 5,),
                       Text(
-                        peluquero.descripcion,
+                        servicio.descripcion,
                         maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: _coloresPeluquerosSeleccionados[index]),
+                        style: TextStyle(color: _coloresServiciosSeleccionados[index]),
                       )
                     ]
                   ),
@@ -139,10 +138,11 @@ class _BarberScreenState extends State<BarberScreen> {
               ),
             ),
             onPressed: () {
-              //Screen de servicios a la que le pasaremos la peluqueria y la lista de peluqueros
+              /*Screen de servicios a la que le pasaremos la peluqueria y la lista de Servicios
               final route = MaterialPageRoute(
-                      builder: (context) => const ServicesScreen());
-                  Navigator.push(context, route);
+                  builder: (context) => const ());
+              Navigator.push(context, route);
+              */
             },
           ),
           SizedBox(height: 90,)
