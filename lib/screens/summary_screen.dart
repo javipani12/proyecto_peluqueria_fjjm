@@ -174,7 +174,7 @@ class SummaryScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     final route = MaterialPageRoute(
-                      builder: (context) => const ReservationsScreen());
+                      builder: (context) => const CreditCardScreen());
                   Navigator.push(context, route);
                   },
                 ),
