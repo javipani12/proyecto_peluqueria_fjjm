@@ -11,3 +11,4 @@ export 'package:proyecto_peluqueria_fjjm/screens/variable.dart';
 export 'package:proyecto_peluqueria_fjjm/screens/credit_card_screen.dart';
 export 'package:proyecto_peluqueria_fjjm/screens/services_screen.dart';
 export 'package:proyecto_peluqueria_fjjm/screens/barber_screen.dart';
+export 'package:proyecto_peluqueria_fjjm/screens/summary_screen.dart';

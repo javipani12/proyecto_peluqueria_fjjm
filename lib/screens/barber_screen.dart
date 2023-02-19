@@ -17,82 +17,81 @@ class _BarberScreenState extends State<BarberScreen> {
   bool _sliderEnable = false;
   static List<Peluquero> listaPeluqueros = Peluqueros.listaPeluqueros;
   static List<Peluquero> peluquerosSeleccionados = [];
-  static List<Color> coloresPeluquerosSeleccionados =
-      List.generate(listaPeluqueros.length, (index) => Colors.black);
+
+  static List<Color> coloresPeluquerosSeleccionados = List.generate(listaPeluqueros.length, (index) => Colors.black);
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-        bottomNavigationBar: buttonNavigationBar(),
-        appBar: AppBar(
-          title: const Text('Flutter App'),
-        ),
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            SwitchListTile(
-              // Puede ser true o false, no tiene valores nulos
-              activeColor: AppThemes.primary,
-              title: const Text('Seleccionar todos/as'),
-              value: _sliderEnable,
-              onChanged: (value) {
-                _sliderEnable = value;
-                setState(() {
-                  if (_sliderEnable) {
-                    peluquerosSeleccionados.clear();
-                    for (int i = 0; i < listaPeluqueros.length; i++) {
-                      peluquerosSeleccionados.add(listaPeluqueros[i]);
-                    }
-                    for (int i = 0;
-                        i < coloresPeluquerosSeleccionados.length;
-                        i++) {
-                      coloresPeluquerosSeleccionados[i] = Colors.green;
-                    }
-                  } else {
-                    peluquerosSeleccionados.clear();
-                    for (int i = 0;
-                        i < coloresPeluquerosSeleccionados.length;
-                        i++) {
-                      coloresPeluquerosSeleccionados[i] = Colors.black;
-                    }
+      bottomNavigationBar: buttonNavigationBar(),
+      appBar: AppBar(
+        title: const Text('Flutter App'),
+      ),
+      body: Column(
+        children: [
+          const SizedBox(height: 20,),
+          SwitchListTile( // Puede ser true o false, no tiene valores nulos
+            activeColor: AppThemes.primary,
+            title: const Text('Seleccionar todos/as'),
+            value: _sliderEnable, 
+            onChanged: (value) {
+              _sliderEnable = value;
+              setState(() {
+                if(_sliderEnable){
+
+                  peluquerosSeleccionados.clear();
+                  for(int i = 0; i < listaPeluqueros.length; i++){
+                    peluquerosSeleccionados.add(listaPeluqueros[i]);
                   }
-                  print(peluquerosSeleccionados);
-                });
-              },
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: listaPeluqueros.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final peluquero = listaPeluqueros[index];
-                  return Container(
-                    width: 130,
-                    height: 190,
-                    margin: const EdgeInsets.all(10),
-                    child: Column(children: [
+                  for(int i = 0; i < coloresPeluquerosSeleccionados.length; i++){
+                    coloresPeluquerosSeleccionados[i] = Colors.green;
+                  }
+
+                } else {
+
+                  peluquerosSeleccionados.clear();
+                  for(int i = 0; i < coloresPeluquerosSeleccionados.length; i++){
+                    coloresPeluquerosSeleccionados[i] = Colors.black;
+                  }
+
+                }
+                print(peluquerosSeleccionados);
+              });
+            },
+          ),
+          const SizedBox(height: 40,),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: listaPeluqueros.length,
+              itemBuilder: (BuildContext context, int index) {
+                final peluquero = listaPeluqueros[index];                
+                return Container(
+                  width: 130,
+                  height: 190,
+                  margin: const EdgeInsets.all(10),
+                  child: Column(
+                    children: [
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (!peluquerosSeleccionados.contains(peluquero)) {
+                            if(!peluquerosSeleccionados.contains(peluquero)) {
+
                               peluquerosSeleccionados.add(peluquero);
-                              for (int i = 0; i < listaPeluqueros.length; i++) {
-                                if (listaPeluqueros[i] == peluquero) {
-                                  coloresPeluquerosSeleccionados[i] =
-                                      Colors.green;
+                              for(int i = 0; i < listaPeluqueros.length; i++){
+                                if(listaPeluqueros[i] == peluquero){
+                                  coloresPeluquerosSeleccionados[i] = Colors.green;
+
                                 }
                               }
                             } else {
                               peluquerosSeleccionados.remove(peluquero);
-                              for (int i = 0; i < listaPeluqueros.length; i++) {
-                                if (listaPeluqueros[i] == peluquero) {
-                                  coloresPeluquerosSeleccionados[i] =
-                                      Colors.black;
+                              for(int i = 0; i < listaPeluqueros.length; i++){
+                                if(listaPeluqueros[i] == peluquero){
+                                  coloresPeluquerosSeleccionados[i] = Colors.black;
+
                                 }
                               }
                             }
@@ -118,19 +117,18 @@ class _BarberScreenState extends State<BarberScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: coloresPeluquerosSeleccionados[index]),
-                      ),
-                      const SizedBox(
-                        height: 5,
+
+                        style: TextStyle(color: coloresPeluquerosSeleccionados[index]),
+
                       ),
                       Text(
                         peluquero.descripcion,
                         maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: coloresPeluquerosSeleccionados[index]),
+
+                        style: TextStyle(color: coloresPeluquerosSeleccionados[index]),
+
                       )
                     ]),
                   );
@@ -161,37 +159,49 @@ class _BarberScreenState extends State<BarberScreen> {
                 }
               },
             ),
-            SizedBox(
-              height: 90,
-            )
-          ],
-        ));
+
+            onPressed: () {
+              if(peluquerosSeleccionados.length == 0) {
+                alertaPeluqueros(context);
+              } else {
+                //Screen de servicios a la que le pasaremos la peluqueria y la lista de peluqueros
+                final route = MaterialPageRoute(
+                        builder: (context) => ServicesScreen(peluquerosSeleccionados: peluquerosSeleccionados, peluqueria: widget.peluqueria,));
+                    Navigator.push(context, route);
+                }
+            },
+          ),
+          SizedBox(height: 90,)
+        ],
+      )
+    );
   }
 }
 
-void alertaPeluqueros(BuildContext context) {
+void alertaPeluqueros(BuildContext context){
   showDialog(
-      barrierDismissible: false, // Nos permite pulsar fuera de la alerta
-      context: context,
-      builder: ((context) {
-        return AlertDialog(
-          title: const Text('¡Atención!'),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusDirectional.circular(20)),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Text('Debes seleccionar al menos un peluquero/a'),
-              SizedBox(
-                height: 20,
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('OK'))
+    barrierDismissible: false, // Nos permite pulsar fuera de la alerta
+    context: context,
+    builder: ((context) {
+      return AlertDialog(
+        title: const Text('¡Atención!'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusDirectional.circular(20)
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Text('Debes seleccionar al menos un peluquero/a'),
+            SizedBox(height: 20,),
           ],
-        );
-      }));
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context), 
+            child: const Text('OK')
+          )
+        ],
+      );
+    })
+  );
 }
