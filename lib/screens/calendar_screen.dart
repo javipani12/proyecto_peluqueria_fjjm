@@ -1,6 +1,5 @@
 import 'package:booking_calendar/booking_calendar.dart';
 import 'package:flutter/material.dart';
-import 'package:proyecto_peluqueria_fjjm/screens/summary_screen.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -64,16 +63,8 @@ class _CalendarScreen extends State<CalendarScreen> {
     return Scaffold(
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
-        title: const Text('Reservas'),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 10.0),
-            child: CircleAvatar(
-              maxRadius: 20,
-              backgroundImage: NetworkImage(
-                  'https://img.europapress.es/fotoweb/fotonoticia_20220720184850_420.jpg'),
-            ),
-          ),
+        title: const Text('Selección fecha'),
+        actions: [
         ],
       ),
       body: Center(
@@ -99,57 +90,61 @@ class _CalendarScreen extends State<CalendarScreen> {
             ),
             Card(
               margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-                Text(
-                  textAlign: TextAlign.start,
-                  'Seleccione: 2 horas contiguas',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                SizedBox(height: 10),
-                Table(
-                  children: <TableRow>[
-                    TableRow(children: <Widget>[
-                      hora(const TimeOfDay(hour: 9, minute: 00), 0),
-                      hora(const TimeOfDay(hour: 9, minute: 30), 1),
-                      hora(const TimeOfDay(hour: 10, minute: 00), 2),
-                    ]),
-                    TableRow(
-                      children: <Widget>[
-                        hora(const TimeOfDay(hour: 10, minute: 30), 3),
-                        hora(const TimeOfDay(hour: 11, minute: 00), 4),
-                        hora(const TimeOfDay(hour: 11, minute: 30), 5),
-                      ],
-                    ),
-                    TableRow(
-                      children: <Widget>[
-                        hora(const TimeOfDay(hour: 12, minute: 00), 6),
-                        hora(const TimeOfDay(hour: 12, minute: 30), 7),
-                        hora(const TimeOfDay(hour: 13, minute: 00), 8),
-                      ],
-                    )
-                  ],
-                ),
-                /*BookingCalendar(),*/
-                ElevatedButton(
-                  child: const SizedBox(
-                    width: 200,
-                    child: Center(
-                      child: Text('Continuar'),
-                    ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min, 
+                children: [
+                  SizedBox(height: 10),
+                  Text(
+                    textAlign: TextAlign.start,
+                    'Seleccione: 2 horas contiguas',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  onPressed: () {
-                    if (horas.length == 0) {
-                      alertaCalendario(context);
-                    } else {
-                      //Guarda en un a varable  global las horas
-                      info['hora'] = horas;
-                      final route = MaterialPageRoute(
-                          builder: (context) => const SummaryScreen());
-                      Navigator.push(context, route);
-                    }
-                  },
-                ),
-              ]),
+                  SizedBox(height: 10),
+                  Table(
+                    children: <TableRow>[
+                      TableRow(children: <Widget>[
+                        hora(const TimeOfDay(hour: 9, minute: 00), 0),
+                        hora(const TimeOfDay(hour: 9, minute: 30), 1),
+                        hora(const TimeOfDay(hour: 10, minute: 00), 2),
+                      ]),
+                      TableRow(
+                        children: <Widget>[
+                          hora(const TimeOfDay(hour: 10, minute: 30), 3),
+                          hora(const TimeOfDay(hour: 11, minute: 00), 4),
+                          hora(const TimeOfDay(hour: 11, minute: 30), 5),
+                        ],
+                      ),
+                      TableRow(
+                        children: <Widget>[
+                          hora(const TimeOfDay(hour: 12, minute: 00), 6),
+                          hora(const TimeOfDay(hour: 12, minute: 30), 7),
+                          hora(const TimeOfDay(hour: 13, minute: 00), 8),
+                        ],
+                      )
+                    ],
+                  ),
+                  /*BookingCalendar(),*/
+                  ElevatedButton(
+                    child: const SizedBox(
+                      width: 200,
+                      child: Center(
+                        child: Text('Continuar'),
+                      ),
+                    ),
+                    onPressed: () {
+                      if (horas.length == 0) {
+                        alertaCalendario(context);
+                      } else {
+                        //Guarda en un a varable  global las horas
+                        info['hora'] = horas;
+                        final route = MaterialPageRoute(
+                            builder: (context) => const SummaryScreen());
+                        Navigator.push(context, route);
+                      }
+                    },
+                  ),
+                ]
+              ),
             ),
           ],
         ),

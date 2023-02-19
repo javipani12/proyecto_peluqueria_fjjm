@@ -27,12 +27,12 @@ class _BarberScreenState extends State<BarberScreen> {
     return Scaffold(
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
-        title: const Text('Flutter App'),
+        title: const Text('Selección pelqueros/as'),
       ),
       body: Column(
         children: [
           const SizedBox(height: 20,),
-          SwitchListTile( // Puede ser true o false, no tiene valores nulos
+          SwitchListTile(
             activeColor: AppThemes.primary,
             title: const Text('Seleccionar todos/as'),
             value: _sliderEnable, 
@@ -159,18 +159,6 @@ class _BarberScreenState extends State<BarberScreen> {
                 }
               },
             ),
-
-            onPressed: () {
-              if(peluquerosSeleccionados.length == 0) {
-                alertaPeluqueros(context);
-              } else {
-                //Screen de servicios a la que le pasaremos la peluqueria y la lista de peluqueros
-                final route = MaterialPageRoute(
-                        builder: (context) => ServicesScreen(peluquerosSeleccionados: peluquerosSeleccionados, peluqueria: widget.peluqueria,));
-                    Navigator.push(context, route);
-                }
-            },
-          ),
           SizedBox(height: 90,)
         ],
       )

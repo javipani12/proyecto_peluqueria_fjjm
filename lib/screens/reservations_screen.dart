@@ -10,14 +10,6 @@ class ReservationsScreen extends StatefulWidget {
 
 class _ReservationsScreenState extends State<ReservationsScreen> {
   List<String> list = List.filled(5, '', growable: true);
-  /*
-  List<Map<String, dynamic>> items = [
-    {'pista': reserva['pista'],
-    'dia': reserva.['dia'],
-    'precio':reserva['precio'] },
-
-];
-*/
 
   void displayDialog(BuildContext context) {
     showDialog(
@@ -49,14 +41,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
         automaticallyImplyLeading: false,
         title: const Text('Mis Reservas'),
         actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 10.0),
-            child: CircleAvatar(
-              maxRadius: 20,
-              backgroundImage: NetworkImage(
-                  'https://img.europapress.es/fotoweb/fotonoticia_20220720184850_420.jpg'),
-            ),
-          ),
+          
         ],
       ),
       bottomNavigationBar: buttonNavigationBar(),

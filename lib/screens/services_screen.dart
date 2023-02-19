@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
-
-
 import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 
 class ServicesScreen extends StatefulWidget {
 
-  
   final Peluqueria peluqueria;
   final List<Peluquero> peluquerosSeleccionados;
    
@@ -30,7 +28,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
     return Scaffold(
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
-        title: const Text('Servicios'),
+        title: const Text('Selección servicio/s'),
       ),
       body: Column(
         children: [
@@ -148,7 +146,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                 if (serviciosSeleccionados.length == 0) {
                   alertaServicios(context);
                 } else {
-                  //Guarda en un a varable  gllobal los servicios
+                  //Guarda en una varable global los servicios
                   info['servicios'] = serviciosSeleccionados;
                   final route = MaterialPageRoute(
                       builder: (context) => const CalendarScreen());
@@ -156,9 +154,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                 }
               },
             ),
-            SizedBox(
-              height: 90,
-            )
+            SizedBox(height: 90,)
           ],
         ));
   }
