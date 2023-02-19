@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 
 class CreditCardScreen extends StatefulWidget {
   const CreditCardScreen({Key? key}) : super(key: key);
@@ -20,7 +20,10 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
   bool isCvvFocused = false;
 
   _onValidate() {
-    if (!myFormKey.currentState!.validate()) {
+    if (myFormKey.currentState!.validate()) {
+      final route =
+          MaterialPageRoute(builder: (context) => const ReservationsScreen());
+      Navigator.push(context, route);
       print('valido!');
     } else {
       print('invalid!');
@@ -43,16 +46,7 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
         title: const Text('Tarjeta'),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 10.0),
-            child: CircleAvatar(
-              maxRadius: 20,
-              backgroundImage: NetworkImage(
-                  'https://img.europapress.es/fotoweb/fotonoticia_20220720184850_420.jpg'),
-            ),
-          ),
-        ],
+        actions: const [],
       ),
       body: Center(
         child: SingleChildScrollView(

@@ -1,28 +1,42 @@
 import 'package:flutter/material.dart';
 
 import 'package:proyecto_peluqueria_fjjm/widgets/button_navigation_bar.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 
 class SummaryScreen extends StatelessWidget {
   const SummaryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<String> peluqueros() {
+      List<String> list = [];
+      for (int i = 0; i < info['peluqueros'].length; i++) {
+        list.add(info['peluqueros'][i].nombre);
+      }
+      return list;
+    }
+
+    List servicio() {
+      List list = [];
+      for (int i = 0; i < info['servicios'].length; i++) {
+        list.add(info['servicios'][i].nombre);
+      }
+      return list;
+    }
+
+    List horas() {
+      List list = [];
+      for (int i = 0; i < info['hora'].length; i++) {
+        list.add(info['hora'][i].hour);
+      }
+      return list;
+    }
 
     PaymentMethod? paymentMethod;
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
           title: const Text('Finalizar reserva'),
-          actions: const [
-            Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: CircleAvatar(
-                maxRadius: 20,
-                backgroundImage: NetworkImage(
-                    'https://img.europapress.es/fotoweb/fotonoticia_20220720184850_420.jpg'),
-              ),
-            ),
-          ],
+          actions: const [],
         ),
         bottomNavigationBar: buttonNavigationBar(),
         body: SingleChildScrollView(
@@ -156,8 +170,10 @@ class SummaryScreen extends StatelessWidget {
                     width: double.infinity,
                     child: Center(child: Text('Continuar')),
                   ),
-                  onPressed: () async => {
-                    //Navigator.push(context, route),
+                  onPressed: () {
+                    final route = MaterialPageRoute(
+                        builder: (context) => const CreditCardScreen());
+                    Navigator.push(context, route);
                   },
                 ),
               ],

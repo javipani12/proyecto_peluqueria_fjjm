@@ -1,6 +1,5 @@
 import 'package:booking_calendar/booking_calendar.dart';
 import 'package:flutter/material.dart';
-import 'package:proyecto_peluqueria_fjjm/screens/summary_screen.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -64,17 +63,8 @@ class _CalendarScreen extends State<CalendarScreen> {
     return Scaffold(
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
-        title: const Text('Reservas'),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 10.0),
-            child: CircleAvatar(
-              maxRadius: 20,
-              backgroundImage: NetworkImage(
-                  'https://img.europapress.es/fotoweb/fotonoticia_20220720184850_420.jpg'),
-            ),
-          ),
-        ],
+        title: const Text('Selección fecha'),
+        actions: [],
       ),
       body: Center(
         child: ListView(
@@ -100,6 +90,7 @@ class _CalendarScreen extends State<CalendarScreen> {
             Card(
               margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
               child: Column(mainAxisSize: MainAxisSize.min, children: [
+                SizedBox(height: 10),
                 Text(
                   textAlign: TextAlign.start,
                   'Seleccione: 2 horas contiguas',

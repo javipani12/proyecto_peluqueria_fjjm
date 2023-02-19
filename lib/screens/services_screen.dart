@@ -1,100 +1,104 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 
-
 import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 
 class ServicesScreen extends StatefulWidget {
-
-  
   final Peluqueria peluqueria;
   final List<Peluquero> peluquerosSeleccionados;
-   
-  const ServicesScreen({Key? key, required this.peluqueria, required this.peluquerosSeleccionados }) : super(key: key);
+
+  const ServicesScreen(
+      {Key? key,
+      required this.peluqueria,
+      required this.peluquerosSeleccionados})
+      : super(key: key);
 
   @override
   State<ServicesScreen> createState() => _ServicesScreenState();
 }
 
 class _ServicesScreenState extends State<ServicesScreen> {
-
   bool _sliderEnable = false;
   static List<Servicio> listaServicios = Servicios.listaServicios;
   static List<Servicio> serviciosSeleccionados = [];
-  static List<Color> coloresServiciosSeleccionados = List.generate(listaServicios.length, (index) => Colors.black);
+  static List<Color> coloresServiciosSeleccionados =
+      List.generate(listaServicios.length, (index) => Colors.black);
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      bottomNavigationBar: buttonNavigationBar(),
-      appBar: AppBar(
-        title: const Text('Servicios'),
-      ),
-      body: Column(
-        children: [
-          SizedBox(height: 20,),
-          SwitchListTile( // Puede ser true o false, no tiene valores nulos
-            activeColor: AppThemes.primary,
-            title: const Text('Seleccionar todos'),
-            value: _sliderEnable, 
-            onChanged: (value) {
-              _sliderEnable = value;
-              setState(() {
-                if(_sliderEnable){
-                  
-                  serviciosSeleccionados.clear();
-                  for(int i = 0; i < listaServicios.length; i++){
-                    serviciosSeleccionados.add(listaServicios[i]);
+        bottomNavigationBar: buttonNavigationBar(),
+        appBar: AppBar(
+          title: const Text('Selección servicio/s'),
+        ),
+        body: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            SwitchListTile(
+              // Puede ser true o false, no tiene valores nulos
+              activeColor: AppThemes.primary,
+              title: const Text('Seleccionar todos'),
+              value: _sliderEnable,
+              onChanged: (value) {
+                _sliderEnable = value;
+                setState(() {
+                  if (_sliderEnable) {
+                    serviciosSeleccionados.clear();
+                    for (int i = 0; i < listaServicios.length; i++) {
+                      serviciosSeleccionados.add(listaServicios[i]);
+                    }
+                    for (int i = 0;
+                        i < coloresServiciosSeleccionados.length;
+                        i++) {
+                      coloresServiciosSeleccionados[i] = Colors.green;
+                    }
+                  } else {
+                    serviciosSeleccionados.clear();
+                    for (int i = 0;
+                        i < coloresServiciosSeleccionados.length;
+                        i++) {
+                      coloresServiciosSeleccionados[i] = Colors.black;
+                    }
                   }
-                  for(int i = 0; i < coloresServiciosSeleccionados.length; i++){
-                    coloresServiciosSeleccionados[i] = Colors.green;
-                  }
-
-                } else {
-
-                  serviciosSeleccionados.clear();
-                  for(int i = 0; i < coloresServiciosSeleccionados.length; i++){
-                    coloresServiciosSeleccionados[i] = Colors.black;
-                  }
-
-                }
-                print(serviciosSeleccionados);
-              });
-            },
-          ),
-          const SizedBox(height: 40,),
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: listaServicios.length,
-              itemBuilder: (BuildContext context, int index) {
-                final servicio = listaServicios[index];                
-                return Container(
-                  width: 130,
-                  height: 190,
-                  margin: const EdgeInsets.all(10),
-                  child: Column(
-                    children: [
+                  print(serviciosSeleccionados);
+                });
+              },
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: listaServicios.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final servicio = listaServicios[index];
+                  return Container(
+                    width: 130,
+                    height: 190,
+                    margin: const EdgeInsets.all(10),
+                    child: Column(children: [
                       GestureDetector(
                         onTap: () {
                           setState(() {
-                            if(!serviciosSeleccionados.contains(servicio)) {
-
+                            if (!serviciosSeleccionados.contains(servicio)) {
                               serviciosSeleccionados.add(servicio);
-                              for(int i = 0; i < listaServicios.length; i++){
-                                if(listaServicios[i] == servicio){
-                                  coloresServiciosSeleccionados[i] = Colors.green;
+                              for (int i = 0; i < listaServicios.length; i++) {
+                                if (listaServicios[i] == servicio) {
+                                  coloresServiciosSeleccionados[i] =
+                                      Colors.green;
                                 }
                               }
-
                             } else {
-
                               serviciosSeleccionados.remove(servicio);
-                              for(int i = 0; i < listaServicios.length; i++){
-                                if(listaServicios[i] == servicio){
-                                  coloresServiciosSeleccionados[i] = Colors.black;
+                              for (int i = 0; i < listaServicios.length; i++) {
+                                if (listaServicios[i] == servicio) {
+                                  coloresServiciosSeleccionados[i] =
+                                      Colors.black;
                                 }
                               }
                             }
@@ -104,7 +108,8 @@ class _ServicesScreenState extends State<ServicesScreen> {
                           clipBehavior: Clip.antiAlias,
                           borderRadius: BorderRadius.circular(20),
                           child: FadeInImage(
-                            placeholder: const AssetImage('assets/jar-loading.gif'),
+                            placeholder:
+                                const AssetImage('assets/jar-loading.gif'),
                             image: servicio.foto,
                             width: 130,
                             height: 190,
@@ -112,23 +117,25 @@ class _ServicesScreenState extends State<ServicesScreen> {
                           ),
                         ),
                       ),
-
-                      const SizedBox(height: 5,),
-
+                      const SizedBox(
+                        height: 5,
+                      ),
                       Text(
                         servicio.nombre,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: coloresServiciosSeleccionados[index]),
+                        style: TextStyle(
+                            color: coloresServiciosSeleccionados[index]),
                       ),
-                      const SizedBox(height: 5,),
+                      const SizedBox(
+                        height: 5,
+                      ),
                       Text(
                         servicio.precio.toString(),
                         maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-
                         style: TextStyle(
                             color: coloresServiciosSeleccionados[index]),
                       )
@@ -148,7 +155,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                 if (serviciosSeleccionados.length == 0) {
                   alertaServicios(context);
                 } else {
-                  //Guarda en un a varable  gllobal los servicios
+                  //Guarda en una varable global los servicios
                   info['servicios'] = serviciosSeleccionados;
                   final route = MaterialPageRoute(
                       builder: (context) => const CalendarScreen());

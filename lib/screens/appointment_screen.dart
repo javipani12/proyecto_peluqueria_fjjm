@@ -15,12 +15,8 @@ class AppointmentScreen extends StatelessWidget {
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Flutter App'),
-
-        actions: [
-          
-
-        ],
+        title: const Text('Inicio - Pedir Cita'),
+        actions: [],
       ),
       body: _ListadoPeluquerias(listadoPeluquerias: listadoPeluquerias),
     );
@@ -63,9 +59,8 @@ class _ListadoPeluquerias extends StatelessWidget {
                     ),
                     Container(
                       alignment: AlignmentDirectional.topStart,
-
-                      padding: const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-
+                      padding:
+                          const EdgeInsets.only(top: 5, bottom: 5, left: 10),
                       child: Text(peluqueria.nombre),
                     ),
                     Container(
@@ -75,7 +70,6 @@ class _ListadoPeluquerias extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-
                         // Guarda El nombre de la peluqueria en una variable Global
                         info['peluqueria'] = peluqueria;
                         final route = MaterialPageRoute(
@@ -90,9 +84,8 @@ class _ListadoPeluquerias extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 10),
                         child: const Text(
                           'Pedir cita aquí',
-
-                          style: TextStyle(decoration: TextDecoration.underline),
-
+                          style:
+                              TextStyle(decoration: TextDecoration.underline),
                         ),
                       ),
                     ),
@@ -145,7 +138,6 @@ class _ListadoNovedadesPeluqueria extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-
                 ),
                 const SizedBox(
                   height: 5,
@@ -156,7 +148,6 @@ class _ListadoNovedadesPeluqueria extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                 ),
-
               ],
             ),
           );
