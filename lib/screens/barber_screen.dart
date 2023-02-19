@@ -5,7 +5,6 @@ import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 
 class BarberScreen extends StatefulWidget {
-
   final Peluqueria peluqueria;
 
   const BarberScreen({Key? key, required this.peluqueria}) : super(key: key);
@@ -15,11 +14,12 @@ class BarberScreen extends StatefulWidget {
 }
 
 class _BarberScreenState extends State<BarberScreen> {
-
   bool _sliderEnable = false;
   static List<Peluquero> listaPeluqueros = Peluqueros.listaPeluqueros;
   static List<Peluquero> peluquerosSeleccionados = [];
+
   static List<Color> coloresPeluquerosSeleccionados = List.generate(listaPeluqueros.length, (index) => Colors.black);
+
 
   @override
   Widget build(BuildContext context) {
@@ -83,18 +83,17 @@ class _BarberScreenState extends State<BarberScreen> {
                               for(int i = 0; i < listaPeluqueros.length; i++){
                                 if(listaPeluqueros[i] == peluquero){
                                   coloresPeluquerosSeleccionados[i] = Colors.green;
+
                                 }
                               }
-
                             } else {
-
                               peluquerosSeleccionados.remove(peluquero);
                               for(int i = 0; i < listaPeluqueros.length; i++){
                                 if(listaPeluqueros[i] == peluquero){
                                   coloresPeluquerosSeleccionados[i] = Colors.black;
+
                                 }
                               }
-
                             }
                           });
                         },
@@ -110,35 +109,57 @@ class _BarberScreenState extends State<BarberScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 5,),
+                      const SizedBox(
+                        height: 5,
+                      ),
                       Text(
                         peluquero.nombre,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
+
                         style: TextStyle(color: coloresPeluquerosSeleccionados[index]),
+
                       ),
-                      const SizedBox(height: 5,),
                       Text(
                         peluquero.descripcion,
                         maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
+
                         style: TextStyle(color: coloresPeluquerosSeleccionados[index]),
+
                       )
-                    ]
-                  ),
-                );
-              },
-            ),
-          ),
-          ElevatedButton(
-            child: const SizedBox(
-              width: 200,
-              child: Center(
-                child: Text('Continuar'),
+                    ]),
+                  );
+                },
               ),
             ),
+            ElevatedButton(
+              child: const SizedBox(
+                width: 200,
+                child: Center(
+                  child: Text('Continuar'),
+                ),
+              ),
+              onPressed: () {
+                if (peluquerosSeleccionados.length == 0) {
+                  alertaPeluqueros(context);
+                } else {
+                  //no borrar si no no funciona
+                  //Esto guarda los peluqueros en la variable global info
+                  info['peluqueros'] = peluquerosSeleccionados;
+                  //Screen de servicios a la que le pasaremos la peluqueria y la lista de peluqueros
+                  final route = MaterialPageRoute(
+                      builder: (context) => ServicesScreen(
+                            peluquerosSeleccionados: peluquerosSeleccionados,
+                            peluqueria: widget.peluqueria,
+                          ));
+                  Navigator.push(context, route);
+                }
+              },
+            ),
+
             onPressed: () {
               if(peluquerosSeleccionados.length == 0) {
                 alertaPeluqueros(context);

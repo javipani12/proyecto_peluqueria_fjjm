@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:proyecto_peluqueria_fjjm/widgets/button_navigation_bar.dart';
 
 class SummaryScreen extends StatelessWidget {
@@ -6,6 +7,7 @@ class SummaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     PaymentMethod? paymentMethod;
     return Scaffold(
         appBar: AppBar(

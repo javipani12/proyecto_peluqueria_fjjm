@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
         color: Colors.black87,
         child: ListView(
           padding: const EdgeInsets.only(top: 100),
-          children: [
+          children: const [
             _ImagenYBotones(),
           ],
         ),
@@ -40,27 +40,19 @@ class _ImagenYBotones extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         ElevatedButton(
-          child: const SizedBox(
-            width: 200,
-            child: Center(child: Text('Iniciar sesion')),
-          ),
+          child: Text('Iniciar sesion'),
           onPressed: () {
-            final route = MaterialPageRoute(
-                builder: (context) => const LoginScreen());
+            final route =
+                MaterialPageRoute(builder: (context) => const LoginScreen());
             Navigator.push(context, route);
           },
         ),
         const SizedBox(height: 10),
         ElevatedButton(
-          child: const SizedBox(
-            width: 200,
-            child: Center(
-              child: Text('Registrarse'),
-            ),
-          ),
+          child: Text('Registrarse'),
           onPressed: () {
-            final route = MaterialPageRoute(
-                builder: (context) => const RegisterScreen());
+            final route =
+                MaterialPageRoute(builder: (context) => const RegisterScreen());
             Navigator.push(context, route);
           },
         ),
@@ -81,8 +73,7 @@ class _LogueoGF extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          margin:
-              const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
           height: 50,
           width: 50,
           decoration: BoxDecoration(
@@ -102,8 +93,7 @@ class _LogueoGF extends StatelessWidget {
           ),
         ),
         Container(
-          margin:
-              const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
           height: 50,
           width: 50,
           decoration: BoxDecoration(
