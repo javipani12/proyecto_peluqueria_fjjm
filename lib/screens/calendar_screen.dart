@@ -1,7 +1,7 @@
 import 'package:booking_calendar/booking_calendar.dart';
 import 'package:flutter/material.dart';
-import 'package:proyecto_peluqueria_fjjm/screens/pago_screen.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
+import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -13,29 +13,37 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreen extends State<CalendarScreen> {
   bool pulsado = false;
+  List<bool> list = List.filled(9, false, growable: true);
+  int servicios = 2;
+  static List<TimeOfDay> horas = [];
 
-  ElevatedButton button() {
-    if (pulsado) {
-      return ElevatedButton(
-        style: ElevatedButton.styleFrom(primary: Colors.grey),
-        child: const Text('Cancelar'),
+  TextButton hora(TimeOfDay hora, int posicion) {
+    if (list[posicion]) {
+      return TextButton(
+        style: TextButton.styleFrom(
+          primary: Colors.grey,
+        ),
+        child: Text(
+          '${hora.hour}:${hora.minute}',
+        ),
         onPressed: () {
           setState(() {
-            pulsado = !pulsado;
+            list[posicion] = false;
+            servicios += 1;
+
+            horas.add(hora);
           });
         },
       );
     } else {
-      return ElevatedButton(
-        child: const Text('Reservar'),
+      return TextButton(
+        child: Text('${hora.hour}:${hora.minute}'),
         onPressed: () {
-          calendar['dia'] = today;
+          list[posicion] = true;
 
-          final route =
-              MaterialPageRoute(builder: (context) => const PagoScreen());
-          Navigator.push(context, route);
           setState(() {
-            pulsado = !pulsado;
+            servicios -= 1;
+            horas.remove(hora);
           });
         },
       );
@@ -52,14 +60,13 @@ class _CalendarScreen extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String precio = calendar.containsKey('precio').toString();
     return Scaffold(
-      appBar: AppBar(title: const Text('Reservas'), actions: const [
-        CircleAvatar(
-          backgroundImage: NetworkImage(
-              'https://as01.epimg.net/meristation/imagenes/2013/09/17/noticia/1379397600_125748_1532601596_portada_normal.jpg'),
-        ),
-      ]),
+      bottomNavigationBar: buttonNavigationBar(),
+      appBar: AppBar(
+        title: const Text('Selección fecha'),
+        actions: [
+        ],
+      ),
       body: Center(
         child: ListView(
           children: [
@@ -82,45 +89,62 @@ class _CalendarScreen extends State<CalendarScreen> {
               ]),
             ),
             Card(
-              margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Text(
-                      textAlign: TextAlign.start,
-                      '9:00 / 10:30',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min, 
+                children: [
+                  SizedBox(height: 10),
+                  Text(
+                    textAlign: TextAlign.start,
+                    'Seleccione: 2 horas contiguas',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  SizedBox(height: 10),
+                  Table(
+                    children: <TableRow>[
+                      TableRow(children: <Widget>[
+                        hora(const TimeOfDay(hour: 9, minute: 00), 0),
+                        hora(const TimeOfDay(hour: 9, minute: 30), 1),
+                        hora(const TimeOfDay(hour: 10, minute: 00), 2),
+                      ]),
+                      TableRow(
+                        children: <Widget>[
+                          hora(const TimeOfDay(hour: 10, minute: 30), 3),
+                          hora(const TimeOfDay(hour: 11, minute: 00), 4),
+                          hora(const TimeOfDay(hour: 11, minute: 30), 5),
+                        ],
+                      ),
+                      TableRow(
+                        children: <Widget>[
+                          hora(const TimeOfDay(hour: 12, minute: 00), 6),
+                          hora(const TimeOfDay(hour: 12, minute: 30), 7),
+                          hora(const TimeOfDay(hour: 13, minute: 00), 8),
+                        ],
+                      )
+                    ],
+                  ),
+                  /*BookingCalendar(),*/
+                  ElevatedButton(
+                    child: const SizedBox(
+                      width: 200,
+                      child: Center(
+                        child: Text('Continuar'),
+                      ),
                     ),
-                    Text(
-                      softWrap: true,
-                      textAlign: TextAlign.center,
-                      calendar.containsKey('tipo').toString(),
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    Icon(Icons.access_time_rounded),
-                    Text(
-                      'duracion: 1h 30 min',
-                    ),
-                  ],
-                ),
-                _table(),
-
-                /*_BookingCalendar(),*/
-                Container(
-                    margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                    child: button()),
-              ]),
+                    onPressed: () {
+                      if (horas.length == 0) {
+                        alertaCalendario(context);
+                      } else {
+                        //Guarda en un a varable  global las horas
+                        info['hora'] = horas;
+                        final route = MaterialPageRoute(
+                            builder: (context) => const SummaryScreen());
+                        Navigator.push(context, route);
+                      }
+                    },
+                  ),
+                ]
+              ),
             ),
           ],
         ),
@@ -129,136 +153,29 @@ class _CalendarScreen extends State<CalendarScreen> {
   }
 }
 
-class _table extends StatelessWidget {
-  const _table({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Table(
-      children: <TableRow>[
-        TableRow(children: <Widget>[
-          TextButton(
-            child: Text('Button 1'),
-            onPressed: () {},
+void alertaCalendario(BuildContext context) {
+  showDialog(
+      barrierDismissible: false, // Nos permite pulsar fuera de la alerta
+      context: context,
+      builder: ((context) {
+        return AlertDialog(
+          title: const Text('¡Atención!'),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.circular(20)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text('Debes seleccionar las horas indicadas'),
+              SizedBox(
+                height: 20,
+              ),
+            ],
           ),
-          TextButton(
-            child: Text('Button 2'),
-            onPressed: () {},
-          ),
-          TextButton(
-            child: Text('Button 2'),
-            onPressed: () {},
-          ),
-        ]),
-        TableRow(
-          children: <Widget>[
+          actions: [
             TextButton(
-              child: Text('Button 3'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: Text('Button 4'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: Text('Button 4'),
-              onPressed: () {},
-            ),
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'))
           ],
-        ),
-        TableRow(
-          children: <Widget>[
-            TextButton(
-              child: Text('Button 5'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: Text('Button 6'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: Text('Button 6'),
-              onPressed: () {},
-            ),
-          ],
-        )
-      ],
-    );
-  }
+        );
+      }));
 }
-/*
-class _BookingCalendar extends StatefulWidget {
-  const _BookingCalendar({
-    super.key,
-  });
-
-  @override
-  State<_BookingCalendar> createState() => _BookingCalendarState();
-}
-
-Stream<dynamic> getBookingStreamMock(
-    {required DateTime end, required DateTime start}) {
-  return Stream.value([]);
-}
-
-final now = DateTime.now();
-
-Future<dynamic> uploadBookingMock({required BookingService newBooking}) async {
-  await Future.value(const Duration(seconds: 1));
-  converted.add(DateTimeRange(
-      start: newBooking.bookingStart, end: newBooking.bookingEnd));
-}
-
-List<DateTimeRange> converted = [];
-
-List<DateTimeRange> convertStreamResultMock({required dynamic streamResult}) {
-  ///here you can parse the streamresult and convert to [List<DateTimeRange>]
-  ///take care this is only mock, so if you add today as disabledDays it will still be visible on the first load
-  ///disabledDays will properly work with real data
-  DateTime first = now;
-  DateTime tomorrow = DateTime.utc(2030, 3, 14);
-
-  converted.add(
-      DateTimeRange(start: first, end: now.add(const Duration(minutes: 30))));
-
-  //book whole day example
-  converted.add(DateTimeRange(
-      start: now, end: DateTime(tomorrow.year, tomorrow.month, tomorrow.day)));
-  return converted;
-}
-
-List<DateTimeRange> generatePauseSlots() {
-  return [
-    DateTimeRange(
-        start: DateTime(now.year, now.month, now.day, 12, 0),
-        end: DateTime(now.year, now.month, now.day, 20, 0))
-  ];
-}
-
-class _BookingCalendarState extends State<_BookingCalendar> {
-  @override
-  Widget build(BuildContext context) {
-    return BookingCalendar(
-      locale: 'es_ES',
-      bookingService: BookingService(
-          bookingStart: now,
-          bookingEnd: DateTime(2023, 2, 16),
-          serviceName: "lola",
-          serviceDuration: 20),
-      convertStreamResultToDateTimeRanges: convertStreamResultMock,
-      getBookingStream: getBookingStreamMock,
-      uploadBooking: uploadBookingMock,
-      pauseSlots: generatePauseSlots(),
-
-      // startingDayOfWeek: StartingDayOfWeek.monday,
-      wholeDayIsBookedWidget:
-          const Text('Sorry, for this day everything is booked'),
-      disabledDates: [DateTime(2023, 4, 20)],
-      disabledDays: [6, 7],
-    );
-  }
-}
-*/
-

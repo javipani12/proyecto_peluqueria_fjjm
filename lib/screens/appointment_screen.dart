@@ -4,23 +4,25 @@ import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'screens.dart';
 
 class AppointmentScreen extends StatelessWidget {
-   
   const AppointmentScreen({Key? key}) : super(key: key);
 
-  static final List<Peluqueria> listadoPeluquerias = Peluquerias.listaPeluquerias; 
-  
+  static final List<Peluqueria> listadoPeluquerias =
+      Peluquerias.listaPeluquerias;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Flutter App'),
+        title: const Text('Inicio - Pedir Cita'),
+
         actions: [
           
+
         ],
       ),
-      body: _ListadoPeluquerias(listadoPeluquerias: listadoPeluquerias),    
+      body: _ListadoPeluquerias(listadoPeluquerias: listadoPeluquerias),
     );
   }
 }
@@ -61,7 +63,9 @@ class _ListadoPeluquerias extends StatelessWidget {
                     ),
                     Container(
                       alignment: AlignmentDirectional.topStart,
+
                       padding: const EdgeInsets.only(top: 5, bottom: 5, left: 10),
+
                       child: Text(peluqueria.nombre),
                     ),
                     Container(
@@ -71,9 +75,14 @@ class _ListadoPeluquerias extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
+
+                        // Guarda El nombre de la peluqueria en una variable Global
+                        info['peluqueria'] = peluqueria;
                         final route = MaterialPageRoute(
-                          builder: (context) => BarberScreen(peluqueria: peluqueria),
-                        );
+                            builder: (context) => BarberScreen(
+                                  peluqueria: peluqueria,
+                                ));
+
                         Navigator.push(context, route);
                       },
                       child: Container(
@@ -81,7 +90,9 @@ class _ListadoPeluquerias extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 10),
                         child: const Text(
                           'Pedir cita aquí',
+
                           style: TextStyle(decoration: TextDecoration.underline),
+
                         ),
                       ),
                     ),
@@ -95,7 +106,6 @@ class _ListadoPeluquerias extends StatelessWidget {
       },
     );
   }
-
 }
 
 class _ListadoNovedadesPeluqueria extends StatelessWidget {
@@ -135,6 +145,7 @@ class _ListadoNovedadesPeluqueria extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
+
                 ),
                 const SizedBox(
                   height: 5,
@@ -145,6 +156,7 @@ class _ListadoNovedadesPeluqueria extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                 ),
+
               ],
             ),
           );

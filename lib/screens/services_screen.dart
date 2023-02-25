@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 
 class ServicesScreen extends StatefulWidget {
-  
   final Peluqueria peluqueria;
   final List<Peluquero> peluquerosSeleccionados;
    
@@ -27,7 +27,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
     return Scaffold(
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
-        title: const Text('Servicios'),
+        title: const Text('Selección servicio/s'),
       ),
       body: Column(
         children: [
@@ -94,7 +94,6 @@ class _ServicesScreenState extends State<ServicesScreen> {
                                   coloresServiciosSeleccionados[i] = Colors.black;
                                 }
                               }
-
                             }
                           });
                         },
@@ -110,7 +109,9 @@ class _ServicesScreenState extends State<ServicesScreen> {
                           ),
                         ),
                       ),
+
                       const SizedBox(height: 5,),
+
                       Text(
                         servicio.nombre,
                         maxLines: 2,
@@ -124,65 +125,62 @@ class _ServicesScreenState extends State<ServicesScreen> {
                         maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: coloresServiciosSeleccionados[index]),
+                        style: TextStyle(
+                            color: coloresServiciosSeleccionados[index]),
                       )
-                    ]
-                  ),
-                );
-              },
-            ),
-          ),
-          ElevatedButton(
-            child: const SizedBox(
-              width: 200,
-              child: Center(
-                child: Text('Continuar'),
+                    ]),
+                  );
+                },
               ),
             ),
-            onPressed: () {
-              if( serviciosSeleccionados.length == 0 ) {
-                alertaServicios(context);
-              } else {
-                /*Screen de servicios a la que le pasaremos la peluqueria y la lista de Servicios
-                final route = MaterialPageRoute(
-                    builder: (context) => const ());
-                Navigator.push(context, route);
-                */
-              }
-              
-            },
-          ),
-          SizedBox(height: 90,)
-        ],
-      )
-    );
+            ElevatedButton(
+              child: const SizedBox(
+                width: 200,
+                child: Center(
+                  child: Text('Continuar'),
+                ),
+              ),
+              onPressed: () {
+                if (serviciosSeleccionados.length == 0) {
+                  alertaServicios(context);
+                } else {
+                  //Guarda en una varable global los servicios
+                  info['servicios'] = serviciosSeleccionados;
+                  final route = MaterialPageRoute(
+                      builder: (context) => const CalendarScreen());
+                  Navigator.push(context, route);
+                }
+              },
+            ),
+            SizedBox(height: 90,)
+          ],
+        ));
   }
 }
 
-void alertaServicios(BuildContext context){
+void alertaServicios(BuildContext context) {
   showDialog(
-    barrierDismissible: false, // Nos permite pulsar fuera de la alerta
-    context: context,
-    builder: ((context) {
-      return AlertDialog(
-        title: const Text('¡Atención!'),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusDirectional.circular(20)
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Text('Debes seleccionar al menos un servicio'),
-            SizedBox(height: 20,),
+      barrierDismissible: false, // Nos permite pulsar fuera de la alerta
+      context: context,
+      builder: ((context) {
+        return AlertDialog(
+          title: const Text('¡Atención!'),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.circular(20)),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text('Debes seleccionar al menos un servicio'),
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'))
           ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context), 
-            child: const Text('OK')
-          )
-        ],
-      );
-    })
-  );
+        );
+      }));
 }
