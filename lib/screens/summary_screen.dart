@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:proyecto_peluqueria_fjjm/widgets/button_navigation_bar.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 
@@ -8,6 +7,7 @@ class SummaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     List<String> peluqueros() {
       List<String> list = [];
       for (int i = 0; i < info['peluqueros'].length; i++) {
@@ -36,7 +36,9 @@ class SummaryScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Finalizar reserva'),
-          actions: const [],
+          actions: const [
+
+          ],
         ),
         bottomNavigationBar: buttonNavigationBar(),
         body: SingleChildScrollView(
@@ -172,8 +174,8 @@ class SummaryScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     final route = MaterialPageRoute(
-                        builder: (context) => const CreditCardScreen());
-                    Navigator.push(context, route);
+                      builder: (context) => const CreditCardScreen());
+                  Navigator.push(context, route);
                   },
                 ),
               ],
