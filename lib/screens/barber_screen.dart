@@ -17,7 +17,6 @@ class _BarberScreenState extends State<BarberScreen> {
   bool _sliderEnable = false;
   static List<Peluquero> listaPeluqueros = Peluqueros.listaPeluqueros;
   static List<Peluquero> peluquerosSeleccionados = [];
-
   static List<Color> coloresPeluquerosSeleccionados = List.generate(listaPeluqueros.length, (index) => Colors.black);
 
 
@@ -78,12 +77,10 @@ class _BarberScreenState extends State<BarberScreen> {
                         onTap: () {
                           setState(() {
                             if(!peluquerosSeleccionados.contains(peluquero)) {
-
                               peluquerosSeleccionados.add(peluquero);
                               for(int i = 0; i < listaPeluqueros.length; i++){
                                 if(listaPeluqueros[i] == peluquero){
                                   coloresPeluquerosSeleccionados[i] = Colors.green;
-
                                 }
                               }
                             } else {
@@ -91,7 +88,10 @@ class _BarberScreenState extends State<BarberScreen> {
                               for(int i = 0; i < listaPeluqueros.length; i++){
                                 if(listaPeluqueros[i] == peluquero){
                                   coloresPeluquerosSeleccionados[i] = Colors.black;
-
+                              peluquerosSeleccionados.remove(peluquero);
+                              for(int i = 0; i < listaPeluqueros.length; i++){
+                                if(listaPeluqueros[i] == peluquero){
+                                  coloresPeluquerosSeleccionados[i] = Colors.black;
                                 }
                               }
                             }
@@ -117,18 +117,14 @@ class _BarberScreenState extends State<BarberScreen> {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-
                         style: TextStyle(color: coloresPeluquerosSeleccionados[index]),
-
                       ),
                       Text(
                         peluquero.descripcion,
                         maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-
                         style: TextStyle(color: coloresPeluquerosSeleccionados[index]),
-
                       )
                     ]),
                   );

@@ -5,7 +5,6 @@ import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 
 class ServicesScreen extends StatefulWidget {
-
   final Peluqueria peluqueria;
   final List<Peluquero> peluquerosSeleccionados;
    
@@ -126,7 +125,6 @@ class _ServicesScreenState extends State<ServicesScreen> {
                         maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
-
                         style: TextStyle(
                             color: coloresServiciosSeleccionados[index]),
                       )
