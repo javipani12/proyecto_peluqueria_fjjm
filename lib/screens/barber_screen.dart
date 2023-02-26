@@ -88,10 +88,12 @@ class _BarberScreenState extends State<BarberScreen> {
                               for(int i = 0; i < listaPeluqueros.length; i++){
                                 if(listaPeluqueros[i] == peluquero){
                                   coloresPeluquerosSeleccionados[i] = Colors.black;
-                              peluquerosSeleccionados.remove(peluquero);
-                              for(int i = 0; i < listaPeluqueros.length; i++){
-                                if(listaPeluqueros[i] == peluquero){
-                                  coloresPeluquerosSeleccionados[i] = Colors.black;
+                                  peluquerosSeleccionados.remove(peluquero);
+                                  for(int i = 0; i < listaPeluqueros.length; i++){
+                                    if(listaPeluqueros[i] == peluquero){
+                                      coloresPeluquerosSeleccionados[i] = Colors.black;
+                                    }
+                                  }
                                 }
                               }
                             }
