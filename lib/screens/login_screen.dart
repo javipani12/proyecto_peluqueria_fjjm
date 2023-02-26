@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/providers/login_form_provider.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatelessWidget {
    
