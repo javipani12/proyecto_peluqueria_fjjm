@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
@@ -136,7 +137,7 @@ class _CalendarScreen extends State<CalendarScreen> {
                         alertaCalendario(context);
                       } else {
                         //Guarda en un a varable  global las horas
-                        info['hora'] = horas;
+                        variablesGlobales.info['hora'] = horas;
                         final route = MaterialPageRoute(
                             builder: (context) => const SummaryScreen());
                         Navigator.push(context, route);

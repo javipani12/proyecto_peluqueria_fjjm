@@ -3,6 +3,7 @@ import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class BarberScreen extends StatefulWidget {
   final Peluqueria peluqueria;
@@ -146,7 +147,7 @@ class _BarberScreenState extends State<BarberScreen> {
                 } else {
                   //no borrar si no no funciona
                   //Esto guarda los peluqueros en la variable global info
-                  info['peluqueros'] = peluquerosSeleccionados;
+                  variablesGlobales.info['peluqueros'] = peluquerosSeleccionados;
                   //Screen de servicios a la que le pasaremos la peluqueria y la lista de peluqueros
                   final route = MaterialPageRoute(
                       builder: (context) => ServicesScreen(
