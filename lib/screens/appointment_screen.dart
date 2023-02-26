@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'screens.dart';
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class AppointmentScreen extends StatelessWidget {
   const AppointmentScreen({Key? key}) : super(key: key);
 
-  static final List<Peluqueria> listadoPeluquerias =
-      Peluquerias.listaPeluquerias;
+  static final List<Peluqueria> listadoPeluquerias = Peluquerias.listaPeluquerias;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,6 @@ class AppointmentScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text('Inicio - Pedir Cita'),
-
-        actions: [
-          
-
-        ],
       ),
       body: _ListadoPeluquerias(listadoPeluquerias: listadoPeluquerias),
     );
@@ -75,13 +70,13 @@ class _ListadoPeluquerias extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-
                         // Guarda El nombre de la peluqueria en una variable Global
                         info['peluqueria'] = peluqueria;
                         final route = MaterialPageRoute(
-                            builder: (context) => BarberScreen(
-                                  peluqueria: peluqueria,
-                                ));
+                          builder: (context) => BarberScreen(
+                            peluqueria: peluqueria,
+                          )
+                        );
 
                         Navigator.push(context, route);
                       },
@@ -90,7 +85,6 @@ class _ListadoPeluquerias extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 10),
                         child: const Text(
                           'Pedir cita aquí',
-
                           style: TextStyle(decoration: TextDecoration.underline),
 
                         ),
@@ -99,6 +93,7 @@ class _ListadoPeluquerias extends StatelessWidget {
                   ],
                 ),
               ),
+              Text('Novedades'),
               _ListadoNovedadesPeluqueria(peluqueria: peluqueria),
             ],
           ),
