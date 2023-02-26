@@ -21,10 +21,12 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
 
   _onValidate() {
     if (myFormKey.currentState!.validate()) {
-      final route =
-          MaterialPageRoute(builder: (context) => const ReservationsScreen());
+      final route = MaterialPageRoute(
+        builder: (context) => const ReservationsScreen()
+      );
       Navigator.push(context, route);
       print('valido!');
+
     } else {
       print('invalid!');
     }
@@ -46,7 +48,9 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
         title: const Text('Tarjeta'),
-        actions: const [],
+        actions: const [
+          
+        ],
       ),
       body: Center(
         child: SingleChildScrollView(

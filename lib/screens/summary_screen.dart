@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/button_navigation_bar.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class SummaryScreen extends StatelessWidget {
   const SummaryScreen({Key? key}) : super(key: key);
@@ -10,24 +11,24 @@ class SummaryScreen extends StatelessWidget {
 
     List<String> peluqueros() {
       List<String> list = [];
-      for (int i = 0; i < info['peluqueros'].length; i++) {
-        list.add(info['peluqueros'][i].nombre);
+      for (int i = 0; i < variablesGlobales.info['peluqueros'].length; i++) {
+        list.add(variablesGlobales.info['peluqueros'][i].nombre);
       }
       return list;
     }
 
     List servicio() {
       List list = [];
-      for (int i = 0; i < info['servicios'].length; i++) {
-        list.add(info['servicios'][i].nombre);
+      for (int i = 0; i < variablesGlobales.info['servicios'].length; i++) {
+        list.add(variablesGlobales.info['servicios'][i].nombre);
       }
       return list;
     }
 
     List horas() {
       List list = [];
-      for (int i = 0; i < info['hora'].length; i++) {
-        list.add(info['hora'][i].hour);
+      for (int i = 0; i < variablesGlobales.info['hora'].length; i++) {
+        list.add(variablesGlobales.info['hora'][i].hour);
       }
       return list;
     }
