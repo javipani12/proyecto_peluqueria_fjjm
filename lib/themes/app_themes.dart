@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AppThemes {
-  static const Color primary = Colors.deepPurple;
+  static const Color primary = Colors.brown;
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     primaryColor: primary,
@@ -14,9 +15,12 @@ class AppThemes {
     // Por el momento
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        primary: primary, 
-        shape: const StadiumBorder(), 
-        elevation: 4
+        primary: primary,
+        shape: const StadiumBorder(),
+        elevation: 2,
+        alignment: Alignment.center,
+        minimumSize: Size(300, 40),
+        textStyle: TextStyle(color: Colors.white),
       ),
     ),
 
@@ -26,11 +30,8 @@ class AppThemes {
     ),
 
     // TextButton Theme
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom( 
-        primary: primary
-      )
-    ),
+    textButtonTheme:
+        TextButtonThemeData(style: TextButton.styleFrom(primary: primary)),
 
     // Botón volver hacia atrás
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -40,27 +41,24 @@ class AppThemes {
 
     // InputDecoration
     inputDecorationTheme: const InputDecorationTheme(
-      floatingLabelStyle: TextStyle( color: primary ),
+      floatingLabelStyle: TextStyle(color: primary),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide( color: primary ),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        )
-      ),
+          borderSide: BorderSide(color: primary),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          )),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide( color: primary ),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        )
-      ),
+          borderSide: BorderSide(color: primary),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          )),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        )
-      ),
+          borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(10),
+        topRight: Radius.circular(10),
+      )),
     ),
   );
 }
