@@ -8,7 +8,16 @@ class LoginFormProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = new GlobalKey<FormState>();
   UsuariosServices usuariosServices = UsuariosServices() ;
 
-  Usuario? usuario;
+  Usuario usuario = Usuario(
+    acceptPrivacy: true, 
+    acceptPublicity: true, 
+    checkPassword: '', 
+    email: '', 
+    lastname: '', 
+    name: '', 
+    password: '', 
+    phoneNumber: ''
+  );
 
   String? email = '';
   String? password = '';

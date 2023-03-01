@@ -1,13 +1,31 @@
-import 'package:flutter/material.dart';
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromMap(jsonString);
 
-class Novedades{
+import 'dart:convert';
 
-  final String titulo;
-  final NetworkImage foto;
+class Novedad {
+    Novedad({
+        required this.foto,
+        required this.titulo,
+        this.id,
+    });
 
-  Novedades({
-    required this.titulo,
-    required this.foto,
-  });
+    String foto;
+    String titulo;
+    String? id;
 
+    factory Novedad.fromJson(String str) => Novedad.fromMap(json.decode(str));
+
+    String toJson() => json.encode(toMap());
+
+    factory Novedad.fromMap(Map<String, dynamic> json) => Novedad(
+        foto: json["foto"],
+        titulo: json["titulo"],
+    );
+
+    Map<String, dynamic> toMap() => {
+        "foto": foto,
+        "titulo": titulo,
+    };
 }
