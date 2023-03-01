@@ -51,6 +51,7 @@ class ProfileScreen extends StatelessWidget {
                   variablesGlobales.usuario.name,
                   style: const TextStyle(
                           fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
                         ),),
               ),
               Container(
@@ -58,34 +59,27 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      child: Text(
-                        'Apellidos: ' + variablesGlobales.usuario.lastname,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
+                    ListTile(
+                      leading: Icon(Icons.person),
+                      title: Text(
+                      'Apellidos: ' + variablesGlobales.usuario.lastname,
+                      style: TextStyle(fontSize: 17.50),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      child: Text(
-                        'Email: ' +variablesGlobales.usuario.email,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
+                    ListTile(
+                      leading: Icon(Icons.email),
+                      title: Text(
+                      'Email: ' + variablesGlobales.usuario.email,
+                      style: TextStyle(fontSize: 17.50),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      child:  Text(
-                        'Teléfono: ' + variablesGlobales.usuario.phoneNumber,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
+                    ListTile(
+                      leading: Icon(Icons.phone_android),
+                      title: Text(
+                      'Teléfono: ' + variablesGlobales.usuario.phoneNumber,
+                      style: TextStyle(fontSize: 17.50),
                       ),
                     ),
-                    
                   ],
                 ),
               ),

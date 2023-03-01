@@ -201,9 +201,18 @@ class _ListadoNovedades extends StatelessWidget {
                   padding: EdgeInsets.only(top: 3, left: 3),
                   width: double.infinity,
                   height: 30,
+                  // ignore: prefer_const_constructors
                   decoration: BoxDecoration(
-                    color: AppThemes.primary,
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.12),
+                        spreadRadius: 5,
+                        blurRadius: 10,
+                        offset: Offset(0, 3), // Posición del sombreado
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
