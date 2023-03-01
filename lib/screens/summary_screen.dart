@@ -9,20 +9,25 @@ class SummaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    List<String> peluqueros() {
-      List<String> list = [];
-      for (int i = 0; i < variablesGlobales.info['peluqueros'].length; i++) {
-        list.add(variablesGlobales.info['peluqueros'][i].nombre);
+    double precio = 0;
+
+    String peluqueros() {
+      String peluqueros = '';
+      for (int i = 0; i < variablesGlobales.peluqueros.length; i++) {
+        peluqueros += variablesGlobales.peluqueros[i].nombre + ", ";
       }
-      return list;
+      peluqueros = peluqueros.substring(0, peluqueros.length - 2);;
+      return peluqueros;
     }
 
-    List servicio() {
-      List list = [];
-      for (int i = 0; i < variablesGlobales.info['servicios'].length; i++) {
-        list.add(variablesGlobales.info['servicios'][i].nombre);
+    String servicios() {
+      String servicios = '';
+      for (int i = 0; i < variablesGlobales.servicios.length; i++) {
+        servicios += variablesGlobales.servicios[i].nombre + ', ';
+        precio += variablesGlobales.servicios[i].precio;
       }
-      return list;
+      servicios = servicios.substring(0, servicios.length - 2);
+      return servicios;
     }
 
     List horas() {
@@ -34,6 +39,7 @@ class SummaryScreen extends StatelessWidget {
     }
 
     PaymentMethod? paymentMethod;
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Finalizar reserva'),
@@ -57,10 +63,10 @@ class SummaryScreen extends StatelessWidget {
                   child: Card(
                     elevation: 5,
                     child: Column(
-                      children: const [
+                      children: [
                         ListTile(
                           title: Text(
-                            "Peluquería Paco's Barber",
+                            variablesGlobales.peluqueria!.nombre,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -70,7 +76,7 @@ class SummaryScreen extends StatelessWidget {
                             'Peluqueros',
                             style: TextStyle(color: Colors.black54),
                           ),
-                          trailing: Text("Rosa",
+                          trailing: Text(peluqueros(),
                               style: TextStyle(color: Colors.black54)),
                         ),
                         ListTile(
@@ -85,19 +91,10 @@ class SummaryScreen extends StatelessWidget {
                         ListTile(
                           visualDensity: VisualDensity(vertical: -4),
                           leading: Text(
-                            'Corte de pelo',
+                            'Servicios',
                             style: TextStyle(color: Colors.black54),
                           ),
-                          trailing: Text("10,05€",
-                              style: TextStyle(color: Colors.black54)),
-                        ),
-                        ListTile(
-                          visualDensity: VisualDensity(vertical: -4),
-                          leading: Text(
-                            'Tinte',
-                            style: TextStyle(color: Colors.black54),
-                          ),
-                          trailing: Text("20,01€",
+                          trailing: Text(servicios(),
                               style: TextStyle(color: Colors.black54)),
                         ),
                         Divider(
@@ -109,7 +106,7 @@ class SummaryScreen extends StatelessWidget {
                             'Total',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          trailing: Text("30,06€",
+                          trailing: Text(precio.toString() + '€',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 25)),
                         ),
@@ -122,9 +119,27 @@ class SummaryScreen extends StatelessWidget {
                   endIndent: 0,
                 ),
                 ListTile(
-                    leading: Icon(Icons.credit_card),
+                  leading: Icon(Icons.credit_card),
+                  title: Text(
+                    'Tarjeta Bancaria',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  trailing: Radio<PaymentMethod>(
+                    value: PaymentMethod.paypal,
+                    groupValue: paymentMethod,
+                    onChanged: (value) {
+                      paymentMethod = PaymentMethod.creditCard;
+                    },
+                  )
+                ),
+                Divider(
+                  indent: 0,
+                  endIndent: 0,
+                ),
+                ListTile(
+                    leading: Icon(Icons.mobile_friendly),
                     title: Text(
-                      'Tarjeta Bancaria',
+                      'Bizum',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     trailing: Radio<PaymentMethod>(
@@ -139,35 +154,20 @@ class SummaryScreen extends StatelessWidget {
                   endIndent: 0,
                 ),
                 ListTile(
-                    leading: Icon(Icons.paypal),
-                    title: Text(
-                      'PayPal',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    trailing: Radio<PaymentMethod>(
-                      value: PaymentMethod.paypal,
-                      groupValue: paymentMethod,
-                      onChanged: (value) {
-                        paymentMethod = PaymentMethod.paypal;
-                      },
-                    )),
-                Divider(
-                  indent: 0,
-                  endIndent: 0,
+                  leading: Icon(Icons.attach_money),
+                  title: Text(
+                    'Efectivo',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  trailing: Radio<PaymentMethod>(
+                    value: PaymentMethod.paypal,
+                    groupValue: paymentMethod,
+                    onChanged: (value) {
+                      paymentMethod = PaymentMethod.paypal;
+                    },
+                  )
                 ),
-                ListTile(
-                    leading: Icon(Icons.attach_money),
-                    title: Text(
-                      'Efectivo',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    trailing: Radio<PaymentMethod>(
-                      value: PaymentMethod.paypal,
-                      groupValue: paymentMethod,
-                      onChanged: (value) {
-                        paymentMethod = PaymentMethod.paypal;
-                      },
-                    )),
+                SizedBox(height: 10,),
                 ElevatedButton(
                   child: const SizedBox(
                     width: double.infinity,

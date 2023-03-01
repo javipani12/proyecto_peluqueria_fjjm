@@ -1,15 +1,35 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class Servicio{
+class Servicio {
+    Servicio({
+        required this.duracion,
+        required this.foto,
+        required this.nombre,
+        required this.precio,
+        this.id,
+    });
 
-  final String nombre;
-  final double precio;
-  final NetworkImage foto;
+    int duracion;
+    String foto;
+    String nombre;
+    double precio;
+    String? id;
 
-  Servicio({
-    required this.nombre,
-    required this.precio,
-    required this.foto,
-  });
+    factory Servicio.fromJson(String str) => Servicio.fromMap(json.decode(str));
 
+    String toJson() => json.encode(toMap());
+
+    factory Servicio.fromMap(Map<String, dynamic> json) => Servicio(
+        duracion: json["duracion"],
+        foto: json["foto"],
+        nombre: json["nombre"],
+        precio: json["precio"]?.toDouble(),
+    );
+
+    Map<String, dynamic> toMap() => {
+        "duracion": duracion,
+        "foto": foto,
+        "nombre": nombre,
+        "precio": precio,
+    };
 }

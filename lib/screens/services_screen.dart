@@ -3,184 +3,193 @@ import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_peluqueria_fjjm/services/services.dart';
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class ServicesScreen extends StatefulWidget {
-  final Peluqueria peluqueria;
-  final List<Peluquero> peluquerosSeleccionados;
    
-  const ServicesScreen({Key? key, required this.peluqueria, required this.peluquerosSeleccionados }) : super(key: key);
+  const ServicesScreen({Key? key, }) : super(key: key);
 
   @override
   State<ServicesScreen> createState() => _ServicesScreenState();
 }
 
 class _ServicesScreenState extends State<ServicesScreen> {
-
-  bool _sliderEnable = false;
-  static List<Servicio> listaServicios = Servicios.listaServicios;
-  static List<Servicio> serviciosSeleccionados = [];
-  static List<Color> coloresServiciosSeleccionados = List.generate(listaServicios.length, (index) => Colors.black);
+  
+  bool sliderEnable = false;
+  final List<Servicio> serviciosSeleccionados = [];
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      bottomNavigationBar: buttonNavigationBar(),
-      appBar: AppBar(
-        title: const Text('Selección servicio/s'),
-      ),
-      body: Column(
-        children: [
-          SizedBox(height: 20,),
-          SwitchListTile( // Puede ser true o false, no tiene valores nulos
-            activeColor: AppThemes.primary,
-            title: const Text('Seleccionar todos'),
-            value: _sliderEnable, 
-            onChanged: (value) {
-              _sliderEnable = value;
-              setState(() {
-                if(_sliderEnable){
-                  
-                  serviciosSeleccionados.clear();
-                  for(int i = 0; i < listaServicios.length; i++){
-                    serviciosSeleccionados.add(listaServicios[i]);
-                  }
-                  for(int i = 0; i < coloresServiciosSeleccionados.length; i++){
-                    coloresServiciosSeleccionados[i] = Colors.green;
-                  }
-
-                } else {
-
-                  serviciosSeleccionados.clear();
-                  for(int i = 0; i < coloresServiciosSeleccionados.length; i++){
-                    coloresServiciosSeleccionados[i] = Colors.black;
-                  }
-
-                }
-                print(serviciosSeleccionados);
-              });
-            },
-          ),
-          const SizedBox(height: 40,),
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: listaServicios.length,
-              itemBuilder: (BuildContext context, int index) {
-                final servicio = listaServicios[index];                
-                return Container(
-                  width: 130,
-                  height: 190,
-                  margin: const EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if(!serviciosSeleccionados.contains(servicio)) {
-
-                              serviciosSeleccionados.add(servicio);
-                              for(int i = 0; i < listaServicios.length; i++){
-                                if(listaServicios[i] == servicio){
-                                  coloresServiciosSeleccionados[i] = Colors.green;
-                                }
-                              }
-
-                            } else {
-
-                              serviciosSeleccionados.remove(servicio);
-                              for(int i = 0; i < listaServicios.length; i++){
-                                if(listaServicios[i] == servicio){
-                                  coloresServiciosSeleccionados[i] = Colors.black;
-                                }
-                              }
-                            }
-                          });
-                        },
-                        child: ClipRRect(
-                          clipBehavior: Clip.antiAlias,
-                          borderRadius: BorderRadius.circular(20),
-                          child: FadeInImage(
-                            placeholder: const AssetImage('assets/jar-loading.gif'),
-                            image: servicio.foto,
-                            width: 130,
-                            height: 190,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 5,),
-
-                      Text(
-                        servicio.nombre,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: coloresServiciosSeleccionados[index]),
-                      ),
-                      const SizedBox(height: 5,),
-                      Text(
-                        servicio.precio.toString(),
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: coloresServiciosSeleccionados[index]),
-                      )
-                    ]),
-                  );
-                },
-              ),
+    
+    return ChangeNotifierProvider<ServiciosServices>(
+      create: (_) => ServiciosServices(),
+      child: Consumer<ServiciosServices>(
+        builder: (context, serviciosServices, _) {
+      
+          final serviciosServices = Provider.of<ServiciosServices>(context);
+          
+          return Scaffold(
+            bottomNavigationBar: buttonNavigationBar(),
+            appBar: AppBar(
+              title: const Text('Selección servicios'),
             ),
-            ElevatedButton(
-              child: const SizedBox(
-                width: 200,
-                child: Center(
-                  child: Text('Continuar'),
+            body: Column(
+              children: [
+                const SizedBox(height: 20,),
+                SwitchListTile(
+                  activeColor: AppThemes.primary,
+                  title: const Text('Seleccionar todos'),
+                  value: sliderEnable, 
+                  onChanged: (value) {
+                    sliderEnable = value;
+                    setState(() {
+                      if(sliderEnable){
+                        serviciosSeleccionados.clear();
+                        for(int i = 0; i < serviciosServices.servicios.length; i++){
+                          serviciosSeleccionados.add(serviciosServices.servicios[i]);
+                        }
+                      } else {
+                        serviciosSeleccionados.clear();
+                      }
+                    });
+                  },
                 ),
-              ),
-              onPressed: () {
-                if (serviciosSeleccionados.length == 0) {
-                  alertaServicios(context);
-                } else {
-                  //Guarda en una varable global los servicios
-                  info['servicios'] = serviciosSeleccionados;
-                  final route = MaterialPageRoute(
-                      builder: (context) => const CalendarScreen());
-                  Navigator.push(context, route);
-                }
-              },
-            ),
-            SizedBox(height: 90,)
-          ],
-        ));
+                const SizedBox(height: 40,),
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: serviciosServices.servicios.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final servicio = serviciosServices.servicios[index];                
+                      return Container(
+                        width: 130,
+                        height: 190,
+                        margin: const EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if(!serviciosSeleccionados.contains(servicio)) {
+                                    serviciosSeleccionados.add(servicio);
+
+                                  } else {
+                                    serviciosSeleccionados.remove(servicio);                             
+                                 }
+                                });
+                              },
+                              child: ClipRRect(
+                                clipBehavior: Clip.antiAlias,
+                                borderRadius: BorderRadius.circular(20),
+                                child: FadeInImage(
+                                  placeholder: AssetImage('assets/jar-loading.gif'),
+                                  image: NetworkImage(servicio.foto),
+                                  width: 130,
+                                  height: 190,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              servicio.nombre,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              servicio.precio.toString() + '€',
+                              maxLines: 5,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                            )
+                          ]),
+                        );
+                      },
+                    ),
+                  ),
+                  Text('Seleccionados:'),
+                  SizedBox(height: 5,),
+                  Text(
+                    mostrarServiciosSeleccionados(serviciosSeleccionados)
+                  ),
+                  SizedBox(height: 20,),
+                  ElevatedButton(
+                    child: const SizedBox(
+                      width: 200,
+                      child: Center(
+                        child: Text('Continuar'),
+                      ),
+                    ),
+                    onPressed: () {
+                      if (serviciosSeleccionados.length == 0) {
+                        alertaServicios(context);
+                      } else {
+                        //no borrar si no no funciona
+                        //Esto guarda los peluqueros en la variable global info
+                        variablesGlobales.info['servicios'] = serviciosSeleccionados;
+                        variablesGlobales.servicios = serviciosSeleccionados;
+                        for(int i = 0; i<serviciosSeleccionados.length; i++){
+                          print(serviciosSeleccionados[i].nombre);
+                        }
+                        final route = MaterialPageRoute(
+                          builder: (context) => CalendarScreen()
+                        );
+                        Navigator.push(context, route);
+                      }
+                    },
+                  ),
+                SizedBox(height: 90,)
+              ],
+            )
+          );
+        }
+      ),
+    );
   }
 }
 
 void alertaServicios(BuildContext context) {
   showDialog(
-      barrierDismissible: false, // Nos permite pulsar fuera de la alerta
-      context: context,
-      builder: ((context) {
-        return AlertDialog(
-          title: const Text('¡Atención!'),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusDirectional.circular(20)),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              Text('Debes seleccionar al menos un servicio'),
-              SizedBox(
-                height: 20,
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('OK'))
+    barrierDismissible: false, // Nos permite pulsar fuera de la alerta
+    context: context,
+    builder: ((context) {
+      return AlertDialog(
+        title: const Text('¡Atención!'),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusDirectional.circular(20)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Text('Debes seleccionar al menos un servicio'),
+            SizedBox(
+              height: 20,
+            ),
           ],
-        );
-      }));
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'))
+        ],
+      );
+    })
+  );
+}
+
+String mostrarServiciosSeleccionados(List<Servicio> serviciosSeleccionados){
+  String servicios = '';
+  if(serviciosSeleccionados.length > 0) {
+    for(int i = 0; i < serviciosSeleccionados.length; i++){
+      servicios += serviciosSeleccionados[i].nombre + ', ';
+    }
+
+    servicios = servicios.substring(0, servicios.length - 2);
+  }
+  
+  return servicios;
 }

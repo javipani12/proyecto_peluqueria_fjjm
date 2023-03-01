@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 
-Usuario? usuario;
+Usuario usuario = Usuario(
+  acceptPrivacy: true, 
+  acceptPublicity: true, 
+  checkPassword: '', 
+  email: '', 
+  lastname: '', 
+  name: '', 
+  password: '', 
+  phoneNumber: ''
+);
+
 Peluqueria? peluqueria;
-List<Peluquero>? peluqueros;
-List<Servicios>? servicios;
-DateTime? fecha;
-TimeOfDay? hora;
+
+List<Peluquero> peluqueros = [];
+List<Servicio> servicios = [];
+List<DateTime> fecha = [];
+List<TimeOfDay> hora = [];
 
 final Map<String, dynamic> info = <String, dynamic>{
   'usuario' : Usuario,
