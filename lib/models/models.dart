@@ -7,3 +7,4 @@ export 'package:proyecto_peluqueria_fjjm/models/servicios.dart';
 export 'package:proyecto_peluqueria_fjjm/models/news.dart';
 export 'package:proyecto_peluqueria_fjjm/models/news_list.dart';
 export 'package:proyecto_peluqueria_fjjm/models/usuario.dart';
+export 'package:proyecto_peluqueria_fjjm/models/calendario.dart';
