@@ -15,10 +15,14 @@ class AppointmentScreen extends StatelessWidget {
       bottomNavigationBar: buttonNavigationBar(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
+<<<<<<< Updated upstream
         title: const Text('Flutter App'),
         actions: [
           
         ],
+=======
+        title: const Text('Inicio'),
+>>>>>>> Stashed changes
       ),
       body: _ListadoPeluquerias(listadoPeluquerias: listadoPeluquerias),    
     );

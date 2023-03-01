@@ -169,7 +169,7 @@ packages:
       name: flutter_native_splash
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.17"
+    version: "2.2.18"
   flutter_phone_direct_caller:
     dependency: "direct main"
     description:
@@ -194,6 +194,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.15.1"
+  http:
+    dependency: "direct main"
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.5"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.2"
   image:
     dependency: transitive
     description:
@@ -242,6 +256,16 @@ packages:
     dependency: transitive
     description:
       name: meta
+<<<<<<< Updated upstream
+=======
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.8.0"
+  multi_select_flutter:
+    dependency: "direct main"
+    description:
+      name: multi_select_flutter
+>>>>>>> Stashed changes
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
@@ -365,6 +389,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
+<<<<<<< Updated upstream
   timezone:
     dependency: transitive
     description:
@@ -372,6 +397,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.1"
+=======
+>>>>>>> Stashed changes
   typed_data:
     dependency: transitive
     description:
@@ -393,6 +420,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+<<<<<<< Updated upstream
   xdg_directories:
     dependency: transitive
     description:
@@ -400,6 +428,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0+3"
+=======
+>>>>>>> Stashed changes
   xml:
     dependency: transitive
     description:

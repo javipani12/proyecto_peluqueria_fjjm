@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
+<<<<<<< Updated upstream
+=======
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
+>>>>>>> Stashed changes
 
 class ServicesScreen extends StatefulWidget {
    
@@ -124,9 +129,34 @@ class _ServicesScreenState extends State<ServicesScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(color: _coloresServiciosSeleccionados[index]),
                       )
+<<<<<<< Updated upstream
                     ]
                   ),
                 );
+=======
+                    ]),
+                  );
+                },
+              ),
+            ),
+            ElevatedButton(
+              child: const SizedBox(
+                width: 200,
+                child: Center(
+                  child: Text('Continuar'),
+                ),
+              ),
+              onPressed: () {
+                if (serviciosSeleccionados.length == 0) {
+                  alertaServicios(context);
+                } else {
+                  //Guarda en una varable global los servicios
+                  variablesGlobales.info['servicios'] = serviciosSeleccionados;
+                  final route = MaterialPageRoute(
+                      builder: (context) => const CalendarScreen());
+                  Navigator.push(context, route);
+                }
+>>>>>>> Stashed changes
               },
             ),
           ),
