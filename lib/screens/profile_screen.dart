@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/edit_profile_screen.dart';
 import 'package:proyecto_peluqueria_fjjm/services/services.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
-import 'package:proyecto_peluqueria_fjjm/routes/routes.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_peluqueria_fjjm/models/usuario.dart';
 import '../services/usuarios_services.dart';
 import 'package:proyecto_peluqueria_fjjm/services/services.dart';
 import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
@@ -50,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                 alignment: AlignmentDirectional.center,
                 padding: const EdgeInsets.only(top: 10, bottom: 30, left: 5),
                 child: Text(
-                  variablesGlobales.usuario!.name,
+                  variablesGlobales.usuario.name,
                   style: const TextStyle(
                           fontSize: 20.0,
                         ),),
@@ -63,7 +61,7 @@ class ProfileScreen extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.only(bottom: 10.0),
                       child: Text(
-                        'Apellidos: ' + variablesGlobales.usuario!.lastname,
+                        'Apellidos: ' + variablesGlobales.usuario.lastname,
                         style: TextStyle(
                           fontSize: 20.0,
                         ),
@@ -72,7 +70,7 @@ class ProfileScreen extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.only(bottom: 10.0),
                       child: Text(
-                        'Email: ' +variablesGlobales.usuario!.email,
+                        'Email: ' +variablesGlobales.usuario.email,
                         style: TextStyle(
                           fontSize: 20.0,
                         ),
@@ -81,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.only(bottom: 10.0),
                       child:  Text(
-                        'Teléfono: ' + variablesGlobales.usuario!.phoneNumber,
+                        'Teléfono: ' + variablesGlobales.usuario.phoneNumber,
                         style: TextStyle(
                           fontSize: 20.0,
                         ),

@@ -78,6 +78,7 @@ class _AppointmentBody extends StatelessWidget {
           child: _ListadoPeluquerias()
         ),
       ]
+    );
   }
 }
 

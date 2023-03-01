@@ -59,9 +59,9 @@ class _EditProfileScreenBody extends StatelessWidget {
                 ),
                 const SizedBox(height: 30,),
                 TextFormField(
-                initialValue: variablesGlobales.usuario!.name,
+                initialValue: variablesGlobales.usuario.name,
                 onChanged: (value) {
-                  usuario?.name = value;
+                  usuario.name = value;
                 }, 
                 decoration: InputDecoration(
                   hintText: 'Nombre'
@@ -80,9 +80,9 @@ class _EditProfileScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: variablesGlobales.usuario!.lastname,
+                initialValue: variablesGlobales.usuario.lastname,
                 onChanged: (value) {
-                  usuario?.lastname = value;
+                  usuario.lastname = value;
                 },
                 decoration: const InputDecoration(
                   hintText: 'Apellidos'
@@ -99,7 +99,7 @@ class _EditProfileScreenBody extends StatelessWidget {
               ),
                 const SizedBox(height: 30,),
                 TextFormField(
-                initialValue: variablesGlobales.usuario!.email,
+                initialValue: variablesGlobales.usuario.email,
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
@@ -107,7 +107,7 @@ class _EditProfileScreenBody extends StatelessWidget {
                   labelText: 'Email',
                 ),
                 onChanged: (value) {
-                  usuario?.email = value;
+                  usuario.email = value;
                 },
                 validator: (value) {
                   String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -122,9 +122,9 @@ class _EditProfileScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: variablesGlobales.usuario!.phoneNumber,
+                initialValue: variablesGlobales.usuario.phoneNumber,
                 onChanged: (value) {
-                  usuario?.phoneNumber = value;
+                  usuario.phoneNumber = value;
                 },
                 decoration: const InputDecoration(
                   hintText: 'Teléfono'
@@ -137,7 +137,7 @@ class _EditProfileScreenBody extends StatelessWidget {
               ),
                 const SizedBox(height: 30,),
               TextFormField(
-                initialValue: variablesGlobales.usuario!.password,
+                initialValue: variablesGlobales.usuario.password,
                 autocorrect: false,
                 obscureText: true,
                 keyboardType: TextInputType.emailAddress,
@@ -146,7 +146,7 @@ class _EditProfileScreenBody extends StatelessWidget {
                   labelText: 'Contraseña',
                 ),
                 onChanged: (value) {
-                  usuario?.password = value;
+                  usuario.password = value;
                 },
                 validator: ( value ) {
                   if ( value!.isEmpty) {
@@ -158,7 +158,7 @@ class _EditProfileScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: variablesGlobales.usuario!.checkPassword,
+                initialValue: variablesGlobales.usuario.checkPassword,
                 autocorrect: false,
                 obscureText: true,
                 keyboardType: TextInputType.emailAddress,
@@ -167,10 +167,10 @@ class _EditProfileScreenBody extends StatelessWidget {
                   labelText: 'Repetir Contraseña',
                 ),
                 onChanged: (value) {
-                  usuario?.checkPassword = value;
+                  usuario.checkPassword = value;
                 },
                 validator: ( value ) {
-                  if ( value != usuario?.password ) {
+                  if ( value != usuario.password ) {
                     return 'Las contraseñas no coinciden';
                   }                             
                 },
@@ -180,7 +180,7 @@ class _EditProfileScreenBody extends StatelessWidget {
                ElevatedButton(
                 onPressed: () async {
                   if(!usuarioForm.isValidForm()) return;
-                  await usuariosServices.updateUsuario(usuario!);
+                  await usuariosServices.updateUsuario(usuario);
 
                   final route = MaterialPageRoute(
                     builder: (context) => const ProfileScreen()
