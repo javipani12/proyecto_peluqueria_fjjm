@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'package:http/http.dart' as http;
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class UsuariosServices extends ChangeNotifier{
   final String _baseURL = 'proyecto-peluqueria-fjjm-default-rtdb.europe-west1.firebasedatabase.app';
@@ -68,6 +69,8 @@ class UsuariosServices extends ChangeNotifier{
 
       final index = this.usuarios.indexWhere((element) => element.id == usuario.id );
       this.usuarios[index] = usuario;
+
+      variablesGlobales.usuario = usuario;
 
       return usuario.id!;
     }

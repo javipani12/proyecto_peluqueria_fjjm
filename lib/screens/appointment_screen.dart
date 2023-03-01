@@ -40,7 +40,7 @@ class _PeluqueriasBody extends StatelessWidget {
     bottomNavigationBar: buttonNavigationBar(),
     appBar: AppBar(
       automaticallyImplyLeading: false,
-      title: const Text('Inicio - Pedir Cita'),
+      title: const Text('Inicio'),
     ),
     body: _AppointmentBody(), 
     );
@@ -78,7 +78,6 @@ class _AppointmentBody extends StatelessWidget {
           child: _ListadoPeluquerias()
         ),
       ]
-    );
   }
 }
 

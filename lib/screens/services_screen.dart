@@ -6,6 +6,8 @@ import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_peluqueria_fjjm/services/services.dart';
 import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
+import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class ServicesScreen extends StatefulWidget {
    
