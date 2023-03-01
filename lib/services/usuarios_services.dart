@@ -76,7 +76,7 @@ class UsuariosServices extends ChangeNotifier{
     }
 
     Future<String> createUsuario( Usuario usuario ) async {
-      final url = Uri.https( _baseURL, 'usuarios/${ usuario.id }.json');
+      final url = Uri.https( _baseURL, 'usuarios.json');
       final resp = await http.post( url, body:  usuario.toJson() );
       final decodedData = json.decode( resp.body );
 
