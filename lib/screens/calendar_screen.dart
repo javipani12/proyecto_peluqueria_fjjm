@@ -4,9 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 
-import 'package:proyecto_peluqueria_fjjm/providers/calendar_from_provider.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
-import 'package:proyecto_peluqueria_fjjm/services/calendario_services.dart';
 import 'package:proyecto_peluqueria_fjjm/services/services.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -25,9 +23,9 @@ class CalendarScreen extends StatelessWidget {
           actions: [],
         ),
         body: Center(
-            child: ChangeNotifierProvider(
-          create: (_) => CalendarFormProvider(),
-          child: _center(),
+            child: ChangeNotifierProvider<CalendariosServices>(
+          create: (_) => CalendariosServices(),
+          builder: (context, _) => _center(),
         )));
   }
 }
@@ -109,11 +107,21 @@ class _centerState extends State<_center> {
       return CircularProgressIndicator(
         color: Colors.indigo,
       );
+    print(usuario.email);
+    List<DateTime> datetime = [];
     listCalendar = calendar.calendarios;
-    /*DateFormat formatoData = DateFormat.yMd();
+/*
+    for (var i = 0; i < listCalendar.length; i++) {
+      if (listCalendar[i].email == usuario.email) {
+        f = List.of(listCalendar[i].datetime);
+      }
+    }
+    */
+    print(variablesGlobales.usuario.email);
+    DateFormat formatoData = DateFormat.yMd();
     String dataFormatada = formatoData.format(calendar.calendarios[0].fecha);
     print(dataFormatada);
-*/
+
     return ListView(
       children: [
         Container(
@@ -175,12 +183,18 @@ class _centerState extends State<_center> {
                   child: Text('Continuar'),
                 ),
               ),
-              onPressed: () {
+              onPressed: () async {
                 if (horas.isEmpty) {
                   alertaCalendario(context);
                 } else {
                   //Guarda en un a varable  global las horas
+                  variablesGlobales.info['dia'] = _selectedDay;
                   variablesGlobales.info['hora'] = horas;
+                  await calendar.saveOrCreateCalendario(Calendario(
+                      datetime: datetime,
+                      email: usuario.email,
+                      fecha: _selectedDay,
+                      tiempo: "12:00"));
                   horas.forEach((element) {
                     print(element);
                   });

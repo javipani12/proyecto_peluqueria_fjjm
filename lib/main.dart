@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_peluqueria_fjjm/providers/usuario_form_provider.dart';
 import 'package:proyecto_peluqueria_fjjm/routes/app_routes.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/services/services.dart';
-import 'package:proyecto_peluqueria_fjjm/services/usuarios_services.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 
 void main() {
@@ -19,9 +17,6 @@ class AppState extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => UsuariosServices(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CalendariosServices(),
         ),
       ],
       child: MyApp(),

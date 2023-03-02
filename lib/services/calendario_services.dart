@@ -54,7 +54,6 @@ class CalendariosServices extends ChangeNotifier {
 
     isSaving = false;
     notifyListeners();
-    print(this.calendarios[0].tiempo);
   }
 
   Future<String> updateCalendario(Calendario calendario) async {
@@ -70,7 +69,7 @@ class CalendariosServices extends ChangeNotifier {
   }
 
   Future<String> createCalendario(Calendario calendario) async {
-    final url = Uri.https(_baseURL, 'calendario/${calendario.id}.json');
+    final url = Uri.https(_baseURL, 'calendario.json');
     final resp = await http.post(url, body: calendario.toJson());
     final decodedData = json.decode(resp.body);
 
