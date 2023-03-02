@@ -49,44 +49,35 @@ class _centerState extends State<_center> {
     });
   }
 
+  List<Calendario> listCalendar = [];
   int servicios = 2;
   List<TimeOfDay> horas = [];
 
-  List<Calendario> listCalendar = [];
+  List<DateTime> listDateTime = [];
+
+  final DateFormat formatoData = DateFormat.yMd();
 
   TextButton hora(TimeOfDay hora) {
-    DateFormat formatoData = DateFormat.yMd();
-    //print(formatoData.format(_selectedDay));
-    String timeOFDayString = '${hora.hour}:${hora.minute}';
-
-    if (listCalendar[0].tiempo == timeOFDayString &&
-        formatoData.format(listCalendar[0].fecha) ==
-            formatoData.format(_selectedDay)) {
-      return TextButton(
-        style: TextButton.styleFrom(
-          primary: Colors.grey,
-        ),
-        onPressed: null,
-        child: Text('${hora.hour}:${hora.minute}'),
-      );
-    } else {
-      if (horas.contains(hora)) {
+    for (final DateTime dateTime in listDateTime) {
+      TimeOfDay horaFromDateTime = TimeOfDay.fromDateTime(dateTime);
+      /* funciona 
+       if (listCalendar[0].tiempo == '${hora.hour}:${hora.minute}' &&
+          formatoData.format(listCalendar[0].fecha) ==
+              formatoData.format(_selectedDay))
+              */
+      if ('${horaFromDateTime.hour}:${horaFromDateTime.minute}' ==
+              '${hora.hour}:${hora.minute}' &&
+          formatoData.format(dateTime) == formatoData.format(_selectedDay)) {
         return TextButton(
           style: TextButton.styleFrom(
             primary: Colors.grey,
           ),
-          child: Text(
-            '${hora.hour}:${hora.minute}',
-          ),
-          onPressed: () {
-            setState(() {
-              servicios += 1;
-
-              horas.remove(hora);
-            });
-          },
+          onPressed: null,
+          child: Text('${hora.hour}:${hora.minute}'),
         );
-      } else {
+      }
+
+      if (!horas.contains(hora)) {
         return TextButton(
           child: Text('${hora.hour}:${hora.minute}'),
           onPressed: () {
@@ -98,6 +89,19 @@ class _centerState extends State<_center> {
         );
       }
     }
+
+    return TextButton(
+      style: TextButton.styleFrom(
+        primary: Colors.grey,
+      ),
+      child: Text('${hora.hour}:${hora.minute}'),
+      onPressed: () {
+        setState(() {
+          servicios += 1;
+          horas.remove(hora);
+        });
+      },
+    );
   }
 
   @override
@@ -109,14 +113,14 @@ class _centerState extends State<_center> {
       );
     print(usuario.email);
     List<DateTime> datetime = [];
+
     listCalendar = calendar.calendarios;
-/*
     for (var i = 0; i < listCalendar.length; i++) {
       if (listCalendar[i].email == usuario.email) {
-        f = List.of(listCalendar[i].datetime);
+        listDateTime = List.of(listCalendar[i].datetime);
       }
     }
-    */
+
     print(variablesGlobales.usuario.email);
     DateFormat formatoData = DateFormat.yMd();
     String dataFormatada = formatoData.format(calendar.calendarios[0].fecha);
