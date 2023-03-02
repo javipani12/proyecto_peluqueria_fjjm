@@ -16,8 +16,9 @@ Peluqueria? peluqueria;
 
 List<Peluquero> peluqueros = [];
 List<Servicio> servicios = [];
-List<DateTime> fecha = [];
-List<TimeOfDay> hora = [];
+String fecha = '';
+List<String> horas = [];
+String fechaHora = '';
 
 final Map<String, dynamic> info = <String, dynamic>{
   'usuario': Usuario,

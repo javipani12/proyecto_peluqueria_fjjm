@@ -111,14 +111,12 @@ class _centerState extends State<_center> {
       return CircularProgressIndicator(
         color: Colors.indigo,
       );
-    print(usuario.email);
+    print(variablesGlobales.usuario.email);
     List<DateTime> datetime = [];
 
     listCalendar = calendar.calendarios;
     for (var i = 0; i < listCalendar.length; i++) {
-      if (listCalendar[i].email == usuario.email) {
-        listDateTime = List.of(listCalendar[i].datetime);
-      }
+      listDateTime = List.of(listCalendar[i].datetime);
     }
 
     print(variablesGlobales.usuario.email);
@@ -190,10 +188,15 @@ class _centerState extends State<_center> {
                   alertaCalendario(context);
                 } else {
                   //Guarda en un a varable  global las horas
-                  variablesGlobales.info['dia'] = _selectedDay;
+                  variablesGlobales.fecha = _selectedDay.toString();
+
+                  for (TimeOfDay hora in horas) {
+                    variablesGlobales.horas.add(hora.toString());
+                  }
+
                   variablesGlobales.info['hora'] = horas;
                   await calendar.saveOrCreateCalendario(
-                      Calendario(datetime: listDateTime, email: usuario.email));
+                      Calendario(datetime: listDateTime, email: variablesGlobales.usuario.email));
                   horas.forEach((element) {
                     print(element);
                   });

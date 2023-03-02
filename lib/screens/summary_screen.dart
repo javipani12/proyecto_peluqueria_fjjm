@@ -38,6 +38,14 @@ class SummaryScreen extends StatelessWidget {
       return list;
     }
 
+    String fechaHora() {
+      String fechaHora = '';
+
+      fechaHora = variablesGlobales.fecha.split(" ")[0] + " " + variablesGlobales.horas[0].split("(")[1].split(")")[0];
+      variablesGlobales.fechaHora = fechaHora;
+      return fechaHora;
+    }
+
     PaymentMethod? paymentMethod;
 
     return Scaffold(
@@ -85,7 +93,7 @@ class SummaryScreen extends StatelessWidget {
                             'Fecha y hora',
                             style: TextStyle(color: Colors.black54),
                           ),
-                          trailing: Text("XX/XX/XXXX XX:XX",
+                          trailing: Text(fechaHora(),
                               style: TextStyle(color: Colors.black54)),
                         ),
                         ListTile(
