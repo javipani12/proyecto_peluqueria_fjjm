@@ -47,6 +47,7 @@ class HomeScreen extends StatelessWidget {
                       acceptPrivacy: false, 
                       acceptPublicity: false, 
                       checkPassword: '', 
+                      efectivo: false,
                       email: '', 
                       lastname: '', 
                       name: '', 
