@@ -50,7 +50,8 @@ class HomeScreen extends StatelessWidget {
                         lastname: '',
                         name: '',
                         password: '',
-                        phoneNumber: '');
+                        phoneNumber: '',
+                        efectivo: false);
                     final route = MaterialPageRoute(
                         builder: (context) => const RegisterScreen());
                     Navigator.push(context, route);

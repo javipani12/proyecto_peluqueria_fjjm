@@ -123,8 +123,6 @@ class _centerState extends State<_center> {
 
     print(variablesGlobales.usuario.email);
     DateFormat formatoData = DateFormat.yMd();
-    String dataFormatada = formatoData.format(calendar.calendarios[0].fecha);
-    print(dataFormatada);
 
     return ListView(
       children: [
@@ -194,11 +192,8 @@ class _centerState extends State<_center> {
                   //Guarda en un a varable  global las horas
                   variablesGlobales.info['dia'] = _selectedDay;
                   variablesGlobales.info['hora'] = horas;
-                  await calendar.saveOrCreateCalendario(Calendario(
-                      datetime: listDateTime,
-                      email: usuario.email,
-                      fecha: _selectedDay,
-                      tiempo: "12:00"));
+                  await calendar.saveOrCreateCalendario(
+                      Calendario(datetime: listDateTime, email: usuario.email));
                   horas.forEach((element) {
                     print(element);
                   });
