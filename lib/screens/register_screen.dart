@@ -124,6 +124,7 @@ class _RegisterScreenBody extends StatelessWidget {
               ),
               TextFormField(
                 initialValue: usuario?.phoneNumber,
+                keyboardType: TextInputType.phone,
                 onChanged: (value) {
                   usuario?.phoneNumber = value;
                 },
@@ -154,7 +155,9 @@ class _RegisterScreenBody extends StatelessWidget {
                 validator: ( value ) {
                   if ( value!.isEmpty) {
                     return 'La contraseña no es válida';
-                  }                              
+                  } else if (value.length < 4) {
+                    return 'La longitud mínima es de 4 caracteres';
+                  }                           
                 },
               ),
               const SizedBox(

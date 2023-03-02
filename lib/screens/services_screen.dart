@@ -131,9 +131,6 @@ class _ServicesScreenState extends State<ServicesScreen> {
                       if (serviciosSeleccionados.length == 0) {
                         alertaServicios(context);
                       } else {
-                        //no borrar si no no funciona
-                        //Esto guarda los peluqueros en la variable global info
-                        variablesGlobales.info['servicios'] = serviciosSeleccionados;
                         variablesGlobales.servicios = serviciosSeleccionados;
                         for(int i = 0; i<serviciosSeleccionados.length; i++){
                           print(serviciosSeleccionados[i].nombre);

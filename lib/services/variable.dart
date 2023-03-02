@@ -19,12 +19,4 @@ List<Servicio> servicios = [];
 String fecha = '';
 List<String> horas = [];
 String fechaHora = '';
-
-final Map<String, dynamic> info = <String, dynamic>{
-  'usuario': Usuario,
-  'peluqueria': <Peluqueria>[].toList(growable: true),
-  'peluqueros': <Peluquero>[].toList(growable: true),
-  'servicios': <Servicio>[].toList(growable: true),
-  'dia': <DateTime>[].toList(growable: true),
-  'hora': <TimeOfDay>[].toList(growable: true),
-};
+String metodoPago = '';

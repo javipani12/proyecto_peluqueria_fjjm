@@ -30,14 +30,6 @@ class SummaryScreen extends StatelessWidget {
       return servicios;
     }
 
-    List horas() {
-      List list = [];
-      for (int i = 0; i < variablesGlobales.info['hora'].length; i++) {
-        list.add(variablesGlobales.info['hora'][i].hour);
-      }
-      return list;
-    }
-
     String fechaHora() {
       String fechaHora = '';
 
