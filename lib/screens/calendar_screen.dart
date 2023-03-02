@@ -195,7 +195,7 @@ class _centerState extends State<_center> {
                   variablesGlobales.info['dia'] = _selectedDay;
                   variablesGlobales.info['hora'] = horas;
                   await calendar.saveOrCreateCalendario(Calendario(
-                      datetime: datetime,
+                      datetime: listDateTime,
                       email: usuario.email,
                       fecha: _selectedDay,
                       tiempo: "12:00"));
