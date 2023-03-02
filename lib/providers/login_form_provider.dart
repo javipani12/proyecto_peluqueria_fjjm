@@ -12,6 +12,7 @@ class LoginFormProvider extends ChangeNotifier {
     acceptPrivacy: true, 
     acceptPublicity: true, 
     checkPassword: '', 
+    efectivo: false,
     email: '', 
     lastname: '', 
     name: '', 

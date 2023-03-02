@@ -5,6 +5,7 @@ class Usuario {
         required this.acceptPrivacy,
         required this.acceptPublicity,
         required this.checkPassword,
+        required this.efectivo,
         required this.email,
         required this.lastname,
         required this.name,
@@ -16,6 +17,7 @@ class Usuario {
     bool acceptPrivacy;
     bool acceptPublicity;
     String checkPassword;
+    bool efectivo;
     String email;
     String lastname;
     String name;
@@ -31,6 +33,7 @@ class Usuario {
         acceptPrivacy: json["acceptPrivacy"],
         acceptPublicity: json["acceptPublicity"],
         checkPassword: json["checkPassword"],
+        efectivo: json["efectivo"],
         email: json["email"],
         lastname: json["lastname"],
         name: json["name"],
@@ -42,6 +45,7 @@ class Usuario {
         "acceptPrivacy": acceptPrivacy,
         "acceptPublicity": acceptPublicity,
         "checkPassword": checkPassword,
+        "efectivo": efectivo,
         "email": email,
         "lastname": lastname,
         "name": name,
@@ -52,7 +56,8 @@ class Usuario {
     Usuario copy() => Usuario(
       acceptPrivacy: acceptPrivacy, 
       acceptPublicity: acceptPublicity, 
-      checkPassword: checkPassword, 
+      checkPassword: checkPassword,
+      efectivo: efectivo, 
       email: email, 
       lastname: lastname, 
       name: name, 
