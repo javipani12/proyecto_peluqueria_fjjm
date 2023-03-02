@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final usuariosServices = Provider.of<UsuariosServices>(context);
 
     return Scaffold(
@@ -34,8 +33,8 @@ class HomeScreen extends StatelessWidget {
                 ElevatedButton(
                   child: Text('Iniciar sesion'),
                   onPressed: () {
-                    final route =
-                        MaterialPageRoute(builder: (context) => const LoginScreen());
+                    final route = MaterialPageRoute(
+                        builder: (context) => const LoginScreen());
                     Navigator.push(context, route);
                   },
                 ),
@@ -44,27 +43,77 @@ class HomeScreen extends StatelessWidget {
                   child: Text('Registrarse'),
                   onPressed: () {
                     usuariosServices.usuarioSeleccionado = Usuario(
-                      acceptPrivacy: false, 
-                      acceptPublicity: false, 
-                      checkPassword: '', 
-                      efectivo: false,
-                      email: '', 
-                      lastname: '', 
-                      name: '', 
-                      password: '', 
-                      phoneNumber: ''
-                    );
+                        acceptPrivacy: false,
+                        acceptPublicity: false,
+                        checkPassword: '',
+                        email: '',
+                        lastname: '',
+                        name: '',
+                        password: '',
+                        phoneNumber: '');
                     final route = MaterialPageRoute(
-                      builder: (context) => const RegisterScreen()
-                    );
+                        builder: (context) => const RegisterScreen());
                     Navigator.push(context, route);
                   },
                 ),
+                const _LogueoGF(),
               ],
             )
           ],
         ),
       ),
+    );
+  }
+}
+
+class _LogueoGF extends StatelessWidget {
+  const _LogueoGF({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Colors.white,
+              width: 5,
+            ),
+          ),
+          child: GestureDetector(
+            onTap: () => print(0),
+            child: Image.network(
+              'https://logos-world.net/wp-content/uploads/2020/09/Google-Symbol.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+            color: Colors.blue.shade900,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: GestureDetector(
+            onTap: () => print(1),
+            child: Image.network(
+              'https://journals.opscidia.com/public/site/facebook-logo.png',
+              fit: BoxFit.contain,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
