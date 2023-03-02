@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/providers/login_form_provider.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_peluqueria_fjjm/themes/app_themes.dart';
 
 class LoginScreen extends StatelessWidget {
    
@@ -99,7 +100,7 @@ class _LoginForm extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           disabledColor: Colors.grey,
           elevation: 0,
-          color: Colors.deepPurple,
+          color: AppThemes.primary,
           child: Container(
             padding: EdgeInsets.symmetric( horizontal: 80, vertical: 15),
             child: Text(

@@ -19,7 +19,7 @@ class AppRoutes {
 
     MenuOptions(
       name: 'Llamanos', 
-      screen: CallUsScreen(peluquerias: Peluquerias.listaPeluquerias,)
+      screen: CallUsScreen()
     ),
 
     MenuOptions(

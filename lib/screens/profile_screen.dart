@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/edit_profile_screen.dart';
+import 'package:proyecto_peluqueria_fjjm/services/services.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
-import 'package:proyecto_peluqueria_fjjm/routes/routes.dart';
+import 'package:provider/provider.dart';
+import '../services/usuarios_services.dart';
+import 'package:proyecto_peluqueria_fjjm/services/services.dart';
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class ProfileScreen extends StatelessWidget {
    
@@ -9,6 +13,9 @@ class ProfileScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+
+    final usuariosServices = Provider.of<UsuariosServices>(context);
+
     return Scaffold(
     bottomNavigationBar: buttonNavigationBar(),
     appBar: AppBar(
@@ -25,25 +32,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-        
-
-      /*
-        actions: <Widget>[
-          
-          GestureDetector(
-            onTap: (){
-              print('object');
-            },
-            child: const Text(
-              'Editar',
-              style: TextStyle(
-                fontSize: 20.0,
-              ),
-            ),         
-          ),
-        ],
-        */
-   
+       
     body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,16 +41,17 @@ class ProfileScreen extends StatelessWidget {
               const Center(
                 child: CircleAvatar(
                   maxRadius: 60,
-                  backgroundImage: NetworkImage('https://www.rctb1899.es/sites/default/files/noticia/imatge//2495_1.jpg'),
+                  backgroundImage: NetworkImage('https://thumbs.dreamstime.com/b/usuario-de-medios-sociales-vectorial-icono-perfil-avatar-predeterminado-retrato-176256935.jpg'),
                 ),
               ),
               Container(
                 alignment: AlignmentDirectional.center,
                 padding: const EdgeInsets.only(top: 10, bottom: 30, left: 5),
-                child: const Text(
-                  'Rafa Nadal',
-                  style: TextStyle(
+                child: Text(
+                  variablesGlobales.usuario.name,
+                  style: const TextStyle(
                           fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
                         ),),
               ),
               Container(
@@ -69,40 +59,25 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      child: const Text(
-                        'Apellidos: Perez',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
+                    ListTile(
+                      leading: Icon(Icons.person),
+                      title: Text(
+                      'Apellidos: ' + variablesGlobales.usuario.lastname,
+                      style: TextStyle(fontSize: 17.50),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      child: const Text(
-                        'Email: juan@gmail.com',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
+                    ListTile(
+                      leading: Icon(Icons.email),
+                      title: Text(
+                      'Email: ' + variablesGlobales.usuario.email,
+                      style: TextStyle(fontSize: 17.50),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      child: const Text(
-                        'Teléfono: 958591093',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      child: const Text(
-                        'Contraseña: ********',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                        ),
+                    ListTile(
+                      leading: Icon(Icons.phone_android),
+                      title: Text(
+                      'Teléfono: ' + variablesGlobales.usuario.phoneNumber,
+                      style: TextStyle(fontSize: 17.50),
                       ),
                     ),
                   ],

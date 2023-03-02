@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AppThemes {
-  static const Color primary = Colors.deepPurple;
+  static const Color primary = Colors.blue;
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     primaryColor: primary,

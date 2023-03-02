@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final usuariosServices = Provider.of<UsuariosServices>(context);
 
     return Scaffold(
@@ -30,12 +29,12 @@ class HomeScreen extends StatelessWidget {
                     width: 300,
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 50),
                 ElevatedButton(
                   child: Text('Iniciar sesion'),
                   onPressed: () {
-                    final route =
-                        MaterialPageRoute(builder: (context) => const LoginScreen());
+                    final route = MaterialPageRoute(
+                        builder: (context) => const LoginScreen());
                     Navigator.push(context, route);
                   },
                 ),
@@ -44,18 +43,16 @@ class HomeScreen extends StatelessWidget {
                   child: Text('Registrarse'),
                   onPressed: () {
                     usuariosServices.usuarioSeleccionado = Usuario(
-                      acceptPrivacy: false, 
-                      acceptPublicity: false, 
-                      checkPassword: '', 
-                      email: '', 
-                      lastname: '', 
-                      name: '', 
-                      password: '', 
-                      phoneNumber: ''
-                    );
+                        acceptPrivacy: false,
+                        acceptPublicity: false,
+                        checkPassword: '',
+                        email: '',
+                        lastname: '',
+                        name: '',
+                        password: '',
+                        phoneNumber: '');
                     final route = MaterialPageRoute(
-                      builder: (context) => const RegisterScreen()
-                    );
+                        builder: (context) => const RegisterScreen());
                     Navigator.push(context, route);
                   },
                 ),
