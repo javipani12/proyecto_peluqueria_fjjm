@@ -51,20 +51,19 @@ class _centerState extends State<_center> {
     });
   }
 
-  bool pulsado = false;
-
   int servicios = 2;
   List<TimeOfDay> horas = [];
 
-  List<Calendario> c = [];
+  List<Calendario> listCalendar = [];
 
   TextButton hora(TimeOfDay hora) {
     DateFormat formatoData = DateFormat.yMd();
     //print(formatoData.format(_selectedDay));
     String timeOFDayString = '${hora.hour}:${hora.minute}';
 
-    if (c[0].tiempo == timeOFDayString &&
-        formatoData.format(c[0].fecha) == formatoData.format(_selectedDay)) {
+    if (listCalendar[0].tiempo == timeOFDayString &&
+        formatoData.format(listCalendar[0].fecha) ==
+            formatoData.format(_selectedDay)) {
       return TextButton(
         style: TextButton.styleFrom(
           primary: Colors.grey,
@@ -110,11 +109,11 @@ class _centerState extends State<_center> {
       return CircularProgressIndicator(
         color: Colors.indigo,
       );
-    c = calendar.calendarios;
-    DateFormat formatoData = DateFormat.yMd();
+    listCalendar = calendar.calendarios;
+    /*DateFormat formatoData = DateFormat.yMd();
     String dataFormatada = formatoData.format(calendar.calendarios[0].fecha);
     print(dataFormatada);
-
+*/
     return ListView(
       children: [
         Container(
