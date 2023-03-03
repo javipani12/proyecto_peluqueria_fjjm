@@ -15,7 +15,7 @@ class CalendariosServices extends ChangeNotifier {
   bool isSaving = false;
 
   CalendariosServices() {
-    this.loadCalendario();
+    loadCalendario();
   }
 
   Future<List<Calendario>> loadCalendario() async {
@@ -27,17 +27,17 @@ class CalendariosServices extends ChangeNotifier {
     calendariosMap.forEach((key, value) {
       final tempCalendario = Calendario.fromMap(value);
       tempCalendario.id = key;
-      this.calendarios.add(tempCalendario);
+      calendarios.add(tempCalendario);
     });
 
-    for (int i = 0; i < this.calendarios.length; i++) {
-      print(this.calendarios[i].id);
+    for (int i = 0; i < calendarios.length; i++) {
+      print(calendarios[i].id);
     }
 
-    this.isLoading = false;
+    isLoading = false;
     notifyListeners();
 
-    return this.calendarios;
+    return calendarios;
   }
 
   Future saveOrCreateCalendario(Calendario calendario) async {
@@ -46,10 +46,10 @@ class CalendariosServices extends ChangeNotifier {
 
     if (calendario.id == null) {
       // Crear
-      await this.createCalendario(calendario);
+      await createCalendario(calendario);
     } else {
       // Actualizar
-      await this.updateCalendario(calendario);
+      await updateCalendario(calendario);
     }
 
     isSaving = false;
@@ -62,8 +62,8 @@ class CalendariosServices extends ChangeNotifier {
     final decodedData = resp.body;
 
     final index =
-        this.calendarios.indexWhere((element) => element.id == calendario.id);
-    this.calendarios[index] = calendario;
+        calendarios.indexWhere((element) => element.id == calendario.id);
+    calendarios[index] = calendario;
 
     return calendario.id!;
   }
@@ -73,7 +73,7 @@ class CalendariosServices extends ChangeNotifier {
     final resp = await http.post(url, body: calendario.toJson());
     final decodedData = json.decode(resp.body);
 
-    calendario.id = decodedData['name'];
+    calendario.id = decodedData['email'];
 
     print('${calendario.id}');
 

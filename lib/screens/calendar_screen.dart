@@ -1,4 +1,3 @@
-import 'package:booking_calendar/booking_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +16,7 @@ class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: buttonNavigationBar(),
+        bottomNavigationBar: ButtonNavigationBar(),
         appBar: AppBar(
           title: const Text('Selección fecha'),
           actions: [],
@@ -152,12 +151,10 @@ class _centerState extends State<_center> {
           limite = 8;
           break;
       }
-
       return horas;
     }
 
     print(variablesGlobales.usuario.email);
-    List<DateTime> datetime = [];
 
     listCalendar = calendar.calendarios;
     for (var i = 0; i < listCalendar.length; i++) {
@@ -238,7 +235,6 @@ class _centerState extends State<_center> {
                   for (TimeOfDay hora in horas) {
                     variablesGlobales.horas.add(hora.toString());
                   }
-
 
                   await calendar.saveOrCreateCalendario(Calendario(
                       datetime: listDateTime,

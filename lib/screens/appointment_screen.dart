@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_peluqueria_fjjm/themes/app_themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'screens.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_peluqueria_fjjm/services/services.dart';
-import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart'
+    as variablesGlobales;
 
 class AppointmentScreen extends StatelessWidget {
   const AppointmentScreen({Key? key}) : super(key: key);
@@ -31,18 +31,17 @@ class _PeluqueriasBody extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-  final Peluqueria peluqueria;
+    final Peluqueria peluqueria;
 
-  return Scaffold(
-    bottomNavigationBar: buttonNavigationBar(),
-    appBar: AppBar(
-      automaticallyImplyLeading: false,
-      title: const Text('Inicio'),
-    ),
-    body: _AppointmentBody(), 
+    return Scaffold(
+      bottomNavigationBar: ButtonNavigationBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Inicio'),
+      ),
+      body: _AppointmentBody(),
     );
   }
 }
@@ -54,31 +53,33 @@ class _AppointmentBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 20,),
-        Text(
-          'Novedades',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+    return Column(children: [
+      const SizedBox(
+        height: 20,
+      ),
+      Text(
+        'Novedades',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
         ),
-        _ListadoNovedades(),
-        const SizedBox(height: 20,),
-        Text(
-          'Peluquerías',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+      ),
+      _ListadoNovedades(),
+      const SizedBox(
+        height: 20,
+      ),
+      Text(
+        'Peluquerías',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
         ),
-        const SizedBox(height: 10,),
-        Expanded(
-          child: _ListadoPeluquerias()
-        ),
-      ]
-    );
+      ),
+      const SizedBox(
+        height: 10,
+      ),
+      Expanded(child: _ListadoPeluquerias()),
+    ]);
   }
 }
 
@@ -87,10 +88,8 @@ class _ListadoPeluquerias extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-
     final peluqueriaServices = Provider.of<PeluqueriaServices>(context);
 
     return ListView.builder(
@@ -117,9 +116,7 @@ class _ListadoPeluquerias extends StatelessWidget {
                 ),
                 Container(
                   alignment: AlignmentDirectional.topStart,
-
                   padding: const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-
                   child: Text(peluqueria.nombre),
                 ),
                 Container(
@@ -131,9 +128,8 @@ class _ListadoPeluquerias extends StatelessWidget {
                   onPressed: () {
                     // Guarda El nombre de la peluqueria en una variable Global
                     variablesGlobales.peluqueria = peluqueria;
-                    final route = MaterialPageRoute(
-                      builder: (context) => BarberScreen()
-                    );
+                    final route =
+                        MaterialPageRoute(builder: (context) => BarberScreen());
                     Navigator.push(context, route);
                     variablesGlobales.peluqueria = peluqueria;
                   },
@@ -143,7 +139,6 @@ class _ListadoPeluquerias extends StatelessWidget {
                     child: const Text(
                       'Pedir cita aquí',
                       style: TextStyle(decoration: TextDecoration.underline),
-
                     ),
                   ),
                 ),
@@ -163,7 +158,6 @@ class _ListadoNovedades extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final novedadesServices = Provider.of<NovedadesServices>(context);
 
     return SizedBox(
@@ -194,7 +188,6 @@ class _ListadoNovedades extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-
                 ),
                 Container(
                   padding: EdgeInsets.only(top: 3, left: 3),
@@ -203,7 +196,9 @@ class _ListadoNovedades extends StatelessWidget {
                   // ignore: prefer_const_constructors
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.12),
@@ -214,21 +209,19 @@ class _ListadoNovedades extends StatelessWidget {
                     ],
                   ),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 4.0, top: 2),
-                        child: Text(
-                          novedad.titulo,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 4.0, top: 2),
+                          child: Text(
+                            novedad.titulo,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                    ]
-                  ),
+                      ]),
                 ),
-
               ],
             ),
           );

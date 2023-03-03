@@ -14,7 +14,7 @@ class AppThemes {
     // Por el momento
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        primary: primary,
+        backgroundColor: primary,
         shape: const StadiumBorder(),
         elevation: 2,
         alignment: Alignment.center,
@@ -29,8 +29,8 @@ class AppThemes {
     ),
 
     // TextButton Theme
-    textButtonTheme:
-        TextButtonThemeData(style: TextButton.styleFrom(primary: primary)),
+    textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(foregroundColor: primary)),
 
     // Botón volver hacia atrás
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
