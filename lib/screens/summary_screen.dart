@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'package:proyecto_peluqueria_fjjm/services/reservas_services.dart';
-import 'package:proyecto_peluqueria_fjjm/services/services.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/button_navigation_bar.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_peluqueria_fjjm/services/services.dart';
 import 'package:proyecto_peluqueria_fjjm/services/variable.dart'as variablesGlobales;
 
 class SummaryScreen extends StatefulWidget {
@@ -19,7 +17,6 @@ class _SummaryScreenState extends State<SummaryScreen> {
   PaymentMethod? paymentMethod;
   @override
   Widget build(BuildContext context) {
-    double precio = 0;
 
     String peluqueros() {
       String peluqueros = '';
@@ -31,17 +28,17 @@ class _SummaryScreenState extends State<SummaryScreen> {
       return peluqueros;
     }
 
-    String servicios() {
-      String servicios = '';
+    double calcularPrecio(){
+      double precio = 0;
+
       for (int i = 0; i < variablesGlobales.servicios.length; i++) {
-        servicios += variablesGlobales.servicios[i].nombre + ', ';
         precio += variablesGlobales.servicios[i].precio;
       }
-      servicios = servicios.substring(0, servicios.length - 2);
-      return servicios;
+
+      return precio;
     }
 
-    String serviciosSinSumar() {
+    String servicios() {
       String servicios = '';
       for (int i = 0; i < variablesGlobales.servicios.length; i++) {
         servicios += variablesGlobales.servicios[i].nombre + ', ';
@@ -96,7 +93,10 @@ class _SummaryScreenState extends State<SummaryScreen> {
                               visualDensity: const VisualDensity(vertical: -4),
                               leading: const Text(
                                 'Peluqueros',
-                                style: TextStyle(color: Colors.black54),
+                                maxLines: 2,
+                                style: TextStyle(
+                                  color: Colors.black54
+                                ),
                               ),
                               trailing: Text(peluqueros(),
                                   style: const TextStyle(color: Colors.black54)),
@@ -116,8 +116,13 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                 'Servicios',
                                 style: TextStyle(color: Colors.black54),
                               ),
-                              trailing: Text(servicios(),
-                                  style: const TextStyle(color: Colors.black54)),
+                              trailing: Text(
+                                servicios(),
+                                maxLines: 2,
+                                style: const TextStyle(
+                                  color: Colors.black54
+                                )
+                              ),
                             ),
                             const Divider(
                               indent: 15,
@@ -128,7 +133,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                 'Total',
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              trailing: Text(precio.toString() + '€',
+                              trailing: Text('${calcularPrecio()}€',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold, fontSize: 25)),
                             ),
@@ -179,20 +184,26 @@ class _SummaryScreenState extends State<SummaryScreen> {
                       endIndent: 0,
                     ),
                     ListTile(
-                        leading: const Icon(Icons.attach_money),
-                        title: const Text(
-                          'Efectivo',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        trailing: Radio(
-                          value: PaymentMethod.cash,
-                          groupValue: paymentMethod,
-                          onChanged: !variablesGlobales.usuario.efectivo ? null : (PaymentMethod? value) {
-                            setState(() {
-                              paymentMethod = value;
-                            });
-                          },
-                        )),
+                      leading: const Icon(Icons.attach_money),
+                      title: const Text(
+                        'Efectivo',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      trailing: Radio(
+                        value: PaymentMethod.cash,
+                        groupValue: paymentMethod,
+                        onChanged: 
+                          !variablesGlobales.usuario.efectivo 
+                          ? 
+                            null 
+                          : 
+                            (PaymentMethod? value) {
+                              setState(() {
+                                paymentMethod = value;
+                              });
+                            },
+                      )
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -203,16 +214,17 @@ class _SummaryScreenState extends State<SummaryScreen> {
                       ),
                       onPressed: () async{
                         Reserva reserva = Reserva(
+                          eliminado: false,
                           fechaHora: variablesGlobales.fechaHora, 
                           idUsuario: variablesGlobales.usuario.id!, 
-                          importe: precio, 
+                          importe: calcularPrecio(), 
                           metodoPago: '', 
                           peluqueria: variablesGlobales.peluqueria!.nombre, 
                           peluqueros: peluqueros(), 
-                          servicios: serviciosSinSumar(),
+                          servicios: servicios(),
                         );
                         if (paymentMethod == PaymentMethod.bizum) {
-                          reserva.metodoPago = conceptoBizum();
+                          reserva.metodoPago = 'Bizum - ${conceptoBizum()}';
                           await serviciosServices.createReserva(reserva);
                           final route = MaterialPageRoute(
                             builder: (context) => const ReservationsScreen());
@@ -228,8 +240,6 @@ class _SummaryScreenState extends State<SummaryScreen> {
                             builder: (context) => const CreditCardScreen());
                             Navigator.push(context, route);
                         }
-
-                        
                       },
                     ),
                   ],

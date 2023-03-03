@@ -59,7 +59,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
           itemBuilder: (BuildContext context, int index) {
             final reserva = reservasServices.reservas[index];
             return Container(
-              child: reserva.idUsuario == variablesGlobales.usuario.id!
+              child: reserva.idUsuario == variablesGlobales.usuario.id! && !reserva.eliminado
               ? Column(
                 children: [
                   Text(
@@ -101,6 +101,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                             ),
                           trailing: Text(
                             reserva.peluqueros, 
+                            maxLines: 2,
                             style: const TextStyle(
                               color: Colors.black54
                               )
@@ -117,6 +118,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                             ),
                           trailing: Text(
                             reserva.servicios, 
+                            maxLines: 2,
                             style: const TextStyle(
                               color: Colors.black54
                               )
@@ -149,6 +151,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                               ),
                           trailing: Text(
                             reserva.metodoPago,
+                            maxLines: 2,
                             style: const TextStyle(
                               color: Colors.black54
                             )
@@ -181,8 +184,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                               )
                             ),
                             onTap: () {
-                              return null;
-                              //displayDialog(context);
+                              displayDialog(context, reserva, reservasServices);
                             },
                           ),
                           onTap: () {
@@ -194,9 +196,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                   ),
                 ],
               )
-              : contador == 0
-                ? Text('Todavía no tienes ninguna reserva')
-                : Text('')
+              : Text('')
             );
           }
         ),
@@ -205,20 +205,24 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   }
 }
 
-void displayDialog(BuildContext context) {
+void displayDialog(BuildContext context, Reserva reserva, ReservasServices reservasServices) {
     showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: const Text("Cancelación de reserva"),
-            content: const Text(
-                "¿Estás seguro de que quieres cancelar tu reserva del día X a las XX:XX en el local X?"),
+            content: Text(
+                "¿Estás seguro de que quieres cancelar tu reserva del día ${variablesGlobales.fechaHora.split(" ")[0]} a las ${variablesGlobales.fechaHora.split(" ")[1]} en el local ${variablesGlobales.peluqueria?.nombre}?"),
             actions: <Widget>[
               TextButton(
                   onPressed: () => Navigator.pop(context),
                   child: const Text("Cancelar")),
               TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () async {
+                    reserva.eliminado = true;
+                    await reservasServices.updateReserva(reserva);
+                    Navigator.pop(context);
+                  }, 
                   child: const Text("Confirmar")),
             ],
           );

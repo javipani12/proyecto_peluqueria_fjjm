@@ -43,6 +43,17 @@ class ReservasServices extends ChangeNotifier{
     return this.reservas;
   }  
 
+  Future<String> updateReserva( Reserva reserva ) async {
+    final url = Uri.https( _baseURL, 'reservas/${ reserva.id }.json');
+    final resp = await http.put( url, body:  reserva.toJson() );
+    final decodedData = resp.body;
+
+    final index = this.reservas.indexWhere((element) => element.id == reserva.id );
+    this.reservas[index] = reserva;
+
+    return reserva.id!;
+  }
+
   Future<String> createReserva( Reserva reserva ) async {
     final url = Uri.https( _baseURL, 'reservas.json');
     final resp = await http.post( url, body:  reserva.toJson() );

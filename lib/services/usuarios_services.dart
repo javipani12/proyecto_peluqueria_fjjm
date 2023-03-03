@@ -63,17 +63,17 @@ class UsuariosServices extends ChangeNotifier{
   
 
   Future<String> updateUsuario( Usuario usuario ) async {
-      final url = Uri.https( _baseURL, 'usuarios/${ usuario.id }.json');
-      final resp = await http.put( url, body:  usuario.toJson() );
-      final decodedData = resp.body;
+    final url = Uri.https( _baseURL, 'usuarios/${ usuario.id }.json');
+    final resp = await http.put( url, body:  usuario.toJson() );
+    final decodedData = resp.body;
 
-      final index = this.usuarios.indexWhere((element) => element.id == usuario.id );
-      this.usuarios[index] = usuario;
+    final index = this.usuarios.indexWhere((element) => element.id == usuario.id );
+    this.usuarios[index] = usuario;
 
-      variablesGlobales.usuario = usuario;
+    variablesGlobales.usuario = usuario;
 
-      return usuario.id!;
-    }
+    return usuario.id!;
+  }
 
     Future<String> createUsuario( Usuario usuario ) async {
       final url = Uri.https( _baseURL, 'usuarios.json');

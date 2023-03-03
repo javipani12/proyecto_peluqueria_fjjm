@@ -37,17 +37,17 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
       return peluqueros;
     }
 
-    String servicios() {
-      String servicios = '';
+    double calcularPrecio(){
+      double precio = 0;
+
       for (int i = 0; i < variablesGlobales.servicios.length; i++) {
-        servicios += variablesGlobales.servicios[i].nombre + ', ';
         precio += variablesGlobales.servicios[i].precio;
       }
-      servicios = servicios.substring(0, servicios.length - 2);
-      return servicios;
+
+      return precio;
     }
 
-    String serviciosSinSumar() {
+    String servicios() {
       String servicios = '';
       for (int i = 0; i < variablesGlobales.servicios.length; i++) {
         servicios += variablesGlobales.servicios[i].nombre + ', ';
@@ -171,13 +171,14 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                       onPressed: () async {
                         if (myFormKey.currentState!.validate()) {
                           Reserva reserva = Reserva(
+                            eliminado: false,
                             fechaHora: variablesGlobales.fechaHora, 
                             idUsuario: variablesGlobales.usuario.id!, 
-                            importe: precio, 
+                            importe: calcularPrecio(), 
                             metodoPago: 'Tarjeta', 
                             peluqueria: variablesGlobales.peluqueria!.nombre, 
                             peluqueros: peluqueros(), 
-                            servicios: serviciosSinSumar(),
+                            servicios: servicios(),
                           );
                           reservasServices.createReserva(reserva);
                           precio = 0;

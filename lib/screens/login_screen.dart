@@ -90,7 +90,9 @@ class _LoginForm extends StatelessWidget {
           validator: ( value ) {
             if ( value!.isEmpty ) {
               return 'La contraseña no es válida';  
-            }                             
+            } else if (value.length < 4) {
+              return 'La longitud mínima es de 4 caracteres';
+            }                        
           },
         ),
         const SizedBox(
