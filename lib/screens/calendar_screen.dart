@@ -146,6 +146,7 @@ class _centerState extends State<_center> {
           horas = "3 horas y 30 minutos contiguos";
           limite = 7;
           break;
+
         case 240:
           horas = "4 horas contiguas";
           limite = 8;
@@ -237,6 +238,7 @@ class _centerState extends State<_center> {
                   for (TimeOfDay hora in horas) {
                     variablesGlobales.horas.add(hora.toString());
                   }
+
 
                   await calendar.saveOrCreateCalendario(Calendario(
                       datetime: listDateTime,
