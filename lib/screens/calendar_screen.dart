@@ -60,26 +60,21 @@ class _centerState extends State<_center> {
   TextButton hora(TimeOfDay hora) {
     for (final DateTime dateTime in listDateTime) {
       TimeOfDay horaFromDateTime = TimeOfDay.fromDateTime(dateTime);
-      /* funciona 
-       if (listCalendar[0].tiempo == '${hora.hour}:${hora.minute}' &&
-          formatoData.format(listCalendar[0].fecha) ==
-              formatoData.format(_selectedDay))
-              */
       if ('${horaFromDateTime.hour}:${horaFromDateTime.minute}' ==
               '${hora.hour}:${hora.minute}' &&
           formatoData.format(dateTime) == formatoData.format(_selectedDay)) {
         return TextButton(
           style: TextButton.styleFrom(
-            primary: Colors.grey,
+            foregroundColor: Colors.grey,
           ),
           onPressed: null,
-          child: Text('${hora.hour}:${hora.minute}'),
+          child: Text(hora.toString().split("(")[1].split(")")[0]),
         );
       }
 
       if (!horas.contains(hora)) {
         return TextButton(
-          child: Text('${hora.hour}:${hora.minute}'),
+          child: Text(hora.toString().split("(")[1].split(")")[0]),
           onPressed: () {
             setState(() {
               servicios -= 1;
@@ -92,9 +87,9 @@ class _centerState extends State<_center> {
 
     return TextButton(
       style: TextButton.styleFrom(
-        primary: Colors.grey,
+        foregroundColor: Colors.grey,
       ),
-      child: Text('${hora.hour}:${hora.minute}'),
+      child: Text(hora.toString().split("(")[1].split(")")[0]),
       onPressed: () {
         setState(() {
           servicios += 1;
@@ -112,14 +107,14 @@ class _centerState extends State<_center> {
         color: Colors.indigo,
       );
 
-    String horasASeleccionar(){
+    String horasASeleccionar() {
       int tiempo = 0;
       String horas = '';
-      
+
       for (var i = 0; i < variablesGlobales.servicios.length; i++) {
         tiempo += variablesGlobales.servicios[i].duracion;
       }
-      
+
       switch (tiempo) {
         case 30:
           horas = "30 minutos";
@@ -142,12 +137,12 @@ class _centerState extends State<_center> {
         case 210:
           horas = "3 horas y 30 minutos contiguos";
           break;
-        case 210:
+        case 240:
           horas = "4 horas contiguas";
           break;
       }
 
-      return horas; 
+      return horas;
     }
 
     print(variablesGlobales.usuario.email);
@@ -233,8 +228,9 @@ class _centerState extends State<_center> {
                     variablesGlobales.horas.add(hora.toString());
                   }
 
-                  await calendar.saveOrCreateCalendario(
-                      Calendario(datetime: listDateTime, email: variablesGlobales.usuario.email));
+                  await calendar.saveOrCreateCalendario(Calendario(
+                      datetime: listDateTime,
+                      email: variablesGlobales.usuario.email));
                   horas.forEach((element) {
                     print(element);
                   });

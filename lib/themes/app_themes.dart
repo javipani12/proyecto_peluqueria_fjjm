@@ -1,8 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AppThemes {
-  static const Color primary = Colors.blue;
+  static const Color primary = Colors.blueGrey;
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     primaryColor: primary,
@@ -19,8 +18,8 @@ class AppThemes {
         shape: const StadiumBorder(),
         elevation: 2,
         alignment: Alignment.center,
-        minimumSize: Size(300, 40),
-        textStyle: TextStyle(color: Colors.white),
+        minimumSize: const Size(300, 40),
+        textStyle: const TextStyle(color: Colors.white),
       ),
     ),
 
