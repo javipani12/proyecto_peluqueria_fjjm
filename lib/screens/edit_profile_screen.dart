@@ -123,6 +123,7 @@ class _EditProfileScreenBody extends StatelessWidget {
               ),
               TextFormField(
                 initialValue: variablesGlobales.usuario.phoneNumber,
+                keyboardType: TextInputType.phone,
                 onChanged: (value) {
                   usuario.phoneNumber = value;
                 },
@@ -151,7 +152,9 @@ class _EditProfileScreenBody extends StatelessWidget {
                 validator: ( value ) {
                   if ( value!.isEmpty) {
                     return 'La contraseña no es válida';
-                  }                              
+                  } else if (value.length < 4) {
+                    return 'La longitud mínima es de 4 caracteres';
+                  }                          
                 },
               ),
               const SizedBox(
@@ -172,7 +175,7 @@ class _EditProfileScreenBody extends StatelessWidget {
                 validator: ( value ) {
                   if ( value != usuario.password ) {
                     return 'Las contraseñas no coinciden';
-                  }                             
+                  }                         
                 },
               ),const SizedBox(
                 height: 30,

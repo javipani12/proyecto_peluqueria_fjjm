@@ -129,9 +129,6 @@ class _BarberScreenState extends State<BarberScreen> {
                       if (peluquerosSeleccionados.length == 0) {
                         alertaPeluqueros(context);
                       } else {
-                        //no borrar si no no funciona
-                        //Esto guarda los peluqueros en la variable global info
-                        variablesGlobales.info['peluqueros'] = peluquerosSeleccionados;
                         variablesGlobales.peluqueros = peluquerosSeleccionados;
                         for(int i = 0; i<peluquerosSeleccionados.length; i++){
                           print(peluquerosSeleccionados[i].nombre);

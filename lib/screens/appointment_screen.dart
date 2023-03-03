@@ -130,7 +130,6 @@ class _ListadoPeluquerias extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     // Guarda El nombre de la peluqueria en una variable Global
-                    variablesGlobales.info['peluqueria'] = peluqueria;
                     variablesGlobales.peluqueria = peluqueria;
                     final route = MaterialPageRoute(
                       builder: (context) => BarberScreen()

@@ -111,6 +111,45 @@ class _centerState extends State<_center> {
       return CircularProgressIndicator(
         color: Colors.indigo,
       );
+
+    String horasASeleccionar(){
+      int tiempo = 0;
+      String horas = '';
+      
+      for (var i = 0; i < variablesGlobales.servicios.length; i++) {
+        tiempo += variablesGlobales.servicios[i].duracion;
+      }
+      
+      switch (tiempo) {
+        case 30:
+          horas = "30 minutos";
+          break;
+        case 60:
+          horas = "1 hora contigua";
+          break;
+        case 90:
+          horas = "1 hora y 30 minutos contiguos";
+          break;
+        case 120:
+          horas = "2 horas contiguas";
+          break;
+        case 150:
+          horas = "2 horas y 30 minutos contiguos";
+          break;
+        case 180:
+          horas = "3 horas contiguas";
+          break;
+        case 210:
+          horas = "3 horas y 30 minutos contiguos";
+          break;
+        case 210:
+          horas = "4 horas contiguas";
+          break;
+      }
+
+      return horas; 
+    }
+
     print(variablesGlobales.usuario.email);
     List<DateTime> datetime = [];
 
@@ -148,7 +187,7 @@ class _centerState extends State<_center> {
             SizedBox(height: 10),
             Text(
               textAlign: TextAlign.start,
-              'Seleccione: 2 horas contiguas',
+              'Seleccione: ' + horasASeleccionar(),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             SizedBox(height: 10),
@@ -194,7 +233,6 @@ class _centerState extends State<_center> {
                     variablesGlobales.horas.add(hora.toString());
                   }
 
-                  variablesGlobales.info['hora'] = horas;
                   await calendar.saveOrCreateCalendario(
                       Calendario(datetime: listDateTime, email: variablesGlobales.usuario.email));
                   horas.forEach((element) {
