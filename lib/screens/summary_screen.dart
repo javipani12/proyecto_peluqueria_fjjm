@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/button_navigation_bar.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
-import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart'
+    as variablesGlobales;
 
-class SummaryScreen extends StatelessWidget {
+class SummaryScreen extends StatefulWidget {
   const SummaryScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<SummaryScreen> createState() => _SummaryScreenState();
+}
 
+class _SummaryScreenState extends State<SummaryScreen> {
+  PaymentMethod? paymentMethod;
+  @override
+  Widget build(BuildContext context) {
     double precio = 0;
 
     String peluqueros() {
@@ -16,7 +22,8 @@ class SummaryScreen extends StatelessWidget {
       for (int i = 0; i < variablesGlobales.peluqueros.length; i++) {
         peluqueros += variablesGlobales.peluqueros[i].nombre + ", ";
       }
-      peluqueros = peluqueros.substring(0, peluqueros.length - 2);;
+      peluqueros = peluqueros.substring(0, peluqueros.length - 2);
+      ;
       return peluqueros;
     }
 
@@ -33,19 +40,17 @@ class SummaryScreen extends StatelessWidget {
     String fechaHora() {
       String fechaHora = '';
 
-      fechaHora = variablesGlobales.fecha.split(" ")[0] + " " + variablesGlobales.horas[0].split("(")[1].split(")")[0];
+      fechaHora = variablesGlobales.fecha.split(" ")[0] +
+          " " +
+          variablesGlobales.horas[0].split("(")[1].split(")")[0];
       variablesGlobales.fechaHora = fechaHora;
       return fechaHora;
     }
 
-    PaymentMethod? paymentMethod;
-
     return Scaffold(
         appBar: AppBar(
           title: const Text('Finalizar reserva'),
-          actions: const [
-
-          ],
+          actions: const [],
         ),
         bottomNavigationBar: buttonNavigationBar(),
         body: SingleChildScrollView(
@@ -119,19 +124,20 @@ class SummaryScreen extends StatelessWidget {
                   endIndent: 0,
                 ),
                 ListTile(
-                  leading: Icon(Icons.credit_card),
-                  title: Text(
-                    'Tarjeta Bancaria',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  trailing: Radio<PaymentMethod>(
-                    value: PaymentMethod.paypal,
-                    groupValue: paymentMethod,
-                    onChanged: (value) {
-                      paymentMethod = PaymentMethod.creditCard;
-                    },
-                  )
-                ),
+                    leading: Icon(Icons.credit_card),
+                    title: Text(
+                      'Tarjeta Bancaria',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    trailing: Radio(
+                      value: PaymentMethod.creditCard,
+                      groupValue: paymentMethod,
+                      onChanged: (value) {
+                        setState(() {
+                          paymentMethod = value;
+                        });
+                      },
+                    )),
                 Divider(
                   indent: 0,
                   endIndent: 0,
@@ -142,11 +148,13 @@ class SummaryScreen extends StatelessWidget {
                       'Bizum',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    trailing: Radio<PaymentMethod>(
-                      value: PaymentMethod.paypal,
+                    trailing: Radio(
+                      value: PaymentMethod.bizum,
                       groupValue: paymentMethod,
                       onChanged: (value) {
-                        paymentMethod = PaymentMethod.paypal;
+                        setState(() {
+                          paymentMethod = value;
+                        });
                       },
                     )),
                 Divider(
@@ -154,20 +162,23 @@ class SummaryScreen extends StatelessWidget {
                   endIndent: 0,
                 ),
                 ListTile(
-                  leading: Icon(Icons.attach_money),
-                  title: Text(
-                    'Efectivo',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  trailing: Radio<PaymentMethod>(
-                    value: PaymentMethod.paypal,
-                    groupValue: paymentMethod,
-                    onChanged: (value) {
-                      paymentMethod = PaymentMethod.paypal;
-                    },
-                  )
+                    leading: Icon(Icons.attach_money),
+                    title: Text(
+                      'Efectivo',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    trailing: Radio(
+                      value: PaymentMethod.cash,
+                      groupValue: paymentMethod,
+                      onChanged: (PaymentMethod? value) {
+                        setState(() {
+                          paymentMethod = value;
+                        });
+                      },
+                    )),
+                SizedBox(
+                  height: 10,
                 ),
-                SizedBox(height: 10,),
                 ElevatedButton(
                   child: const SizedBox(
                     width: double.infinity,
@@ -175,8 +186,8 @@ class SummaryScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     final route = MaterialPageRoute(
-                      builder: (context) => const CreditCardScreen());
-                  Navigator.push(context, route);
+                        builder: (context) => const CreditCardScreen());
+                    Navigator.push(context, route);
                   },
                 ),
               ],
@@ -186,4 +197,15 @@ class SummaryScreen extends StatelessWidget {
   }
 }
 
-enum PaymentMethod { paypal, creditCard, cash }
+enum PaymentMethod { bizum, creditCard, cash }
+
+String conceptoBizum() {
+  String concepto = variablesGlobales.peluqueria?.id ?? '';
+  for (var i = 0; i < variablesGlobales.peluqueros.length; i++) {
+    String conceptoPeluquero = variablesGlobales.peluqueros[i].id ?? '';
+    concepto += conceptoPeluquero;
+  }
+  concepto += variablesGlobales.fechaHora.split(" ")[0];
+  concepto += variablesGlobales.fechaHora.split(" ")[1];
+  return concepto;
+}
