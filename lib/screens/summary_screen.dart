@@ -41,6 +41,15 @@ class _SummaryScreenState extends State<SummaryScreen> {
       return servicios;
     }
 
+    String serviciosSinSumar() {
+      String servicios = '';
+      for (int i = 0; i < variablesGlobales.servicios.length; i++) {
+        servicios += variablesGlobales.servicios[i].nombre + ', ';
+      }
+      servicios = servicios.substring(0, servicios.length - 2);
+      return servicios;
+    }
+
     String fechaHora() {
       String fechaHora = '';
 
@@ -200,7 +209,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                           metodoPago: '', 
                           peluqueria: variablesGlobales.peluqueria!.nombre, 
                           peluqueros: peluqueros(), 
-                          servicios: servicios(),
+                          servicios: serviciosSinSumar(),
                         );
                         if (paymentMethod == PaymentMethod.bizum) {
                           reserva.metodoPago = conceptoBizum();

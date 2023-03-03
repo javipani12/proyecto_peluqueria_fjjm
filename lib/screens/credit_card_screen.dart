@@ -47,6 +47,15 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
       return servicios;
     }
 
+    String serviciosSinSumar() {
+      String servicios = '';
+      for (int i = 0; i < variablesGlobales.servicios.length; i++) {
+        servicios += variablesGlobales.servicios[i].nombre + ', ';
+      }
+      servicios = servicios.substring(0, servicios.length - 2);
+      return servicios;
+    }
+
   void onCreditCardModelChange(CreditCardModel? creditCardModel) {
     setState(() {
       cardNumber = creditCardModel!.cardNumber;
@@ -168,11 +177,10 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                             metodoPago: 'Tarjeta', 
                             peluqueria: variablesGlobales.peluqueria!.nombre, 
                             peluqueros: peluqueros(), 
-                            servicios: servicios(),
+                            servicios: serviciosSinSumar(),
                           );
-
                           reservasServices.createReserva(reserva);
-
+                          precio = 0;
                           final route = MaterialPageRoute(
                             builder: (context) => const ReservationsScreen()
                           );
