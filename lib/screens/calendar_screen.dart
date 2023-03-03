@@ -50,7 +50,7 @@ class _centerState extends State<_center> {
   }
 
   List<Calendario> listCalendar = [];
-  int servicios = 2;
+  int limite = 0;
   List<TimeOfDay> horas = [];
 
   List<DateTime> listDateTime = [];
@@ -58,6 +58,7 @@ class _centerState extends State<_center> {
   final DateFormat formatoData = DateFormat.yMd();
 
   TextButton hora(TimeOfDay hora) {
+    // if (limite !=0) {
     for (final DateTime dateTime in listDateTime) {
       TimeOfDay horaFromDateTime = TimeOfDay.fromDateTime(dateTime);
       if ('${horaFromDateTime.hour}:${horaFromDateTime.minute}' ==
@@ -77,13 +78,14 @@ class _centerState extends State<_center> {
           child: Text(hora.toString().split("(")[1].split(")")[0]),
           onPressed: () {
             setState(() {
-              servicios -= 1;
+              limite -= 1;
               horas.add(hora);
             });
           },
         );
       }
     }
+    //}
 
     return TextButton(
       style: TextButton.styleFrom(
@@ -92,7 +94,7 @@ class _centerState extends State<_center> {
       child: Text(hora.toString().split("(")[1].split(")")[0]),
       onPressed: () {
         setState(() {
-          servicios += 1;
+          limite += 1;
           horas.remove(hora);
         });
       },
@@ -118,27 +120,35 @@ class _centerState extends State<_center> {
       switch (tiempo) {
         case 30:
           horas = "30 minutos";
+          limite = 1;
           break;
         case 60:
           horas = "1 hora contigua";
+          limite = 2;
           break;
         case 90:
           horas = "1 hora y 30 minutos contiguos";
+          limite = 3;
           break;
         case 120:
           horas = "2 horas contiguas";
+          limite = 4;
           break;
         case 150:
           horas = "2 horas y 30 minutos contiguos";
+          limite = 5;
           break;
         case 180:
           horas = "3 horas contiguas";
+          limite = 6;
           break;
         case 210:
           horas = "3 horas y 30 minutos contiguos";
+          limite = 7;
           break;
         case 240:
           horas = "4 horas contiguas";
+          limite = 8;
           break;
       }
 
@@ -218,8 +228,8 @@ class _centerState extends State<_center> {
                 ),
               ),
               onPressed: () async {
-                if (horas.isEmpty) {
-                  alertaCalendario(context);
+                if (horas.length != limite) {
+                  alertaCalendario(context, limite);
                 } else {
                   //Guarda en un a varable  global las horas
                   variablesGlobales.fecha = _selectedDay.toString();
@@ -247,7 +257,7 @@ class _centerState extends State<_center> {
   }
 }
 
-void alertaCalendario(BuildContext context) {
+void alertaCalendario(BuildContext context, int limite) {
   showDialog(
       barrierDismissible: false, // Nos permite pulsar fuera de la alerta
       context: context,
@@ -258,9 +268,9 @@ void alertaCalendario(BuildContext context) {
               borderRadius: BorderRadiusDirectional.circular(20)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              Text('Debes seleccionar las horas indicadas'),
-              SizedBox(
+            children: [
+              Text('Debes seleccionar $limite hora/s'),
+              const SizedBox(
                 height: 20,
               ),
             ],
