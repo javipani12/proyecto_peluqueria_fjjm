@@ -46,140 +46,159 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
   }
 
   SingleChildScrollView _Reserva(BuildContext context, ReservasServices reservasServices) {
+    
+    int contador = 0;
+    
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.all(10),
         width: double.infinity,
-        height: 310,
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: ListView.builder(
-            itemCount: reservasServices.reservas.length,
-            itemBuilder: (BuildContext context, int index) {
-              final reserva = reservasServices.reservas[index];
-              return Column(
+        height: 590,
+        child: ListView.builder(
+          itemCount: reservasServices.reservas.length,
+          itemBuilder: (BuildContext context, int index) {
+            final reserva = reservasServices.reservas[index];
+            return Container(
+              child: reserva.idUsuario == variablesGlobales.usuario.id!
+              ? Column(
                 children: [
-                  ListTile(
-                    visualDensity: const VisualDensity(vertical: -4),
-                    leading: const Text(
-                      'Peluquería',
-                      style: TextStyle(
-                        color: Colors.black54
-                      ),
-                    ),
-                    trailing: Text(
-                      reserva.peluqueria,
-                      style: const TextStyle(
-                        color: Colors.black54
-                      )
+                  Text(
+                    '${contador++}',
+                    style: TextStyle(
+                      color: Colors.transparent
                     ),
                   ),
-                  ListTile(
-                    visualDensity: VisualDensity(vertical: -4),
-                    leading:
-                      const Text(
-                        'Peluqueros', 
-                        style: TextStyle(
-                          color: Colors.black54
-                        )
-                      ),
-                    trailing: Text(
-                      reserva.peluqueros, 
-                      style: const TextStyle(
-                        color: Colors.black54
-                        )
-                      ),
-                  ),
-                  ListTile(
-                    visualDensity: VisualDensity(vertical: -4),
-                    leading:
-                      const Text(
-                        'Servicios', 
-                        style: TextStyle(
-                          color: Colors.black54
-                        )
-                      ),
-                    trailing: Text(
-                      reserva.servicios, 
-                      style: const TextStyle(
-                        color: Colors.black54
-                        )
-                      ),
-                  ),
-                  ListTile(
-                    visualDensity: VisualDensity(vertical: -4),
-                    leading:
-                        const Text(
-                          'Fecha y hora', 
-                          style: TextStyle(
-                            color: Colors.black54
-                          )
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          visualDensity: const VisualDensity(vertical: -4),
+                          leading: const Text(
+                            'Peluquería',
+                            style: TextStyle(
+                              color: Colors.black54
+                            ),
+                          ),
+                          trailing: Text(
+                            reserva.peluqueria,
+                            style: const TextStyle(
+                              color: Colors.black54
+                            )
+                          ),
                         ),
-                    trailing: Text(
-                      reserva.fechaHora,
-                      style: const TextStyle(
-                        color: Colors.black54
-                      )
-                    ),
-                  ),
-                  ListTile(
-                    visualDensity: VisualDensity(vertical: -4),
-                    leading:
-                        const Text(
-                          'Método de pago', 
-                          style: TextStyle(
-                            color: Colors.black54
-                          )
+                        ListTile(
+                          visualDensity: VisualDensity(vertical: -4),
+                          leading:
+                            const Text(
+                              'Peluqueros', 
+                              style: TextStyle(
+                                color: Colors.black54
+                              )
+                            ),
+                          trailing: Text(
+                            reserva.peluqueros, 
+                            style: const TextStyle(
+                              color: Colors.black54
+                              )
+                            ),
                         ),
-                    trailing: Text(
-                      reserva.metodoPago,
-                      style: const TextStyle(
-                        color: Colors.black54
-                      )
+                        ListTile(
+                          visualDensity: VisualDensity(vertical: -4),
+                          leading:
+                            const Text(
+                              'Servicios', 
+                              style: TextStyle(
+                                color: Colors.black54
+                              )
+                            ),
+                          trailing: Text(
+                            reserva.servicios, 
+                            style: const TextStyle(
+                              color: Colors.black54
+                              )
+                            ),
+                        ),
+                        ListTile(
+                          visualDensity: VisualDensity(vertical: -4),
+                          leading:
+                              const Text(
+                                'Fecha y hora', 
+                                style: TextStyle(
+                                  color: Colors.black54
+                                )
+                              ),
+                          trailing: Text(
+                            reserva.fechaHora,
+                            style: const TextStyle(
+                              color: Colors.black54
+                            )
+                          ),
+                        ),
+                        ListTile(
+                          visualDensity: VisualDensity(vertical: -4),
+                          leading:
+                              const Text(
+                                'Método de pago', 
+                                style: TextStyle(
+                                  color: Colors.black54
+                                )
+                              ),
+                          trailing: Text(
+                            reserva.metodoPago,
+                            style: const TextStyle(
+                              color: Colors.black54
+                            )
+                          ),
+                        ),
+                        ListTile(
+                          visualDensity: const VisualDensity(vertical: -4),
+                          leading: const Text(
+                            'Importe total:',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold
+                              )
+                            ),
+                          trailing: Text(
+                            "${reserva.importe}€",
+                            style: const TextStyle(
+                              fontSize: 20, 
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                        ),
+                        ListTile(
+                          visualDensity: const VisualDensity(vertical: -3),
+                          trailing: GestureDetector(
+                            child: const Text(
+                              "Cancelar Reserva",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold, 
+                                color: Colors.red
+                              )
+                            ),
+                            onTap: () {
+                              return null;
+                              //displayDialog(context);
+                            },
+                          ),
+                          onTap: () {
+                            setState(() {});
+                          },
+                        ),
+                      ],
                     ),
-                  ),
-                  ListTile(
-                    visualDensity: const VisualDensity(vertical: -4),
-                    leading: const Text(
-                      'Importe total:',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold
-                        )
-                      ),
-                    trailing: Text(
-                      "${reserva.importe}€",
-                      style: const TextStyle(
-                        fontSize: 20, 
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    visualDensity: const VisualDensity(vertical: -3),
-                    trailing: GestureDetector(
-                      child: const Text(
-                        "Cancelar Reserva",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold, 
-                          color: Colors.red
-                        )
-                      ),
-                      onTap: () {
-                        return null;
-                        //displayDialog(context);
-                      },
-                    ),
-                    onTap: () {
-                      setState(() {});
-                    },
                   ),
                 ],
-              );
-            }
-          ),
+              )
+              : contador == 0
+                ? Text('Todavía no tienes ninguna reserva')
+                : Text('')
+            );
+          }
         ),
       ),
     );
