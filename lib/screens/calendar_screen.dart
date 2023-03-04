@@ -16,16 +16,16 @@ class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: ButtonNavigationBar(),
-        appBar: AppBar(
-          title: const Text('Selección fecha'),
-          actions: [],
-        ),
-        body: Center(
-            child: ChangeNotifierProvider<CalendariosServices>(
-          create: (_) => CalendariosServices(),
-          builder: (context, _) => _center(),
-        )));
+      bottomNavigationBar: ButtonNavigationBar(),
+      appBar: AppBar(
+        title: const Text('Selección fecha'),
+        actions: [],
+      ),
+      body: ChangeNotifierProvider<CalendariosServices>(
+        create: (_) => CalendariosServices(),
+        child: _center(),
+      ),
+    );
   }
 }
 
@@ -103,10 +103,9 @@ class _centerState extends State<_center> {
   @override
   Widget build(BuildContext context) {
     final calendar = Provider.of<CalendariosServices>(context);
-    if (calendar.isLoading)
-      return CircularProgressIndicator(
-        color: Colors.indigo,
-      );
+    if (calendar.isLoading) {
+      return const CircularProgressIndicator();
+    }
 
     String horasASeleccionar() {
       int tiempo = 0;
@@ -162,38 +161,32 @@ class _centerState extends State<_center> {
     }
 
     print(variablesGlobales.usuario.email);
-    DateFormat formatoData = DateFormat.yMd();
 
     return ListView(
       children: [
-        Container(
-          color: Colors.grey[300],
-          child: Column(children: [
-            TableCalendar(
-              locale: 'es_ES',
-              headerStyle: const HeaderStyle(
-                  formatButtonVisible: false, titleCentered: true),
-              //startingDayOfWeek: StartingDayOfWeek.monday,
-              calendarFormat: CalendarFormat.week,
-              firstDay: DateTime.now(),
-              lastDay: DateTime.utc(2030, 3, 14),
-              focusedDay: today,
-              availableGestures: AvailableGestures.all,
-              selectedDayPredicate: (day) => isSameDay(day, today),
-              onDaySelected: _onDaySelected,
-            ),
-          ]),
+        TableCalendar(
+          locale: 'es_ES',
+          headerStyle: const HeaderStyle(
+              formatButtonVisible: false, titleCentered: true),
+          //startingDayOfWeek: StartingDayOfWeek.monday,
+          calendarFormat: CalendarFormat.week,
+          firstDay: DateTime.now(),
+          lastDay: DateTime.utc(2030, 3, 14),
+          focusedDay: today,
+          availableGestures: AvailableGestures.all,
+          selectedDayPredicate: (day) => isSameDay(day, today),
+          onDaySelected: _onDaySelected,
         ),
         Card(
           margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               textAlign: TextAlign.start,
               'Seleccione: ' + horasASeleccionar(),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Table(
               children: <TableRow>[
                 TableRow(children: <Widget>[
@@ -231,14 +224,15 @@ class _centerState extends State<_center> {
                 } else {
                   //Guarda en un a varable  global las horas
                   variablesGlobales.fecha = _selectedDay.toString();
-
+                  List<DateTime> lista = [];
                   for (TimeOfDay hora in horas) {
                     variablesGlobales.horas.add(hora.toString());
+                    lista.add(DateTime(_selectedDay.year, _selectedDay.month,
+                        _selectedDay.day, hora.hour, hora.minute));
                   }
 
                   await calendar.saveOrCreateCalendario(Calendario(
-                      datetime: listDateTime,
-                      email: variablesGlobales.usuario.email));
+                      datetime: lista, email: variablesGlobales.usuario.email));
                   horas.forEach((element) {
                     print(element);
                   });
