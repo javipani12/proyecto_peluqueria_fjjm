@@ -19,7 +19,8 @@ class CalendarScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: ButtonNavigationBar(),
       appBar: AppBar(
-        title: const Text('Selección fecha'),
+        title: const Text('Selección fecha')
+
       ),
       body: ChangeNotifierProvider<CalendariosServices>(
         create: (_) => CalendariosServices(),
@@ -49,7 +50,9 @@ class _centerState extends State<_center> {
   }
 
   List<Calendario> listCalendar = [];
+
   // para recoge el el numero de botones que seleccionar
+
   int limite = 0;
   List<TimeOfDay> horas = [];
 
@@ -105,7 +108,9 @@ class _centerState extends State<_center> {
   Widget build(BuildContext context) {
     final calendar = Provider.of<CalendariosServices>(context);
     if (calendar.isLoading) {
+
       return const Center(child: CircularProgressIndicator.adaptive());
+
     }
 
     String horasASeleccionar() {
@@ -165,6 +170,7 @@ class _centerState extends State<_center> {
 
     return ListView(
       children: [
+
         Container(
           color: Colors.grey[300],
           child: TableCalendar(
