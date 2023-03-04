@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class AppThemes {
   static const Color primary = Colors.blueGrey;
@@ -14,7 +15,7 @@ class AppThemes {
     // Por el momento
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        primary: primary,
+        backgroundColor: primary,
         shape: const StadiumBorder(),
         elevation: 2,
         alignment: Alignment.center,
@@ -29,8 +30,8 @@ class AppThemes {
     ),
 
     // TextButton Theme
-    textButtonTheme:
-        TextButtonThemeData(style: TextButton.styleFrom(primary: primary)),
+    textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(foregroundColor: primary)),
 
     // Botón volver hacia atrás
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -58,6 +59,18 @@ class AppThemes {
         bottomLeft: Radius.circular(10),
         topRight: Radius.circular(10),
       )),
+    ),
+    // Card
+    cardTheme: CardTheme(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+    ),
+    //ProgressIndicator
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: primary,
+      circularTrackColor: Colors.blue,
     ),
   );
 }

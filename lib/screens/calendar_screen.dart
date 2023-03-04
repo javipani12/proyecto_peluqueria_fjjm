@@ -1,4 +1,3 @@
-import 'package:booking_calendar/booking_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -17,16 +16,16 @@ class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: buttonNavigationBar(),
-        appBar: AppBar(
-          title: const Text('Selección fecha'),
-          actions: [],
-        ),
-        body: Center(
-            child: ChangeNotifierProvider<CalendariosServices>(
-          create: (_) => CalendariosServices(),
-          builder: (context, _) => _center(),
-        )));
+      bottomNavigationBar: ButtonNavigationBar(),
+      appBar: AppBar(
+        title: const Text('Selección fecha'),
+        actions: [],
+      ),
+      body: ChangeNotifierProvider<CalendariosServices>(
+        create: (_) => CalendariosServices(),
+        child: _center(),
+      ),
+    );
   }
 }
 
@@ -50,7 +49,7 @@ class _centerState extends State<_center> {
   }
 
   List<Calendario> listCalendar = [];
-  int servicios = 2;
+  int limite = 0;
   List<TimeOfDay> horas = [];
 
   List<DateTime> listDateTime = [];
@@ -58,6 +57,7 @@ class _centerState extends State<_center> {
   final DateFormat formatoData = DateFormat.yMd();
 
   TextButton hora(TimeOfDay hora) {
+    // if (limite !=0) {
     for (final DateTime dateTime in listDateTime) {
       TimeOfDay horaFromDateTime = TimeOfDay.fromDateTime(dateTime);
       if ('${horaFromDateTime.hour}:${horaFromDateTime.minute}' ==
@@ -77,13 +77,14 @@ class _centerState extends State<_center> {
           child: Text(hora.toString().split("(")[1].split(")")[0]),
           onPressed: () {
             setState(() {
-              servicios -= 1;
+              limite -= 1;
               horas.add(hora);
             });
           },
         );
       }
     }
+    //}
 
     return TextButton(
       style: TextButton.styleFrom(
@@ -92,7 +93,7 @@ class _centerState extends State<_center> {
       child: Text(hora.toString().split("(")[1].split(")")[0]),
       onPressed: () {
         setState(() {
-          servicios += 1;
+          limite += 1;
           horas.remove(hora);
         });
       },
@@ -102,10 +103,9 @@ class _centerState extends State<_center> {
   @override
   Widget build(BuildContext context) {
     final calendar = Provider.of<CalendariosServices>(context);
-    if (calendar.isLoading)
-      return CircularProgressIndicator(
-        color: Colors.indigo,
-      );
+    if (calendar.isLoading) {
+      return const CircularProgressIndicator();
+    }
 
     String horasASeleccionar() {
       int tiempo = 0;
@@ -118,36 +118,42 @@ class _centerState extends State<_center> {
       switch (tiempo) {
         case 30:
           horas = "30 minutos";
+          limite = 1;
           break;
         case 60:
           horas = "1 hora contigua";
+          limite = 2;
           break;
         case 90:
           horas = "1 hora y 30 minutos contiguos";
+          limite = 3;
           break;
         case 120:
           horas = "2 horas contiguas";
+          limite = 4;
           break;
         case 150:
           horas = "2 horas y 30 minutos contiguos";
+          limite = 5;
           break;
         case 180:
           horas = "3 horas contiguas";
+          limite = 6;
           break;
         case 210:
           horas = "3 horas y 30 minutos contiguos";
+          limite = 7;
           break;
 
         case 240:
           horas = "4 horas contiguas";
+          limite = 8;
           break;
       }
-
       return horas;
     }
 
     print(variablesGlobales.usuario.email);
-    List<DateTime> datetime = [];
 
     listCalendar = calendar.calendarios;
     for (var i = 0; i < listCalendar.length; i++) {
@@ -155,38 +161,32 @@ class _centerState extends State<_center> {
     }
 
     print(variablesGlobales.usuario.email);
-    DateFormat formatoData = DateFormat.yMd();
 
     return ListView(
       children: [
-        Container(
-          color: Colors.grey[300],
-          child: Column(children: [
-            TableCalendar(
-              locale: 'es_ES',
-              headerStyle: const HeaderStyle(
-                  formatButtonVisible: false, titleCentered: true),
-              //startingDayOfWeek: StartingDayOfWeek.monday,
-              calendarFormat: CalendarFormat.week,
-              firstDay: DateTime.now(),
-              lastDay: DateTime.utc(2030, 3, 14),
-              focusedDay: today,
-              availableGestures: AvailableGestures.all,
-              selectedDayPredicate: (day) => isSameDay(day, today),
-              onDaySelected: _onDaySelected,
-            ),
-          ]),
+        TableCalendar(
+          locale: 'es_ES',
+          headerStyle: const HeaderStyle(
+              formatButtonVisible: false, titleCentered: true),
+          //startingDayOfWeek: StartingDayOfWeek.monday,
+          calendarFormat: CalendarFormat.week,
+          firstDay: DateTime.now(),
+          lastDay: DateTime.utc(2030, 3, 14),
+          focusedDay: today,
+          availableGestures: AvailableGestures.all,
+          selectedDayPredicate: (day) => isSameDay(day, today),
+          onDaySelected: _onDaySelected,
         ),
         Card(
           margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               textAlign: TextAlign.start,
               'Seleccione: ' + horasASeleccionar(),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Table(
               children: <TableRow>[
                 TableRow(children: <Widget>[
@@ -219,20 +219,20 @@ class _centerState extends State<_center> {
                 ),
               ),
               onPressed: () async {
-                if (horas.isEmpty) {
-                  alertaCalendario(context);
+                if (horas.length != limite) {
+                  alertaCalendario(context, limite);
                 } else {
                   //Guarda en un a varable  global las horas
                   variablesGlobales.fecha = _selectedDay.toString();
-
+                  List<DateTime> lista = [];
                   for (TimeOfDay hora in horas) {
                     variablesGlobales.horas.add(hora.toString());
+                    lista.add(DateTime(_selectedDay.year, _selectedDay.month,
+                        _selectedDay.day, hora.hour, hora.minute));
                   }
 
-
                   await calendar.saveOrCreateCalendario(Calendario(
-                      datetime: listDateTime,
-                      email: variablesGlobales.usuario.email));
+                      datetime: lista, email: variablesGlobales.usuario.email));
                   horas.forEach((element) {
                     print(element);
                   });
@@ -249,7 +249,7 @@ class _centerState extends State<_center> {
   }
 }
 
-void alertaCalendario(BuildContext context) {
+void alertaCalendario(BuildContext context, int limite) {
   showDialog(
       barrierDismissible: false, // Nos permite pulsar fuera de la alerta
       context: context,
@@ -260,9 +260,9 @@ void alertaCalendario(BuildContext context) {
               borderRadius: BorderRadiusDirectional.circular(20)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              Text('Debes seleccionar las horas indicadas'),
-              SizedBox(
+            children: [
+              Text('Debes seleccionar $limite hora/s'),
+              const SizedBox(
                 height: 20,
               ),
             ],
