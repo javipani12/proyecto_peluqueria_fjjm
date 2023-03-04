@@ -90,6 +90,7 @@ class _CallUsBody extends StatelessWidget {
                                       peluqueria.telefono.toString()),
                                 }),
                       ],
+
                     ),
                   ],
                 ),
