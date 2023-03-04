@@ -33,7 +33,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
               automaticallyImplyLeading: false,
               title: const Text('Mis Reservas'),
             ),
-            bottomNavigationBar: buttonNavigationBar(),
+            bottomNavigationBar: ButtonNavigationBar(),
             body: Column(
               children: [
                 _Reserva(context, reservasServices),
