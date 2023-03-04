@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
@@ -19,7 +20,6 @@ class CalendarScreen extends StatelessWidget {
       bottomNavigationBar: ButtonNavigationBar(),
       appBar: AppBar(
         title: const Text('Selección fecha'),
-        actions: [],
       ),
       body: ChangeNotifierProvider<CalendariosServices>(
         create: (_) => CalendariosServices(),
@@ -49,13 +49,14 @@ class _centerState extends State<_center> {
   }
 
   List<Calendario> listCalendar = [];
+  // para recoge el el numero de botones que seleccionar
   int limite = 0;
   List<TimeOfDay> horas = [];
 
   List<DateTime> listDateTime = [];
 
   final DateFormat formatoData = DateFormat.yMd();
-
+// Esto recorre el array del tiempo y devuelbe
   TextButton hora(TimeOfDay hora) {
     // if (limite !=0) {
     for (final DateTime dateTime in listDateTime) {
@@ -104,7 +105,7 @@ class _centerState extends State<_center> {
   Widget build(BuildContext context) {
     final calendar = Provider.of<CalendariosServices>(context);
     if (calendar.isLoading) {
-      return const CircularProgressIndicator();
+      return const Center(child: CircularProgressIndicator.adaptive());
     }
 
     String horasASeleccionar() {
@@ -164,18 +165,24 @@ class _centerState extends State<_center> {
 
     return ListView(
       children: [
-        TableCalendar(
-          locale: 'es_ES',
-          headerStyle: const HeaderStyle(
-              formatButtonVisible: false, titleCentered: true),
-          //startingDayOfWeek: StartingDayOfWeek.monday,
-          calendarFormat: CalendarFormat.week,
-          firstDay: DateTime.now(),
-          lastDay: DateTime.utc(2030, 3, 14),
-          focusedDay: today,
-          availableGestures: AvailableGestures.all,
-          selectedDayPredicate: (day) => isSameDay(day, today),
-          onDaySelected: _onDaySelected,
+        Container(
+          color: Colors.grey[300],
+          child: TableCalendar(
+            calendarStyle: CalendarStyle(
+                tableBorder:
+                    TableBorder(borderRadius: BorderRadius.circular(30))),
+            locale: 'es_ES',
+            headerStyle: const HeaderStyle(
+                formatButtonVisible: false, titleCentered: true),
+            startingDayOfWeek: StartingDayOfWeek.monday,
+            calendarFormat: CalendarFormat.week,
+            firstDay: DateTime.now(),
+            lastDay: DateTime.utc(2030, 3, 14),
+            focusedDay: today,
+            availableGestures: AvailableGestures.all,
+            selectedDayPredicate: (day) => isSameDay(day, today),
+            onDaySelected: _onDaySelected,
+          ),
         ),
         Card(
           margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
