@@ -70,24 +70,27 @@ class _CallUsBody extends StatelessWidget {
                     Text(peluqueria.nombre),
                     Text(peluqueria.direccion),
                     const SizedBox(height: 20),
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-                      color: AppThemes.primary,
-                      child: const SizedBox(
-                        width: 165,
-                        child: Center(
-                          child: Text(
-                            'Llamar',
-                            style: TextStyle(
-                              color: Colors.white
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            color: Colors.green,
+                            iconSize: 50,
+                            icon: const ImageIcon(
+                              NetworkImage(
+                                  'https://i.pinimg.com/originals/90/22/c3/9022c3da331305796ded3dda4c619df0.png'),
                             ),
-                          )
-                        ),
-                      ),
-                      onPressed: () async => {
-                        await FlutterPhoneDirectCaller.callNumber(
-                            peluqueria.telefono.toString()),
-                      },
+                            onPressed: () async => {}),
+                        IconButton(
+                            color: Colors.green,
+                            iconSize: 50,
+                            icon: const Icon(Icons.phone),
+                            onPressed: () async => {
+                                  await FlutterPhoneDirectCaller.callNumber(
+                                      peluqueria.telefono.toString()),
+                                }),
+                      ],
+
                     ),
                   ],
                 ),
