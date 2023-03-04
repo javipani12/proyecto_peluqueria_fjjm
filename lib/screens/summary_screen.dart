@@ -66,7 +66,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
               title: const Text('Finalizar reserva'),
               actions: const [],
             ),
-            bottomNavigationBar: const buttonNavigationBar(),
+            bottomNavigationBar: const ButtonNavigationBar(),
             body: SingleChildScrollView(
               child: Padding(
                 padding:

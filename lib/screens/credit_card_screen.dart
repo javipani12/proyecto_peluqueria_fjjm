@@ -5,8 +5,7 @@ import 'package:proyecto_peluqueria_fjjm/services/reservas_services.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_peluqueria_fjjm/services/variable.dart'
-    as variablesGlobales;
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class CreditCardScreen extends StatefulWidget {
   const CreditCardScreen({Key? key}) : super(key: key);
@@ -168,6 +167,7 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                     onPressed: () async {
                       if (myFormKey.currentState!.validate()) {
                         Reserva reserva = Reserva(
+                          eliminado: false,
                           fechaHora: variablesGlobales.fechaHora,
                           idUsuario: variablesGlobales.usuario.id!,
                           importe: precio,
