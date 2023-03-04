@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
-import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/services/reservas_services.dart';
-import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_peluqueria_fjjm/services/services.dart';
 import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 
@@ -64,7 +61,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                 children: [
                   Text(
                     '${contador++}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.transparent
                     ),
                   ),
@@ -206,25 +203,26 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
 }
 
 void displayDialog(BuildContext context, Reserva reserva, ReservasServices reservasServices) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text("Cancelación de reserva"),
-            content: Text(
-                "¿Estás seguro de que quieres cancelar tu reserva del día ${variablesGlobales.fechaHora.split(" ")[0]} a las ${variablesGlobales.fechaHora.split(" ")[1]} en el local ${variablesGlobales.peluqueria?.nombre}?"),
-            actions: <Widget>[
-              TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text("Cancelar")),
-              TextButton(
-                  onPressed: () async {
-                    reserva.eliminado = true;
-                    await reservasServices.updateReserva(reserva);
-                    Navigator.pop(context);
-                  }, 
-                  child: const Text("Confirmar")),
-            ],
-          );
-        });
-  }
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text("Cancelación de reserva"),
+        content: Text(
+            "¿Estás seguro de que quieres cancelar tu reserva del día ${variablesGlobales.fechaHora.split(" ")[0]} a las ${variablesGlobales.fechaHora.split(" ")[1]} en el local ${variablesGlobales.peluqueria?.nombre}?"),
+        actions: <Widget>[
+          TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Cancelar")),
+          TextButton(
+              onPressed: () async {
+                reserva.eliminado = true;
+                await reservasServices.updateReserva(reserva);
+                Navigator.pop(context);
+              }, 
+              child: const Text("Confirmar")),
+        ],
+      );
+    }
+  );
+}
