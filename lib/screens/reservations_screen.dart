@@ -14,12 +14,9 @@ class ReservationsScreen extends StatefulWidget {
 }
 
 class _ReservationsScreenState extends State<ReservationsScreen> {
-  List<String> list = List.filled(5, '', growable: true);
-  List<bool> _isOpen = [false, false];
 
   @override
   Widget build(BuildContext context) {
-    _isOpen.toList(growable: true);
 
     return ChangeNotifierProvider<ReservasServices>(
       create: (_) => ReservasServices(),
@@ -46,6 +43,12 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
     
     int contador = 0;
     
+    void updateReservas() {
+      setState(() {
+        // Actualiza el estado del widget padre
+      });
+    }
+
     return SingleChildScrollView(
       child: Container(
         margin: EdgeInsets.all(10),
@@ -174,7 +177,10 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                           visualDensity: const VisualDensity(vertical: -3),
                           trailing: CancelButton(
                             onPressed: () {
-                              displayDialog(context, reserva, reservasServices);
+                              displayDialog(context, reserva, reservasServices, updateReservas);
+                              setState(() {
+                                
+                              });
                             },
                           ),
                         ),
@@ -183,7 +189,7 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                   ),
                 ],
               )
-              : Text('')
+              : null
             );
           }
         ),
@@ -200,7 +206,6 @@ class CancelButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 200,
       child: TextButton(
         onPressed: onPressed,
         child: const Text(
@@ -215,14 +220,14 @@ class CancelButton extends StatelessWidget {
   }
 }
 
-void displayDialog(BuildContext context, Reserva reserva, ReservasServices reservasServices) {
+void displayDialog(BuildContext context, Reserva reserva, ReservasServices reservasServices, Function updateReserva) {
   showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
         title: const Text("Cancelación de reserva"),
         content: Text(
-            "¿Estás seguro de que quieres cancelar tu reserva del día ${variablesGlobales.fechaHora.split(" ")[0]} a las ${variablesGlobales.fechaHora.split(" ")[1]} en el local ${variablesGlobales.peluqueria?.nombre}?"),
+            "¿Estás seguro de que quieres cancelar tu reserva del día ${reserva.fechaHora.split(" ")[0]} a las ${reserva.fechaHora.split(" ")[1]} en el local ${reserva.peluqueria}?"),
         actions: <Widget>[
           TextButton(
               onPressed: () => Navigator.pop(context),
@@ -232,6 +237,7 @@ void displayDialog(BuildContext context, Reserva reserva, ReservasServices reser
                 reserva.eliminado = true;
                 await reservasServices.updateReserva(reserva);
                 Navigator.pop(context);
+                updateReserva();
               }, 
               child: const Text("Confirmar")),
         ],

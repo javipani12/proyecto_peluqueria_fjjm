@@ -59,7 +59,13 @@ class _CampoRestablecerContrasenna extends StatelessWidget {
         const SizedBox(
           height: 40,
         ),
-        const Text('Introduce el email asociado a tu cuenta'),
+        const Text(
+          'Introduce el email asociado a tu cuenta',
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         const SizedBox(
           height: 30,
         ),

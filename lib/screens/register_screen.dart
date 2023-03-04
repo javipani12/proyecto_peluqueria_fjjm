@@ -58,7 +58,6 @@ class _RegisterScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: usuario?.name,
                 onChanged: (value) {
                   usuario?.name = value;
                 }, 
@@ -79,7 +78,6 @@ class _RegisterScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: usuario?.lastname,
                 onChanged: (value) {
                   usuario?.lastname = value;
                 },
@@ -100,7 +98,6 @@ class _RegisterScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: usuario?.email,
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
@@ -123,7 +120,6 @@ class _RegisterScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: usuario?.phoneNumber,
                 keyboardType: TextInputType.phone,
                 onChanged: (value) {
                   usuario?.phoneNumber = value;
@@ -141,7 +137,6 @@ class _RegisterScreenBody extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
-                initialValue: usuario?.password,
                 autocorrect: false,
                 obscureText: true,
                 keyboardType: TextInputType.emailAddress,
@@ -164,7 +159,6 @@ class _RegisterScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: usuario?.checkPassword,
                 autocorrect: false,
                 obscureText: true,
                 keyboardType: TextInputType.emailAddress,

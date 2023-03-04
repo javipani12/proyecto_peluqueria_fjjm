@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'package:proyecto_peluqueria_fjjm/services/reservas_services.dart';
+import 'package:proyecto_peluqueria_fjjm/themes/app_themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:provider/provider.dart';
@@ -26,32 +27,33 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
   double precio = 0;
 
   String peluqueros() {
-    String peluqueros = '';
-    for (int i = 0; i < variablesGlobales.peluqueros.length; i++) {
-      peluqueros += "${variablesGlobales.peluqueros[i].nombre}, ";
+      String peluqueros = '';
+      for (int i = 0; i < variablesGlobales.peluqueros.length; i++) {
+        peluqueros += variablesGlobales.peluqueros[i].nombre + ", ";
+      }
+      peluqueros = peluqueros.substring(0, peluqueros.length - 2);
+      ;
+      return peluqueros;
     }
-    peluqueros = peluqueros.substring(0, peluqueros.length - 2);
-    return peluqueros;
-  }
 
-  String servicios() {
-    String servicios = '';
-    for (int i = 0; i < variablesGlobales.servicios.length; i++) {
-      servicios += '${variablesGlobales.servicios[i].nombre}, ';
-      precio += variablesGlobales.servicios[i].precio;
-    }
-    servicios = servicios.substring(0, servicios.length - 2);
-    return servicios;
-  }
+    double calcularPrecio(){
+      double precio = 0;
 
-  String serviciosSinSumar() {
-    String servicios = '';
-    for (int i = 0; i < variablesGlobales.servicios.length; i++) {
-      servicios += '${variablesGlobales.servicios[i].nombre}, ';
+      for (int i = 0; i < variablesGlobales.servicios.length; i++) {
+        precio += variablesGlobales.servicios[i].precio;
+      }
+
+      return precio;
     }
-    servicios = servicios.substring(0, servicios.length - 2);
-    return servicios;
-  }
+
+    String servicios() {
+      String servicios = '';
+      for (int i = 0; i < variablesGlobales.servicios.length; i++) {
+        servicios += variablesGlobales.servicios[i].nombre + ', ';
+      }
+      servicios = servicios.substring(0, servicios.length - 2);
+      return servicios;
+    }
 
   void onCreditCardModelChange(CreditCardModel? creditCardModel) {
     setState(() {
@@ -98,7 +100,7 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                     themeColor: Colors.red,
 
                     obscureCvv: true,
-                    obscureNumber: true,
+                    obscureNumber: false,
                     isHolderNameVisible: true,
                     isCardNumberVisible: true,
                     isExpiryDateVisible: true,
@@ -134,22 +136,82 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
 
                     cardNumberDecoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Number',
+                      labelText: 'Nº de tarjeta',
                       hintText: 'XXXX XXXX XXXX XXXX',
+                      floatingLabelStyle: TextStyle(color: AppThemes.primary),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppThemes.primary),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppThemes.primary),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        )
+                      ),
                     ),
                     expiryDateDecoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Expired Date',
+                      labelText: 'Expiración',
                       hintText: 'XX/XX',
+                      floatingLabelStyle: TextStyle(color: AppThemes.primary),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppThemes.primary),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppThemes.primary),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        )
+                      ),
                     ),
                     cvvCodeDecoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'CVV',
                       hintText: 'XXX',
+                      floatingLabelStyle: TextStyle(color: AppThemes.primary),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppThemes.primary),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppThemes.primary),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        )
+                      ),
                     ),
                     cardHolderDecoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Card Holder',
+                      labelText: 'Nombre del titular',
+                      floatingLabelStyle: TextStyle(color: AppThemes.primary),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppThemes.primary),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppThemes.primary),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        )
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -157,11 +219,9 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                   ),
                   ElevatedButton(
                     child: const Text(
-                      'Validar',
+                      'Confirmar',
                       style: TextStyle(
-                        fontFamily: 'halter',
                         fontSize: 14,
-                        package: 'flutter_credit_card',
                       ),
                     ),
                     onPressed: () async {
@@ -170,11 +230,11 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                           eliminado: false,
                           fechaHora: variablesGlobales.fechaHora,
                           idUsuario: variablesGlobales.usuario.id!,
-                          importe: precio,
+                          importe: calcularPrecio(),
                           metodoPago: 'Tarjeta',
                           peluqueria: variablesGlobales.peluqueria!.nombre,
                           peluqueros: peluqueros(),
-                          servicios: serviciosSinSumar(),
+                          servicios: servicios(),
                         );
                         reservasServices.createReserva(reserva);
                         precio = 0;

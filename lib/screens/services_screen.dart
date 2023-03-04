@@ -33,7 +33,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
         final serviciosServices = Provider.of<ServiciosServices>(context);
 
         return Scaffold(
-            bottomNavigationBar: ButtonNavigationBar(),
+            bottomNavigationBar: const ButtonNavigationBar(),
             appBar: AppBar(
               title: const Text('Selección servicios'),
             ),
@@ -64,7 +64,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                   },
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 Expanded(
                   child: ListView.builder(
@@ -76,6 +76,18 @@ class _ServicesScreenState extends State<ServicesScreen> {
                         width: 130,
                         height: 190,
                         margin: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.12),
+                              spreadRadius: 5,
+                              blurRadius: 10,
+                              offset: const Offset(0, 3), // Posición del sombreado
+                            ),
+                          ],
+                        ),
                         child: Column(children: [
                           GestureDetector(
                             onTap: () {
@@ -90,10 +102,13 @@ class _ServicesScreenState extends State<ServicesScreen> {
                             },
                             child: ClipRRect(
                               clipBehavior: Clip.antiAlias,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20)
+                              ),
                               child: FadeInImage(
                                 placeholder:
-                                    AssetImage('assets/jar-loading.gif'),
+                                    const AssetImage('assets/jar-loading.gif'),
                                 image: NetworkImage(servicio.foto),
                                 width: 130,
                                 height: 190,
@@ -102,32 +117,57 @@ class _ServicesScreenState extends State<ServicesScreen> {
                             ),
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 7,
                           ),
                           Text(
                             servicio.nombre,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 2,
                           ),
                           Text(
                             servicio.precio.toString() + '€',
                             maxLines: 5,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.black87
+                            ),
                           )
                         ]),
                       );
                     },
                   ),
                 ),
-                Text('Seleccionados:'),
-                SizedBox(
-                  height: 5,
+                const SizedBox(height: 40,),
+                const Text(
+                  'Seleccionados:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16
+                  ),
                 ),
-                Text(mostrarServiciosSeleccionados(serviciosSeleccionados)),
-                SizedBox(
+                const SizedBox(height: 5,),
+                Text(
+                  mostrarServiciosSeleccionados(serviciosSeleccionados),
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.black87
+                  ),
+                ),
+                const SizedBox(
                   height: 20,
+                ),
+                const SizedBox(
+                  height: 70,
                 ),
                 ElevatedButton(
                   child: const SizedBox(
@@ -145,13 +185,13 @@ class _ServicesScreenState extends State<ServicesScreen> {
                         print(serviciosSeleccionados[i].nombre);
                       }
                       final route = MaterialPageRoute(
-                          builder: (context) => CalendarScreen());
+                          builder: (context) => const CalendarScreen());
                       Navigator.push(context, route);
                     }
                   },
                 ),
-                SizedBox(
-                  height: 90,
+                const SizedBox(
+                  height: 30,
                 )
               ],
             ));
