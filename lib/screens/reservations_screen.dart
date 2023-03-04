@@ -172,21 +172,11 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                         ),
                         ListTile(
                           visualDensity: const VisualDensity(vertical: -3),
-                          trailing: GestureDetector(
-                            child: const Text(
-                              "Cancelar Reserva",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold, 
-                                color: Colors.red
-                              )
-                            ),
-                            onTap: () {
+                          trailing: CancelButton(
+                            onPressed: () {
                               displayDialog(context, reserva, reservasServices);
                             },
                           ),
-                          onTap: () {
-                            setState(() {});
-                          },
                         ),
                       ],
                     ),
@@ -196,6 +186,29 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
               : Text('')
             );
           }
+        ),
+      ),
+    );
+  }
+}
+
+class CancelButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const CancelButton({Key? key, required this.onPressed}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 200,
+      child: TextButton(
+        onPressed: onPressed,
+        child: const Text(
+          "Cancelar Reserva",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.red,
+          ),
         ),
       ),
     );
