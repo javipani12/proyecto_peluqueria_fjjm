@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
-
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:proyecto_peluqueria_fjjm/services/services.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
@@ -40,12 +39,10 @@ class _center extends StatefulWidget {
 }
 
 class _centerState extends State<_center> {
-  DateTime _selectedDay = DateTime.now();
   DateTime today = DateTime.now();
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
       today = day;
-      _selectedDay = day;
     });
   }
 
@@ -66,7 +63,7 @@ class _centerState extends State<_center> {
       TimeOfDay horaFromDateTime = TimeOfDay.fromDateTime(dateTime);
       if ('${horaFromDateTime.hour}:${horaFromDateTime.minute}' ==
               '${hora.hour}:${hora.minute}' &&
-          formatoData.format(dateTime) == formatoData.format(_selectedDay)) {
+          formatoData.format(dateTime) == formatoData.format(today)) {
         return TextButton(
           style: TextButton.styleFrom(
             foregroundColor: Colors.grey,
@@ -174,9 +171,6 @@ class _centerState extends State<_center> {
         Container(
           color: Colors.grey[300],
           child: TableCalendar(
-            calendarStyle: CalendarStyle(
-                tableBorder:
-                    TableBorder(borderRadius: BorderRadius.circular(30))),
             locale: 'es_ES',
             headerStyle: const HeaderStyle(
                 formatButtonVisible: false, titleCentered: true),
@@ -223,7 +217,6 @@ class _centerState extends State<_center> {
                 )
               ],
             ),
-            /*BookingCalendar(),*/
             ElevatedButton(
               child: const SizedBox(
                 width: 200,
@@ -236,12 +229,12 @@ class _centerState extends State<_center> {
                   alertaCalendario(context, limite);
                 } else {
                   //Guarda en un a varable  global las horas
-                  variablesGlobales.fecha = _selectedDay.toString();
+                  variablesGlobales.fecha = today.toString();
                   List<DateTime> lista = [];
                   for (TimeOfDay hora in horas) {
                     variablesGlobales.horas.add(hora.toString());
-                    lista.add(DateTime(_selectedDay.year, _selectedDay.month,
-                        _selectedDay.day, hora.hour, hora.minute));
+                    lista.add(DateTime(today.year, today.month, today.day,
+                        hora.hour, hora.minute));
                   }
 
                   await calendar.saveOrCreateCalendario(Calendario(
