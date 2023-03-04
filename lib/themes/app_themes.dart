@@ -24,7 +24,7 @@ class AppThemes {
       ),
     ),
 
-    // ListTile Theme
+    // Colores de los iconos de la listas
     listTileTheme: const ListTileThemeData(
       iconColor: primary,
     ),
@@ -39,27 +39,31 @@ class AppThemes {
       elevation: 5,
     ),
 
-    // InputDecoration
+    // Formulario de registro y de login
     inputDecorationTheme: const InputDecorationTheme(
       floatingLabelStyle: TextStyle(color: primary),
       enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: primary),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-          )),
+        borderSide: BorderSide(color: primary),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        )
+      ),
       focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: primary),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-          )),
+        borderSide: BorderSide(color: primary),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        )
+      ),
       border: OutlineInputBorder(
-          borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(10),
-        topRight: Radius.circular(10),
-      )),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        )
+      ),
     ),
+
     // Card
     cardTheme: CardTheme(
       clipBehavior: Clip.antiAlias,
@@ -67,10 +71,11 @@ class AppThemes {
         borderRadius: BorderRadius.circular(15),
       ),
     ),
-    //ProgressIndicator
+
+    // ProgressIndicator
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: primary,
-      circularTrackColor: Colors.blue,
+      circularTrackColor: primary,
     ),
   );
 }

@@ -193,7 +193,7 @@ class _centerState extends State<_center> {
         Card(
           margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            const SizedBox(height: 10),
+            const SizedBox(height: 15),
             Text(
               textAlign: TextAlign.start,
               'Seleccione: ' + horasASeleccionar(),
@@ -223,6 +223,7 @@ class _centerState extends State<_center> {
                 )
               ],
             ),
+            SizedBox(height: 7,),
             /*BookingCalendar(),*/
             ElevatedButton(
               child: const SizedBox(
@@ -233,7 +234,7 @@ class _centerState extends State<_center> {
               ),
               onPressed: () async {
                 if (horas.length != limite) {
-                  alertaCalendario(context, limite);
+                  alertaCalendario(context);
                 } else {
                   //Guarda en un a varable  global las horas
                   variablesGlobales.fecha = _selectedDay.toString();
@@ -255,6 +256,7 @@ class _centerState extends State<_center> {
                 }
               },
             ),
+            SizedBox(height: 10,)
           ]),
         ),
       ],
@@ -262,7 +264,7 @@ class _centerState extends State<_center> {
   }
 }
 
-void alertaCalendario(BuildContext context, int limite) {
+void alertaCalendario(BuildContext context) {
   showDialog(
       barrierDismissible: false, // Nos permite pulsar fuera de la alerta
       context: context,
@@ -274,7 +276,7 @@ void alertaCalendario(BuildContext context, int limite) {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Debes seleccionar $limite hora/s'),
+              Text('Debes seleccionar la/s hora/s indicada/s'),
               const SizedBox(
                 height: 20,
               ),

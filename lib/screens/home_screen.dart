@@ -43,15 +43,16 @@ class HomeScreen extends StatelessWidget {
                   child: Text('Registrarse'),
                   onPressed: () {
                     usuariosServices.usuarioSeleccionado = Usuario(
-                        acceptPrivacy: false,
-                        acceptPublicity: false,
-                        checkPassword: '',
-                        email: '',
-                        lastname: '',
-                        name: '',
-                        password: '',
-                        phoneNumber: '',
-                        efectivo: false);
+                      acceptPrivacy: false,
+                      acceptPublicity: false,
+                      checkPassword: '',
+                      email: '',
+                      lastname: '',
+                      name: '',
+                      password: '',
+                      phoneNumber: '',
+                      efectivo: false
+                    );
                     final route = MaterialPageRoute(
                         builder: (context) => const RegisterScreen());
                     Navigator.push(context, route);

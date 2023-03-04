@@ -95,7 +95,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                 'Peluqueros',
                                 maxLines: 2,
                                 style: TextStyle(
-                                  color: Colors.black54
+                                  color: Colors.black87
                                 ),
                               ),
                               trailing: Text(peluqueros(),
@@ -105,7 +105,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                               visualDensity: const VisualDensity(vertical: -4),
                               leading: const Text(
                                 'Fecha y hora',
-                                style: TextStyle(color: Colors.black54),
+                                style: TextStyle(color: Colors.black87),
                               ),
                               trailing: Text(fechaHora(),
                                   style: const TextStyle(color: Colors.black54)),
@@ -114,7 +114,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                               visualDensity: const VisualDensity(vertical: -4),
                               leading: const Text(
                                 'Servicios',
-                                style: TextStyle(color: Colors.black54),
+                                style: TextStyle(color: Colors.black87),
                               ),
                               trailing: Text(
                                 servicios(),
@@ -229,13 +229,15 @@ class _SummaryScreenState extends State<SummaryScreen> {
                           final route = MaterialPageRoute(
                             builder: (context) => const ReservationsScreen());
                             Navigator.push(context, route);
-                        } else if (paymentMethod == PaymentMethod.cash) {
+                        }
+                        if (paymentMethod == PaymentMethod.cash) {
                           reserva.metodoPago = 'Efectivo';
                           await serviciosServices.createReserva(reserva);
                           final route = MaterialPageRoute(
                             builder: (context) => const ReservationsScreen());
                             Navigator.push(context, route);
-                        } else {
+                        }
+                        if(paymentMethod == PaymentMethod.creditCard){
                           final route = MaterialPageRoute(
                             builder: (context) => const CreditCardScreen());
                             Navigator.push(context, route);
@@ -255,12 +257,10 @@ class _SummaryScreenState extends State<SummaryScreen> {
 
 enum PaymentMethod { bizum, creditCard, cash }
 
+// El concepto no puede ser muy largo, ya que si no da error
+// en la ventana de reservas 
 String conceptoBizum() {
-  String concepto = variablesGlobales.peluqueria?.id ?? '';
-  for (var i = 0; i < variablesGlobales.peluqueros.length; i++) {
-    String conceptoPeluquero = variablesGlobales.peluqueros[i].id ?? '';
-    concepto += conceptoPeluquero;
-  }
+  String concepto = '';
   concepto += variablesGlobales.fechaHora.split(" ")[0].replaceAll("-", "");
   concepto += variablesGlobales.fechaHora.split(" ")[1].replaceAll(":", "");
   return concepto;

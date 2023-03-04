@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'package:provider/provider.dart';
@@ -45,25 +46,51 @@ class _CallUsBody extends StatelessWidget {
         itemBuilder: (context, index) {
           final peluqueria = peluqueriaServices.peluquerias[index];
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Center(
-              child: Column(
-                children: [
-                  const SizedBox(height: 50),
-                  Text(peluqueria.nombre),
-                  Text(peluqueria.direccion),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    child: const SizedBox(
-                      width: double.infinity,
-                      child: Center(child: Text('Llamar')),
+              child: Container(
+                width: double.infinity,
+                height: 150,
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.12),
+                      spreadRadius: 5,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3), // Posición del sombreado
                     ),
-                    onPressed: () async => {
-                      await FlutterPhoneDirectCaller.callNumber(
-                          peluqueria.telefono.toString()),
-                    },
-                  ),
-                ],
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 25),
+                    Text(peluqueria.nombre),
+                    Text(peluqueria.direccion),
+                    const SizedBox(height: 20),
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+                      color: AppThemes.primary,
+                      child: const SizedBox(
+                        width: 165,
+                        child: Center(
+                          child: Text(
+                            'Llamar',
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
+                          )
+                        ),
+                      ),
+                      onPressed: () async => {
+                        await FlutterPhoneDirectCaller.callNumber(
+                            peluqueria.telefono.toString()),
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           );
