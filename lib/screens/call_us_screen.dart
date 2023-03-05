@@ -5,8 +5,8 @@ import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_peluqueria_fjjm/services/services.dart';
-import 'package:proyecto_peluqueria_fjjm/services/variable.dart'
-    as variablesGlobales;
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
+import 'package:url_launcher/url_launcher.dart';
 
 class CallUsScreen extends StatelessWidget {
   const CallUsScreen({
@@ -45,6 +45,8 @@ class _CallUsBody extends StatelessWidget {
         itemCount: peluqueriaServices.peluquerias.length,
         itemBuilder: (context, index) {
           final peluqueria = peluqueriaServices.peluquerias[index];
+          String message = "Hola! Me gustaría solicitar una cita en vuestra peluquería";
+          String androidURL = "https://wa.me/${peluqueria.telefono}/?text=${Uri.parse(message)}";
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Center(
@@ -74,13 +76,18 @@ class _CallUsBody extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                            color: Colors.green,
-                            iconSize: 50,
-                            icon: const ImageIcon(
-                              NetworkImage(
-                                  'https://i.pinimg.com/originals/90/22/c3/9022c3da331305796ded3dda4c619df0.png'),
-                            ),
-                            onPressed: () async => {}),
+                          color: Colors.green,
+                          iconSize: 50,
+                          icon: const ImageIcon(
+                            NetworkImage(
+                                'https://i.pinimg.com/originals/90/22/c3/9022c3da331305796ded3dda4c619df0.png'),
+                          ),
+                          onPressed: () async => {
+                            if(await canLaunchUrl(Uri.parse(androidURL))){
+                              await launchUrl(Uri.parse(androidURL),mode: LaunchMode.externalApplication)
+                            }
+                          }
+                        ),
                         IconButton(
                             color: Colors.green,
                             iconSize: 50,
