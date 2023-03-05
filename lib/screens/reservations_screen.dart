@@ -152,7 +152,8 @@ class _ReservationsScreenState extends State<ReservationsScreen> {
                       : contador == 0 &&
                               index == reservasServices.reservas.length - 1
                           ? Image(image: AssetImage("assets/no-results.png"))
-                          : null);
+                          : null
+              );
             }),
       ),
     );
