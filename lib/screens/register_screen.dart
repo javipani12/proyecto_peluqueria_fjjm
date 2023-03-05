@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_peluqueria_fjjm/providers/usuario_form_provider.dart';
+import 'package:proyecto_peluqueria_fjjm/providers/providers.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/home_screen.dart';
 import 'package:proyecto_peluqueria_fjjm/services/usuarios_services.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/app_themes.dart';
-import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {

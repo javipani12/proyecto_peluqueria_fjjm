@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/edit_profile_screen.dart';
-import 'package:proyecto_peluqueria_fjjm/services/services.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
-import 'package:provider/provider.dart';
-import '../services/usuarios_services.dart';
-import 'package:proyecto_peluqueria_fjjm/services/services.dart';
-import 'package:proyecto_peluqueria_fjjm/services/variable.dart'
-    as variablesGlobales;
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final usuariosServices = Provider.of<UsuariosServices>(context);
-
     return Scaffold(
-      bottomNavigationBar: ButtonNavigationBar(),
+      bottomNavigationBar: const ButtonNavigationBar(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text('Perfil'),
@@ -25,7 +18,8 @@ class ProfileScreen extends StatelessWidget {
             icon: const Icon(Icons.settings),
             onPressed: () {
               final route = MaterialPageRoute(
-                  builder: (context) => const EditProfileScreen());
+                builder: (context) => const EditProfileScreen()
+              );
               Navigator.push(context, route);
             },
           ),
@@ -40,7 +34,8 @@ class ProfileScreen extends StatelessWidget {
               child: CircleAvatar(
                 maxRadius: 60,
                 backgroundImage: NetworkImage(
-                    'https://thumbs.dreamstime.com/b/usuario-de-medios-sociales-vectorial-icono-perfil-avatar-predeterminado-retrato-176256935.jpg'),
+                  'https://thumbs.dreamstime.com/b/usuario-de-medios-sociales-vectorial-icono-perfil-avatar-predeterminado-retrato-176256935.jpg'
+                ),
               ),
             ),
             Container(
@@ -55,29 +50,35 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 30.0),
+              margin: const EdgeInsets.only(left: 30.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ListTile(
-                    leading: Icon(Icons.person),
+                    leading: const Icon(Icons.person),
                     title: Text(
-                      'Apellidos: ' + variablesGlobales.usuario.lastname,
-                      style: TextStyle(fontSize: 17.50),
+                      'Apellidos: ${variablesGlobales.usuario.lastname}',
+                      style: const TextStyle(
+                        fontSize: 17.50
+                      ),
                     ),
                   ),
                   ListTile(
-                    leading: Icon(Icons.email),
+                    leading: const Icon(Icons.email),
                     title: Text(
-                      'Email: ' + variablesGlobales.usuario.email,
-                      style: TextStyle(fontSize: 17.50),
+                      'Email: ${variablesGlobales.usuario.email}',
+                      style: const TextStyle(
+                        fontSize: 17.50
+                      ),
                     ),
                   ),
                   ListTile(
-                    leading: Icon(Icons.phone_android),
+                    leading: const Icon(Icons.phone_android),
                     title: Text(
-                      'Teléfono: ' + variablesGlobales.usuario.phoneNumber,
-                      style: TextStyle(fontSize: 17.50),
+                      'Teléfono: ${variablesGlobales.usuario.phoneNumber}',
+                      style: const TextStyle(
+                        fontSize: 17.50
+                      ),
                     ),
                   ),
                 ],
