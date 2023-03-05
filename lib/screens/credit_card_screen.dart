@@ -239,10 +239,11 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                         reservasServices.createReserva(reserva);
                         precio = 0;
                         final route = MaterialPageRoute(
-                            builder: (context) => const ReservationsScreen());
+                          builder: (context) => const ReservationsScreen()
+                        );
                         Navigator.push(context, route);
                       } else {
-                        //  print('La tarjeta no es valida');
+                        // print('La tarjeta no es valida');
                       }
                     },
                   ),
