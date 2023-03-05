@@ -5,11 +5,7 @@ import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_peluqueria_fjjm/services/services.dart';
-import 'package:proyecto_peluqueria_fjjm/services/variable.dart'
-    as variablesGlobales;
-import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
-import 'package:proyecto_peluqueria_fjjm/services/variable.dart'
-    as variablesGlobales;
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class ServicesScreen extends StatefulWidget {
   const ServicesScreen({
@@ -21,6 +17,7 @@ class ServicesScreen extends StatefulWidget {
 }
 
 class _ServicesScreenState extends State<ServicesScreen> {
+
   bool sliderEnable = false;
   final List<Servicio> serviciosSeleccionados = [];
 
@@ -28,10 +25,8 @@ class _ServicesScreenState extends State<ServicesScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ServiciosServices>(
       create: (_) => ServiciosServices(),
-      child:
-          Consumer<ServiciosServices>(builder: (context, serviciosServices, _) {
+      child: Consumer<ServiciosServices>(builder: (context, serviciosServices, _) {
         final serviciosServices = Provider.of<ServiciosServices>(context);
-
         return Scaffold(
             bottomNavigationBar: const ButtonNavigationBar(),
             appBar: AppBar(
@@ -39,9 +34,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
             ),
             body: Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20,),
                 SwitchListTile(
                   activeColor: AppThemes.primary,
                   title: const Text('Seleccionar todos'),
@@ -63,9 +56,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                     });
                   },
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20,),
                 Expanded(
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -88,61 +79,59 @@ class _ServicesScreenState extends State<ServicesScreen> {
                             ),
                           ],
                         ),
-                        child: Column(children: [
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                if (!serviciosSeleccionados
-                                    .contains(servicio)) {
-                                  serviciosSeleccionados.add(servicio);
-                                } else {
-                                  serviciosSeleccionados.remove(servicio);
-                                }
-                              });
-                            },
-                            child: ClipRRect(
-                              clipBehavior: Clip.antiAlias,
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20)
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (!serviciosSeleccionados
+                                      .contains(servicio)) {
+                                    serviciosSeleccionados.add(servicio);
+                                  } else {
+                                    serviciosSeleccionados.remove(servicio);
+                                  }
+                                });
+                              },
+                              child: ClipRRect(
+                                clipBehavior: Clip.antiAlias,
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20)
+                                ),
+                                child: FadeInImage(
+                                  placeholder:
+                                      const AssetImage('assets/jar-loading.gif'),
+                                  image: NetworkImage(servicio.foto),
+                                  width: 130,
+                                  height: 190,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                              child: FadeInImage(
-                                placeholder:
-                                    const AssetImage('assets/jar-loading.gif'),
-                                image: NetworkImage(servicio.foto),
-                                width: 130,
-                                height: 190,
-                                fit: BoxFit.cover,
+                            ),
+                            const SizedBox(height: 7,),
+                            Text(
+                              servicio.nombre,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 7,
-                          ),
-                          Text(
-                            servicio.nombre,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 2,
-                          ),
-                          Text(
-                            servicio.precio.toString() + '€',
-                            maxLines: 5,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.black87
-                            ),
-                          )
-                        ]),
+                            const SizedBox(height: 3,),
+                            Text(
+                              '${servicio.precio}€',
+                              maxLines: 5,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.black87
+                              ),
+                            )
+                          ]
+                        ),
                       );
                     },
                   ),
@@ -163,12 +152,8 @@ class _ServicesScreenState extends State<ServicesScreen> {
                     color: Colors.black87
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const SizedBox(
-                  height: 70,
-                ),
+                const SizedBox(height: 20,),
+                const SizedBox(height: 70,),
                 ElevatedButton(
                   child: const SizedBox(
                     width: 200,
@@ -185,50 +170,54 @@ class _ServicesScreenState extends State<ServicesScreen> {
                         print(serviciosSeleccionados[i].nombre);
                       }
                       final route = MaterialPageRoute(
-                          builder: (context) => const CalendarScreen());
+                        builder: (context) => const CalendarScreen()
+                      );
                       Navigator.push(context, route);
                     }
                   },
                 ),
-                const SizedBox(
-                  height: 30,
-                )
+                const SizedBox(height: 30,)
               ],
-            ));
-      }),
+            )
+          );
+        }
+      ),
     );
   }
 }
 
 void alertaServicios(BuildContext context) {
   showDialog(
-      barrierDismissible: false, // Nos permite pulsar fuera de la alerta
-      context: context,
-      builder: ((context) {
+    barrierDismissible: false, // Nos permite pulsar fuera de la alerta
+    context: context,
+    builder: (
+      (context) {
         return AlertDialog(
           title: const Text('¡Atención!'),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusDirectional.circular(20)),
+            borderRadius: BorderRadiusDirectional.circular(20)
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: const [
               Text('Debes seleccionar al menos un servicio'),
-              SizedBox(
-                height: 20,
-              ),
             ],
           ),
           actions: [
             TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('OK'))
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK')
+            )
           ],
         );
-      }));
+      }
+    )
+  );
 }
 
 String mostrarServiciosSeleccionados(List<Servicio> serviciosSeleccionados) {
   String servicios = '';
+  
   if (serviciosSeleccionados.length > 0) {
     for (int i = 0; i < serviciosSeleccionados.length; i++) {
       servicios += serviciosSeleccionados[i].nombre + ', ';

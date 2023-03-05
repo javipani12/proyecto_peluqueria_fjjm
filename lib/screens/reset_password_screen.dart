@@ -93,8 +93,9 @@ class _CampoRestablecerContrasenna extends StatelessWidget {
             }
           },
           child: const SizedBox(
-              width: double.infinity,
-              child: Center(child: Text('Restablecer contraseña'))),
+            width: double.infinity,
+            child: Center(child: Text('Restablecer contraseña'))
+          ),
         ),
       ],
     );

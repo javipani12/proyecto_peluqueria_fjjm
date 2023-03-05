@@ -30,13 +30,21 @@ class _ButtonNavigationBarState extends State<ButtonNavigationBar> {
       },
       items: const [
         BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle), label: 'Pedir cita'),
+          icon: Icon(Icons.add_circle), 
+          label: 'Pedir cita'
+        ),
         BottomNavigationBarItem(
           icon: Icon(Icons.wifi_tethering),
           label: "Mis Reservas",
         ),
-        BottomNavigationBarItem(icon: Icon(Icons.phone), label: "Llamanos"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Perfil"),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.phone),
+          label: "Llamanos"
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: "Perfil"
+        ),
       ],
     );
   }

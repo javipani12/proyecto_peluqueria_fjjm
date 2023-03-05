@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:proyecto_peluqueria_fjjm/themes/themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
-import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_peluqueria_fjjm/services/services.dart';
-import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 import 'package:url_launcher/url_launcher.dart';
 
 class CallUsScreen extends StatelessWidget {
@@ -21,7 +18,7 @@ class CallUsScreen extends StatelessWidget {
           create: (context) => PeluqueriaServices(),
         ),
       ],
-      child: _CallUsBody(),
+      child: const _CallUsBody(),
     );
   }
 }
@@ -33,10 +30,11 @@ class _CallUsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final peluqueriaServices = Provider.of<PeluqueriaServices>(context);
 
     return Scaffold(
-      bottomNavigationBar: ButtonNavigationBar(),
+      bottomNavigationBar: const ButtonNavigationBar(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text('Llámanos'),
@@ -46,7 +44,7 @@ class _CallUsBody extends StatelessWidget {
         itemBuilder: (context, index) {
           final peluqueria = peluqueriaServices.peluquerias[index];
           String message = "Hola! Me gustaría solicitar una cita en vuestra peluquería";
-          String androidURL = "https://wa.me/${peluqueria.telefono}/?text=${Uri.parse(message)}";
+          String whatsappAndroidURL = "https://wa.me/${peluqueria.telefono}/?text=${Uri.parse(message)}";
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Center(
@@ -69,9 +67,16 @@ class _CallUsBody extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 25),
-                    Text(peluqueria.nombre),
+                    Text(
+                      peluqueria.nombre,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16
+                      ),
+                    ),
+                    const SizedBox(height: 5,),
                     Text(peluqueria.direccion),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -80,24 +85,26 @@ class _CallUsBody extends StatelessWidget {
                           iconSize: 50,
                           icon: const ImageIcon(
                             NetworkImage(
-                                'https://i.pinimg.com/originals/90/22/c3/9022c3da331305796ded3dda4c619df0.png'),
+                              'https://i.pinimg.com/originals/90/22/c3/9022c3da331305796ded3dda4c619df0.png'
+                            ),
                           ),
                           onPressed: () async => {
-                            if(await canLaunchUrl(Uri.parse(androidURL))){
-                              await launchUrl(Uri.parse(androidURL),mode: LaunchMode.externalApplication)
+                            if(await canLaunchUrl(Uri.parse(whatsappAndroidURL))){
+                              await launchUrl(Uri.parse(whatsappAndroidURL),mode: LaunchMode.externalApplication)
                             }
                           }
                         ),
                         IconButton(
-                            color: Colors.green,
-                            iconSize: 50,
-                            icon: const Icon(Icons.phone),
-                            onPressed: () async => {
-                                  await FlutterPhoneDirectCaller.callNumber(
-                                      peluqueria.telefono.toString()),
-                                }),
+                          color: Colors.green,
+                          iconSize: 50,
+                          icon: const Icon(Icons.phone),
+                          onPressed: () async => {
+                            await FlutterPhoneDirectCaller.callNumber(
+                              peluqueria.telefono.toString()
+                            ),
+                          }
+                        ),
                       ],
-
                     ),
                   ],
                 ),

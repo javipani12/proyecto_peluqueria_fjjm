@@ -24,17 +24,14 @@ class _SummaryScreenState extends State<SummaryScreen> {
         peluqueros += variablesGlobales.peluqueros[i].nombre + ", ";
       }
       peluqueros = peluqueros.substring(0, peluqueros.length - 2);
-      ;
       return peluqueros;
     }
 
     double calcularPrecio(){
       double precio = 0;
-
       for (int i = 0; i < variablesGlobales.servicios.length; i++) {
         precio += variablesGlobales.servicios[i].precio;
       }
-
       return precio;
     }
 
@@ -49,10 +46,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
 
     String fechaHora() {
       String fechaHora = '';
-
-      fechaHora = variablesGlobales.fecha.split(" ")[0] +
-          " " +
-          variablesGlobales.horas[0].split("(")[1].split(")")[0];
+      fechaHora = "${variablesGlobales.fecha.split(" ")[0]} ${variablesGlobales.horas[0].split("(")[1].split(")")[0]}";
       variablesGlobales.fechaHora = fechaHora;
       return fechaHora;
     }
@@ -64,18 +58,19 @@ class _SummaryScreenState extends State<SummaryScreen> {
         return Scaffold(
             appBar: AppBar(
               title: const Text('Finalizar reserva'),
-              actions: const [],
             ),
             bottomNavigationBar: const ButtonNavigationBar(),
             body: SingleChildScrollView(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
                 child: Column(
                   children: [
                     const Text(
                       'Resumen de tu pedido',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -86,7 +81,9 @@ class _SummaryScreenState extends State<SummaryScreen> {
                             ListTile(
                               title: Text(
                                 variablesGlobales.peluqueria!.nombre,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold
+                                ),
                               ),
                             ),
                             ListTile(
@@ -98,23 +95,31 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                   color: Colors.black87
                                 ),
                               ),
-                              trailing: Text(peluqueros(),
-                                  style: const TextStyle(color: Colors.black54)),
+                              trailing: Text(
+                                peluqueros(),
+                                style: const TextStyle(color: Colors.black54)
+                              ),
                             ),
                             ListTile(
                               visualDensity: const VisualDensity(vertical: -4),
                               leading: const Text(
                                 'Fecha y hora',
-                                style: TextStyle(color: Colors.black87),
+                                style: TextStyle(
+                                  color: Colors.black87
+                                ),
                               ),
-                              trailing: Text(fechaHora(),
-                                  style: const TextStyle(color: Colors.black54)),
+                              trailing: Text(
+                                fechaHora(),
+                                style: const TextStyle(color: Colors.black54)
+                              ),
                             ),
                             ListTile(
                               visualDensity: const VisualDensity(vertical: -4),
                               leading: const Text(
                                 'Servicios',
-                                style: TextStyle(color: Colors.black87),
+                                style: TextStyle(
+                                  color: Colors.black87
+                                ),
                               ),
                               trailing: Text(
                                 servicios(),
@@ -133,9 +138,13 @@ class _SummaryScreenState extends State<SummaryScreen> {
                                 'Total',
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              trailing: Text('${calcularPrecio()}€',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 25)),
+                              trailing: Text(
+                                '${calcularPrecio()}€',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold, 
+                                  fontSize: 25
+                                )
+                              ),
                             ),
                           ],
                         ),
@@ -146,39 +155,45 @@ class _SummaryScreenState extends State<SummaryScreen> {
                       endIndent: 0,
                     ),
                     ListTile(
-                        leading: const Icon(Icons.credit_card),
-                        title: const Text(
-                          'Tarjeta Bancaria',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                      leading: const Icon(Icons.credit_card),
+                      title: const Text(
+                        'Tarjeta Bancaria',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold
                         ),
-                        trailing: Radio(
-                          value: PaymentMethod.creditCard,
-                          groupValue: paymentMethod,
-                          onChanged: (value) {
-                            setState(() {
-                              paymentMethod = value;
-                            });
-                          },
-                        )),
+                      ),
+                      trailing: Radio(
+                        value: PaymentMethod.creditCard,
+                        groupValue: paymentMethod,
+                        onChanged: (value) {
+                          setState(() {
+                            paymentMethod = value;
+                          });
+                        },
+                      )
+                    ),
                     const Divider(
                       indent: 0,
                       endIndent: 0,
                     ),
                     ListTile(
-                        leading: const Icon(Icons.mobile_friendly),
-                        title: const Text(
-                          'Bizum',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                      leading: const Icon(Icons.mobile_friendly),
+                      title: const Text(
+                        'Bizum',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold
                         ),
-                        trailing: Radio(
-                          value: PaymentMethod.bizum,
-                          groupValue: paymentMethod,
-                          onChanged: (value) {
-                            setState(() {
-                              paymentMethod = value;
-                            });
-                          },
-                        )),
+                      ),
+                      trailing: Radio(
+                        value: PaymentMethod.bizum,
+                        groupValue: paymentMethod,
+                        onChanged: (value) {
+                          setState(() {
+                            paymentMethod = value;
+                          });
+                        },
+                      )
+                    ),
                     const Divider(
                       indent: 0,
                       endIndent: 0,
@@ -187,32 +202,29 @@ class _SummaryScreenState extends State<SummaryScreen> {
                       leading: const Icon(Icons.attach_money),
                       title: const Text(
                         'Efectivo',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
                       ),
                       trailing: Radio(
                         value: PaymentMethod.cash,
                         groupValue: paymentMethod,
-                        onChanged: 
-                          !variablesGlobales.usuario.efectivo 
-                          ? 
-                            null 
-                          : 
-                            (PaymentMethod? value) {
-                              setState(() {
-                                paymentMethod = value;
-                              });
-                            },
+                        onChanged: !variablesGlobales.usuario.efectivo 
+                          ? null 
+                          : (PaymentMethod? value) {
+                            setState(() {
+                              paymentMethod = value;
+                            });
+                          },
                       )
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox( height: 10,),
                     ElevatedButton(
                       child: const SizedBox(
                         width: double.infinity,
                         child: Center(child: Text('Continuar')),
                       ),
-                      onPressed: () async{
+                      onPressed: () async {
                         Reserva reserva = Reserva(
                           eliminado: false,
                           fechaHora: variablesGlobales.fechaHora, 

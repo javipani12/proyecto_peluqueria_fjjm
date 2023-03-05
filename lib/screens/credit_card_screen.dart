@@ -27,33 +27,33 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
   double precio = 0;
 
   String peluqueros() {
-      String peluqueros = '';
-      for (int i = 0; i < variablesGlobales.peluqueros.length; i++) {
-        peluqueros += variablesGlobales.peluqueros[i].nombre + ", ";
-      }
-      peluqueros = peluqueros.substring(0, peluqueros.length - 2);
-      ;
-      return peluqueros;
+    String peluqueros = '';
+    for (int i = 0; i < variablesGlobales.peluqueros.length; i++) {
+      peluqueros += variablesGlobales.peluqueros[i].nombre + ", ";
+    }
+    peluqueros = peluqueros.substring(0, peluqueros.length - 2);
+    ;
+    return peluqueros;
+  }
+
+  double calcularPrecio(){
+    double precio = 0;
+
+    for (int i = 0; i < variablesGlobales.servicios.length; i++) {
+      precio += variablesGlobales.servicios[i].precio;
     }
 
-    double calcularPrecio(){
-      double precio = 0;
+    return precio;
+  }
 
-      for (int i = 0; i < variablesGlobales.servicios.length; i++) {
-        precio += variablesGlobales.servicios[i].precio;
-      }
-
-      return precio;
+  String servicios() {
+    String servicios = '';
+    for (int i = 0; i < variablesGlobales.servicios.length; i++) {
+      servicios += '${variablesGlobales.servicios[i].nombre}, ';
     }
-
-    String servicios() {
-      String servicios = '';
-      for (int i = 0; i < variablesGlobales.servicios.length; i++) {
-        servicios += variablesGlobales.servicios[i].nombre + ', ';
-      }
-      servicios = servicios.substring(0, servicios.length - 2);
-      return servicios;
-    }
+    servicios = servicios.substring(0, servicios.length - 2);
+    return servicios;
+  }
 
   void onCreditCardModelChange(CreditCardModel? creditCardModel) {
     setState(() {
@@ -69,10 +69,9 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ReservasServices>(
       create: (_) => ReservasServices(),
-      child:
-          Consumer<ReservasServices>(builder: (context, reservasServices, _) {
+      child: Consumer<ReservasServices>(builder: (context, reservasServices, _) {
         return Scaffold(
-          bottomNavigationBar: ButtonNavigationBar(),
+          bottomNavigationBar: const ButtonNavigationBar(),
           appBar: AppBar(
             title: const Text('Tarjeta'),
           ),
@@ -239,10 +238,9 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
                         reservasServices.createReserva(reserva);
                         precio = 0;
                         final route = MaterialPageRoute(
-                            builder: (context) => const ReservationsScreen());
+                          builder: (context) => const ReservationsScreen()
+                        );
                         Navigator.push(context, route);
-                      } else {
-                        //  print('La tarjeta no es valida');
                       }
                     },
                   ),

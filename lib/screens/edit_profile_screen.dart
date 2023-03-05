@@ -5,8 +5,7 @@ import 'package:proyecto_peluqueria_fjjm/services/usuarios_services.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_peluqueria_fjjm/services/services.dart';
-import 'package:proyecto_peluqueria_fjjm/services/variable.dart'
-    as variablesGlobales;
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -33,11 +32,12 @@ class _EditProfileScreenBody extends StatelessWidget {
   final UsuariosServices usuariosServices;
   @override
   Widget build(BuildContext context) {
+
     final usuarioForm = Provider.of<UsuarioFormProvider>(context);
     final usuario = variablesGlobales.usuario;
 
     return Scaffold(
-      bottomNavigationBar: ButtonNavigationBar(),
+      bottomNavigationBar: const ButtonNavigationBar(),
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: const Text('Editar'),
@@ -55,7 +55,8 @@ class _EditProfileScreenBody extends StatelessWidget {
                 child: CircleAvatar(
                   maxRadius: 60,
                   backgroundImage: NetworkImage(
-                      'https://thumbs.dreamstime.com/b/usuario-de-medios-sociales-vectorial-icono-perfil-avatar-predeterminado-retrato-176256935.jpg'),
+                    'https://thumbs.dreamstime.com/b/usuario-de-medios-sociales-vectorial-icono-perfil-avatar-predeterminado-retrato-176256935.jpg'
+                  ),
                 ),
               ),
               const SizedBox(
@@ -66,12 +67,11 @@ class _EditProfileScreenBody extends StatelessWidget {
                 onChanged: (value) {
                   usuario.name = value;
                 },
-                decoration: InputDecoration(hintText: 'Nombre'),
+                decoration: const InputDecoration(hintText: 'Nombre'),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'La longitud no es válida';
                   }
-
                   if (value.length > 20) {
                     return 'La longitud no puede ser mayor a 20';
                   }
@@ -90,7 +90,6 @@ class _EditProfileScreenBody extends StatelessWidget {
                   if (value!.isEmpty) {
                     return 'La longitud no es válida';
                   }
-
                   if (value.length > 80) {
                     return 'La longitud no puede ser mayor a 80';
                   }
@@ -111,18 +110,14 @@ class _EditProfileScreenBody extends StatelessWidget {
                   usuario.email = value;
                 },
                 validator: (value) {
-                  String pattern =
-                      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                  String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                   RegExp regExp = new RegExp(pattern);
-
                   return regExp.hasMatch(value ?? '')
-                      ? null
-                      : 'El email no es válido';
+                    ? null
+                    : 'El email no es válido';
                 },
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30,),
               TextFormField(
                 initialValue: variablesGlobales.usuario.phoneNumber,
                 keyboardType: TextInputType.phone,
@@ -136,9 +131,7 @@ class _EditProfileScreenBody extends StatelessWidget {
                   }
                 },
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30,),
               TextFormField(
                 initialValue: variablesGlobales.usuario.password,
                 autocorrect: false,
@@ -159,9 +152,7 @@ class _EditProfileScreenBody extends StatelessWidget {
                   }
                 },
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30,),
               TextFormField(
                 initialValue: variablesGlobales.usuario.checkPassword,
                 autocorrect: false,
@@ -180,9 +171,7 @@ class _EditProfileScreenBody extends StatelessWidget {
                   }
                 },
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              const SizedBox(height: 30,),
               ElevatedButton(
                 onPressed: () async {
                   if (!usuarioForm.isValidForm()) return;
@@ -193,8 +182,9 @@ class _EditProfileScreenBody extends StatelessWidget {
                   Navigator.push(context, route);
                 },
                 child: const SizedBox(
-                    width: double.infinity,
-                    child: Center(child: Text('Guardar'))),
+                  width: double.infinity,
+                  child: Center(child: Text('Guardar'))
+                ),
               ),
             ],
           ),

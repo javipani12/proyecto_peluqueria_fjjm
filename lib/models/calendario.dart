@@ -20,14 +20,12 @@ class Calendario {
   String toJson() => json.encode(toMap());
 
   factory Calendario.fromMap(Map<String, dynamic> json) => Calendario(
-        datetime:
-            List<DateTime>.from(json["datetime"].map((x) => DateTime.parse(x))),
-        email: json["email"],
-      );
+    datetime: List<DateTime>.from(json["datetime"].map((x) => DateTime.parse(x))),
+    email: json["email"],
+  );
 
   Map<String, dynamic> toMap() => {
-        "datetime":
-            List<dynamic>.from(datetime.map((x) => x.toIso8601String())),
-        "email": email,
-      };
+  "datetime": List<dynamic>.from(datetime.map((x) => x.toIso8601String())),
+  "email": email,
+};
 }

@@ -32,8 +32,6 @@ class _AppointmentComplete extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Peluqueria peluqueria;
-
     return Scaffold(
       bottomNavigationBar: const ButtonNavigationBar(),
       appBar: AppBar(
@@ -53,9 +51,7 @@ class _AppointmentBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: const [
-      SizedBox(
-        height: 20,
-      ),
+      SizedBox(height: 20,),
       Text(
         'Novedades',
         style: TextStyle(
@@ -64,9 +60,7 @@ class _AppointmentBody extends StatelessWidget {
         ),
       ),
       _ListadoNovedades(),
-      SizedBox(
-        height: 20,
-      ),
+      SizedBox(height: 20,),
       Text(
         'Peluquerías',
         style: TextStyle(
@@ -74,10 +68,10 @@ class _AppointmentBody extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      SizedBox(
-        height: 10,
+      SizedBox(height: 10,),
+      Expanded(
+        child: _ListadoPeluquerias()
       ),
-      Expanded(child: _ListadoPeluquerias()),
     ]);
   }
 }
@@ -89,6 +83,7 @@ class _ListadoPeluquerias extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final peluqueriaServices = Provider.of<PeluqueriaServices>(context);
 
     return ListView.builder(
@@ -138,8 +133,9 @@ class _ListadoPeluquerias extends StatelessWidget {
                   onPressed: () {
                     // Guarda El nombre de la peluqueria en una variable Global
                     variablesGlobales.peluqueria = peluqueria;
-                    final route =
-                        MaterialPageRoute(builder: (context) => const BarberScreen());
+                    final route = MaterialPageRoute(
+                      builder: (context) => const BarberScreen()
+                    );
                     Navigator.push(context, route);
                     variablesGlobales.peluqueria = peluqueria;
                   },
@@ -170,10 +166,11 @@ class _ListadoNovedades extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final novedadesServices = Provider.of<NovedadesServices>(context);
 
     return SizedBox(
-      height: 260,
+      height: 220,
       child: ListView.builder(
         shrinkWrap: false,
         scrollDirection: Axis.horizontal,
@@ -188,7 +185,6 @@ class _ListadoNovedades extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               children: [
                 GestureDetector(
-                  onTap: () {},
                   child: ClipRRect(
                     clipBehavior: Clip.antiAlias,
                     borderRadius: BorderRadius.circular(20),
@@ -205,7 +201,6 @@ class _ListadoNovedades extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 3, left: 3),
                   width: double.infinity,
                   height: 30,
-                  // ignore: prefer_const_constructors
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.only(

@@ -16,14 +16,14 @@ class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: ButtonNavigationBar(),
+      bottomNavigationBar: const ButtonNavigationBar(),
       appBar: AppBar(
         title: const Text('Selección fecha')
 
       ),
       body: ChangeNotifierProvider<CalendariosServices>(
         create: (_) => CalendariosServices(),
-        child: _center(),
+        child: const _center(),
       ),
     );
   }
@@ -191,7 +191,7 @@ class _centerState extends State<_center> {
             Text(
               textAlign: TextAlign.start,
               'Seleccione: ' + horasASeleccionar(),
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             const SizedBox(height: 10),
             Table(
@@ -217,7 +217,7 @@ class _centerState extends State<_center> {
                 )
               ],
             ),
-            SizedBox(height: 7,),
+            const SizedBox(height: 7,),
             ElevatedButton(
               child: const SizedBox(
                 width: 200,
@@ -249,7 +249,7 @@ class _centerState extends State<_center> {
                 }
               },
             ),
-            SizedBox(height: 10,)
+            const SizedBox(height: 10,)
           ]),
         ),
       ],
@@ -269,7 +269,7 @@ void alertaCalendario(BuildContext context) {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Debes seleccionar la/s hora/s indicada/s'),
+              const Text('Debes seleccionar la/s hora/s indicada/s'),
               const SizedBox(
                 height: 20,
               ),

@@ -28,59 +28,60 @@ class _BarberScreenState extends State<BarberScreen> {
       child: Consumer<PeluquerosServices>(
         builder: (context, peluquerosServices, _) {
           return Scaffold(
-              bottomNavigationBar: const ButtonNavigationBar(),
-              appBar: AppBar(
-                title: const Text('Selección peluqueros/as'),
-              ),
-              body: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  SwitchListTile(
-                    activeColor: AppThemes.primary,
-                    title: const Text('Seleccionar todos/as'),
-                    value: sliderEnable,
-                    onChanged: (value) {
-                      sliderEnable = value;
-                      setState(() {
-                        if (sliderEnable) {
-                          peluquerosSeleccionados.clear();
-                          for (int i = 0; i < peluquerosServices.peluqueros.length; i++) {
-                            peluquerosSeleccionados.add(peluquerosServices.peluqueros[i]);
-                          }
-                        } else {
-                          peluquerosSeleccionados.clear();
+            bottomNavigationBar: const ButtonNavigationBar(),
+            appBar: AppBar(
+              title: const Text('Selección peluqueros/as'),
+            ),
+            body: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                SwitchListTile(
+                  activeColor: AppThemes.primary,
+                  title: const Text('Seleccionar todos/as'),
+                  value: sliderEnable,
+                  onChanged: (value) {
+                    sliderEnable = value;
+                    setState(() {
+                      if (sliderEnable) {
+                        peluquerosSeleccionados.clear();
+                        for (int i = 0; i < peluquerosServices.peluqueros.length; i++) {
+                          peluquerosSeleccionados.add(peluquerosServices.peluqueros[i]);
                         }
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: peluquerosServices.peluqueros.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final peluquero = peluquerosServices.peluqueros[index];
-                        return Container(
-                          width: 130,
-                          height: 190,
-                          margin: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.12),
-                                spreadRadius: 5,
-                                blurRadius: 10,
-                                offset: const Offset(0, 3), // Posición del sombreado
-                              ),
-                            ],
-                          ),
-                          child: Column(children: [
+                      } else {
+                        peluquerosSeleccionados.clear();
+                      }
+                    });
+                  },
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: peluquerosServices.peluqueros.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final peluquero = peluquerosServices.peluqueros[index];
+                      return Container(
+                        width: 130,
+                        height: 190,
+                        margin: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.12),
+                              spreadRadius: 5,
+                              blurRadius: 10,
+                              offset: const Offset(0, 3), // Posición del sombreado
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
                             GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -98,8 +99,7 @@ class _BarberScreenState extends State<BarberScreen> {
                                   topRight: Radius.circular(20)
                                 ),
                                 child: FadeInImage(
-                                  placeholder:
-                                      const AssetImage('assets/jar-loading.gif'),
+                                  placeholder: const AssetImage('assets/jar-loading.gif'),
                                   image: NetworkImage(peluquero.foto),
                                   width: 130,
                                   height: 190,
@@ -107,9 +107,7 @@ class _BarberScreenState extends State<BarberScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 7,
-                            ),
+                            const SizedBox(height: 7,),
                             Text(
                               peluquero.nombre,
                               maxLines: 2,
@@ -120,9 +118,7 @@ class _BarberScreenState extends State<BarberScreen> {
                                 fontSize: 16
                               ),
                             ),
-                            const SizedBox(
-                              height: 2,
-                            ),
+                            const SizedBox(height: 2,),
                             Text(
                               peluquero.descripcion,
                               maxLines: 5,
@@ -133,71 +129,70 @@ class _BarberScreenState extends State<BarberScreen> {
                                 color: Colors.black87
                               ),
                             )
-                          ]),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 20,),
-                  const Text(
-                    'Seleccionados:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 7,
-                  ),
-                  Text(
-                    mostrarPeluquerosSeleccionados(peluquerosSeleccionados),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.black87
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  ElevatedButton(
-                    child: const SizedBox(
-                      width: 200,
-                      child: Center(
-                        child: Text('Continuar'),
-                      ),
-                    ),
-                    onPressed: () {
-                      if (peluquerosSeleccionados.length == 0) {
-                        alertaPeluqueros(context);
-                      } else {
-                        variablesGlobales.peluqueros = peluquerosSeleccionados;
-                        for (int i = 0; i < peluquerosSeleccionados.length; i++) {
-                          print(peluquerosSeleccionados[i].nombre);
-                        }
-                        final route = MaterialPageRoute(
-                            builder: (context) => const ServicesScreen());
-                        Navigator.push(context, route);
-                      }
+                          ]
+                        ),
+                      );
                     },
                   ),
-                  const SizedBox(
-                    height: 30,
-                  )
-                ],
-              ));
-      }),
+                ),
+                const SizedBox(height: 20,),
+                const Text(
+                  'Seleccionados:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16
+                  ),
+                ),
+                const SizedBox(height: 7,),
+                Text(
+                  mostrarPeluquerosSeleccionados(peluquerosSeleccionados),
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.black87
+                  ),
+                ),
+                const SizedBox(height: 20,),
+                const SizedBox(height: 50,),
+                ElevatedButton(
+                  child: const SizedBox(
+                    width: 200,
+                    child: Center(
+                      child: Text('Continuar'),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (peluquerosSeleccionados.length == 0) {
+                      alertaPeluqueros(context);
+                    } else {
+                      variablesGlobales.peluqueros = peluquerosSeleccionados;
+
+                      for (int i = 0; i < peluquerosSeleccionados.length; i++) {
+                        print(peluquerosSeleccionados[i].nombre);
+                      }
+
+                      final route = MaterialPageRoute(
+                        builder: (context) => const ServicesScreen()
+                      );
+                      Navigator.push(context, route);
+                    }
+                  },
+                ),
+                const SizedBox( height: 30,)
+              ],
+            )
+          );
+        }
+      ),
     );
   }
 }
 
 void alertaPeluqueros(BuildContext context) {
   showDialog(
-      barrierDismissible: false, // Nos permite pulsar fuera de la alerta
-      context: context,
-      builder: ((context) {
+    barrierDismissible: false, // Nos permite pulsar fuera de la alerta
+    context: context,
+    builder: (
+      (context) {
         return AlertDialog(
           title: const Text('¡Atención!'),
           shape: RoundedRectangleBorder(
@@ -206,27 +201,27 @@ void alertaPeluqueros(BuildContext context) {
             mainAxisSize: MainAxisSize.min,
             children: const [
               Text('Debes seleccionar al menos un peluquero/a'),
-              SizedBox(
-                height: 20,
-              ),
             ],
           ),
           actions: [
             TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('OK'))
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK')
+            )
           ],
         );
-      }));
+      }
+    )  
+  );
 }
 
 String mostrarPeluquerosSeleccionados(List<Peluquero> peluquerosSeleccionados) {
   String peluqueros = '';
+
   if (peluquerosSeleccionados.length > 0) {
     for (int i = 0; i < peluquerosSeleccionados.length; i++) {
       peluqueros += peluquerosSeleccionados[i].nombre + ', ';
     }
-
     peluqueros = peluqueros.substring(0, peluqueros.length - 2);
   }
 

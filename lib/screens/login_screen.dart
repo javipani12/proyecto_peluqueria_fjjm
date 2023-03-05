@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_peluqueria_fjjm/providers/login_form_provider.dart';
+import 'package:proyecto_peluqueria_fjjm/providers/providers.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/app_themes.dart';
