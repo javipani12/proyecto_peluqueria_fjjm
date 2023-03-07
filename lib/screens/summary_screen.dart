@@ -43,7 +43,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
       servicios = servicios.substring(0, servicios.length - 2);
       return servicios;
     }
-
+    
     String fechaHora() {
       String fechaHora = '';
       fechaHora = "${variablesGlobales.fecha.split(" ")[0]} ${variablesGlobales.horas[0].split("(")[1].split(")")[0]}";
@@ -54,7 +54,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
     return  ChangeNotifierProvider<ReservasServices>(
       create: (_) => ReservasServices(),
       child: Consumer<ReservasServices>(
-        builder: (context, serviciosServices, _) {
+        builder: (context, reservasServices, _) {
         return Scaffold(
             appBar: AppBar(
               title: const Text('Finalizar reserva'),
@@ -237,14 +237,14 @@ class _SummaryScreenState extends State<SummaryScreen> {
                         );
                         if (paymentMethod == PaymentMethod.bizum) {
                           reserva.metodoPago = 'Bizum - ${conceptoBizum()}';
-                          await serviciosServices.createReserva(reserva);
+                          await reservasServices.createReserva(reserva);
                           final route = MaterialPageRoute(
                             builder: (context) => const ReservationsScreen());
                             Navigator.push(context, route);
                         }
                         if (paymentMethod == PaymentMethod.cash) {
                           reserva.metodoPago = 'Efectivo';
-                          await serviciosServices.createReserva(reserva);
+                          await reservasServices.createReserva(reserva);
                           final route = MaterialPageRoute(
                             builder: (context) => const ReservationsScreen());
                             Navigator.push(context, route);

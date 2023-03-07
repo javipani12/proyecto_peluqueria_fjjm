@@ -17,7 +17,6 @@ class ServicesScreen extends StatefulWidget {
 }
 
 class _ServicesScreenState extends State<ServicesScreen> {
-
   bool sliderEnable = false;
   final List<Servicio> serviciosSeleccionados = [];
 
@@ -68,7 +67,9 @@ class _ServicesScreenState extends State<ServicesScreen> {
                         height: 190,
                         margin: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: !serviciosSeleccionados.contains(servicio)
+                          ?Colors.white
+                          : Colors.teal[300],
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
@@ -225,6 +226,7 @@ String mostrarServiciosSeleccionados(List<Servicio> serviciosSeleccionados) {
 
     servicios = servicios.substring(0, servicios.length - 2);
   }
+
 
   return servicios;
 }
