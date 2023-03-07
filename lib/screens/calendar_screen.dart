@@ -17,10 +17,7 @@ class CalendarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const ButtonNavigationBar(),
-      appBar: AppBar(
-        title: const Text('Selección fecha')
-
-      ),
+      appBar: AppBar(title: const Text('Selección fecha')),
       body: ChangeNotifierProvider<CalendariosServices>(
         create: (_) => CalendariosServices(),
         child: const _center(),
@@ -105,9 +102,7 @@ class _centerState extends State<_center> {
   Widget build(BuildContext context) {
     final calendar = Provider.of<CalendariosServices>(context);
     if (calendar.isLoading) {
-
       return const Center(child: CircularProgressIndicator.adaptive());
-
     }
 
     String horasASeleccionar() {
@@ -167,7 +162,6 @@ class _centerState extends State<_center> {
 
     return ListView(
       children: [
-
         Container(
           color: Colors.grey[300],
           child: TableCalendar(
@@ -217,7 +211,9 @@ class _centerState extends State<_center> {
                 )
               ],
             ),
-            const SizedBox(height: 7,),
+            const SizedBox(
+              height: 7,
+            ),
             ElevatedButton(
               child: const SizedBox(
                 width: 200,
@@ -249,7 +245,9 @@ class _centerState extends State<_center> {
                 }
               },
             ),
-            const SizedBox(height: 10,)
+            const SizedBox(
+              height: 10,
+            )
           ]),
         ),
       ],

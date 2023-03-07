@@ -31,7 +31,10 @@ class AppThemes {
 
     // TextButton Theme
     textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(foregroundColor: primary)),
+        style: TextButton.styleFrom(
+      foregroundColor: primary,
+      side: BorderSide(color: Colors.blue, width: 2),
+    )),
 
     // Botón volver hacia atrás
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -43,25 +46,22 @@ class AppThemes {
     inputDecorationTheme: const InputDecorationTheme(
       floatingLabelStyle: TextStyle(color: primary),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: primary),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        )
-      ),
+          borderSide: BorderSide(color: primary),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          )),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: primary),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        )
-      ),
+          borderSide: BorderSide(color: primary),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          )),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        )
-      ),
+          borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(10),
+        topRight: Radius.circular(10),
+      )),
     ),
 
     // Card
