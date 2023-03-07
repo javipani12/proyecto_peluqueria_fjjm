@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_peluqueria_fjjm/providers/usuario_form_provider.dart';
+import 'package:proyecto_peluqueria_fjjm/providers/providers.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/home_screen.dart';
 import 'package:proyecto_peluqueria_fjjm/services/usuarios_services.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/app_themes.dart';
-import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -58,7 +57,6 @@ class _RegisterScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: usuario?.name,
                 onChanged: (value) {
                   usuario?.name = value;
                 }, 
@@ -79,7 +77,6 @@ class _RegisterScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: usuario?.lastname,
                 onChanged: (value) {
                   usuario?.lastname = value;
                 },
@@ -100,7 +97,6 @@ class _RegisterScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: usuario?.email,
                 autocorrect: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
@@ -123,7 +119,7 @@ class _RegisterScreenBody extends StatelessWidget {
                 height: 30,
               ),
               TextFormField(
-                initialValue: usuario?.phoneNumber,
+                keyboardType: TextInputType.phone,
                 onChanged: (value) {
                   usuario?.phoneNumber = value;
                 },
@@ -140,7 +136,6 @@ class _RegisterScreenBody extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
-                initialValue: usuario?.password,
                 autocorrect: false,
                 obscureText: true,
                 keyboardType: TextInputType.emailAddress,
@@ -154,14 +149,15 @@ class _RegisterScreenBody extends StatelessWidget {
                 validator: ( value ) {
                   if ( value!.isEmpty) {
                     return 'La contraseña no es válida';
-                  }                              
+                  } else if (value.length < 4) {
+                    return 'La longitud mínima es de 4 caracteres';
+                  }                           
                 },
               ),
               const SizedBox(
                 height: 30,
               ),
               TextFormField(
-                initialValue: usuario?.checkPassword,
                 autocorrect: false,
                 obscureText: true,
                 keyboardType: TextInputType.emailAddress,

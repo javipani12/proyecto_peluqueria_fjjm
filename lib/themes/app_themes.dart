@@ -1,8 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class AppThemes {
-  static const Color primary = Colors.brown;
+  static const Color primary = Colors.blueGrey;
+
 
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     primaryColor: primary,
@@ -15,23 +16,23 @@ class AppThemes {
     // Por el momento
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        primary: primary,
+        backgroundColor: primary,
         shape: const StadiumBorder(),
         elevation: 2,
         alignment: Alignment.center,
-        minimumSize: Size(300, 40),
-        textStyle: TextStyle(color: Colors.white),
+        minimumSize: const Size(300, 40),
+        textStyle: const TextStyle(color: Colors.white),
       ),
     ),
 
-    // ListTile Theme
+    // Colores de los iconos de la listas
     listTileTheme: const ListTileThemeData(
       iconColor: primary,
     ),
 
     // TextButton Theme
-    textButtonTheme:
-        TextButtonThemeData(style: TextButton.styleFrom(primary: primary)),
+    textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(foregroundColor: primary)),
 
     // Botón volver hacia atrás
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -39,26 +40,43 @@ class AppThemes {
       elevation: 5,
     ),
 
-    // InputDecoration
+    // Formulario de registro y de login
     inputDecorationTheme: const InputDecorationTheme(
       floatingLabelStyle: TextStyle(color: primary),
       enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: primary),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-          )),
+        borderSide: BorderSide(color: primary),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        )
+      ),
       focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: primary),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-          )),
+        borderSide: BorderSide(color: primary),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        )
+      ),
       border: OutlineInputBorder(
-          borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(10),
-        topRight: Radius.circular(10),
-      )),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        )
+      ),
+    ),
+
+    // Card
+    cardTheme: CardTheme(
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+    ),
+
+    // ProgressIndicator
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: primary,
+      circularTrackColor: primary,
     ),
   );
 }

@@ -21,28 +21,25 @@ class AppointmentScreen extends StatelessWidget {
           create: (context) => NovedadesServices(),
         ),
       ],
-      child: _PeluqueriasBody(),
+      child: const _AppointmentComplete(),
     );
   }
 }
 
-class _PeluqueriasBody extends StatelessWidget {
-  const _PeluqueriasBody({
+class _AppointmentComplete extends StatelessWidget {
+  const _AppointmentComplete({
     Key? key,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-  final Peluqueria peluqueria;
-
-  return Scaffold(
-    bottomNavigationBar: buttonNavigationBar(),
-    appBar: AppBar(
-      automaticallyImplyLeading: false,
-      title: const Text('Inicio - Pedir Cita'),
-    ),
-    body: _AppointmentBody(), 
+    return Scaffold(
+      bottomNavigationBar: const ButtonNavigationBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Inicio'),
+      ),
+      body: const _AppointmentBody(),
     );
   }
 }
@@ -54,31 +51,29 @@ class _AppointmentBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 20,),
-        Text(
-          'Novedades',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+    return Column(children: const [
+      SizedBox(height: 20,),
+      Text(
+        'Novedades',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
         ),
-        _ListadoNovedades(),
-        const SizedBox(height: 20,),
-        Text(
-          'Peluquerías',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+      ),
+      _ListadoNovedades(),
+      SizedBox(height: 20,),
+      Text(
+        'Peluquerías',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
         ),
-        const SizedBox(height: 10,),
-        Expanded(
-          child: _ListadoPeluquerias()
-        ),
-      ]
-    );
+      ),
+      SizedBox(height: 10,),
+      Expanded(
+        child: _ListadoPeluquerias()
+      ),
+    ]);
   }
 }
 
@@ -86,7 +81,6 @@ class _ListadoPeluquerias extends StatelessWidget {
   const _ListadoPeluquerias({
     Key? key,
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -111,29 +105,38 @@ class _ListadoPeluquerias extends StatelessWidget {
                   width: double.infinity,
                   height: 260,
                   fit: BoxFit.cover,
-                  placeholder: AssetImage('assets/jar-loading.gif'),
-                  fadeInDuration: Duration(milliseconds: 360),
+                  placeholder: const AssetImage('assets/jar-loading.gif'),
+                  fadeInDuration: const Duration(milliseconds: 360),
+
                   image: NetworkImage(peluqueria.foto),
                 ),
                 Container(
                   alignment: AlignmentDirectional.topStart,
-
                   padding: const EdgeInsets.only(top: 5, bottom: 5, left: 10),
-
-                  child: Text(peluqueria.nombre),
+                  child: Text(
+                    peluqueria.nombre,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16
+                    ),
+                  ),
                 ),
                 Container(
                   alignment: AlignmentDirectional.topStart,
                   padding: const EdgeInsets.only(left: 10),
-                  child: Text(peluqueria.direccion),
+                  child: Text(
+                    peluqueria.direccion,
+                    style: const TextStyle(
+                      fontSize: 13
+                    ),
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
                     // Guarda El nombre de la peluqueria en una variable Global
-                    variablesGlobales.info['peluqueria'] = peluqueria;
                     variablesGlobales.peluqueria = peluqueria;
                     final route = MaterialPageRoute(
-                      builder: (context) => BarberScreen()
+                      builder: (context) => const BarberScreen()
                     );
                     Navigator.push(context, route);
                     variablesGlobales.peluqueria = peluqueria;
@@ -143,8 +146,9 @@ class _ListadoPeluquerias extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 10),
                     child: const Text(
                       'Pedir cita aquí',
-                      style: TextStyle(decoration: TextDecoration.underline),
-
+                      style: TextStyle(
+                        decoration: TextDecoration.underline
+                      ),
                     ),
                   ),
                 ),
@@ -168,7 +172,7 @@ class _ListadoNovedades extends StatelessWidget {
     final novedadesServices = Provider.of<NovedadesServices>(context);
 
     return SizedBox(
-      height: 260,
+      height: 220,
       child: ListView.builder(
         shrinkWrap: false,
         scrollDirection: Axis.horizontal,
@@ -183,27 +187,36 @@ class _ListadoNovedades extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               children: [
                 GestureDetector(
-                  onTap: () {},
                   child: ClipRRect(
                     clipBehavior: Clip.antiAlias,
                     borderRadius: BorderRadius.circular(20),
                     child: FadeInImage(
-                      placeholder: AssetImage('assets/jar-loading.gif'),
+                      placeholder: const AssetImage('assets/jar-loading.gif'),
                       image: NetworkImage(novedad.foto),
                       width: 130,
                       height: 190,
                       fit: BoxFit.cover,
                     ),
                   ),
-
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 3, left: 3),
+                  padding: const EdgeInsets.only(top: 3, left: 3),
                   width: double.infinity,
                   height: 30,
                   decoration: BoxDecoration(
-                    color: AppThemes.primary,
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.12),
+                        spreadRadius: 5,
+                        blurRadius: 10,
+                        offset: const Offset(0, 3), // Posición del sombreado
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,12 +228,14 @@ class _ListadoNovedades extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.black87
+                          ),
                         ),
                       ),
                     ]
                   ),
                 ),
-
               ],
             ),
           );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_peluqueria_fjjm/providers/login_form_provider.dart';
+import 'package:proyecto_peluqueria_fjjm/providers/providers.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_peluqueria_fjjm/themes/app_themes.dart';
@@ -90,14 +90,16 @@ class _LoginForm extends StatelessWidget {
           validator: ( value ) {
             if ( value!.isEmpty ) {
               return 'La contraseña no es válida';  
-            }                             
+            } else if (value.length < 4) {
+              return 'La longitud mínima es de 4 caracteres';
+            }                        
           },
         ),
         const SizedBox(
           height: 30,
         ),
         MaterialButton(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           disabledColor: Colors.grey,
           elevation: 0,
           color: AppThemes.primary,

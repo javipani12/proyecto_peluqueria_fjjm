@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_peluqueria_fjjm/routes/routes.dart';
 
-class buttonNavigationBar extends StatefulWidget {
-  const buttonNavigationBar({
+class ButtonNavigationBar extends StatefulWidget {
+  const ButtonNavigationBar({
     super.key,
   });
 
   @override
-  State<buttonNavigationBar> createState() => _buttonNavigationBarState();
+  State<ButtonNavigationBar> createState() => _ButtonNavigationBarState();
 }
 
 int currentIndex = 0;
 
-class _buttonNavigationBarState extends State<buttonNavigationBar> {
+class _ButtonNavigationBarState extends State<ButtonNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -30,13 +30,21 @@ class _buttonNavigationBarState extends State<buttonNavigationBar> {
       },
       items: const [
         BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle), label: 'Pedir cita'),
+          icon: Icon(Icons.add_circle), 
+          label: 'Pedir cita'
+        ),
         BottomNavigationBarItem(
           icon: Icon(Icons.wifi_tethering),
           label: "Mis Reservas",
         ),
-        BottomNavigationBarItem(icon: Icon(Icons.phone), label: "Llamanos"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Perfil"),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.phone),
+          label: "Llamanos"
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: "Perfil"
+        ),
       ],
     );
   }

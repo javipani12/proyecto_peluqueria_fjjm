@@ -6,12 +6,15 @@ import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlo
 class LoginFormProvider extends ChangeNotifier {
 
   GlobalKey<FormState> formKey = new GlobalKey<FormState>();
-  UsuariosServices usuariosServices = UsuariosServices() ;
+  UsuariosServices usuariosServices = UsuariosServices();
+
 
   Usuario usuario = Usuario(
     acceptPrivacy: true, 
     acceptPublicity: true, 
     checkPassword: '', 
+    efectivo: false,
+
     email: '', 
     lastname: '', 
     name: '', 

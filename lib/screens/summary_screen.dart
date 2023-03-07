@@ -1,189 +1,279 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_peluqueria_fjjm/models/models.dart';
+import 'package:proyecto_peluqueria_fjjm/services/reservas_services.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/button_navigation_bar.dart';
 import 'package:proyecto_peluqueria_fjjm/screens/screens.dart';
-import 'package:proyecto_peluqueria_fjjm/services/variable.dart' as variablesGlobales;
+import 'package:provider/provider.dart';
+import 'package:proyecto_peluqueria_fjjm/services/variable.dart'as variablesGlobales;
 
-class SummaryScreen extends StatelessWidget {
+class SummaryScreen extends StatefulWidget {
   const SummaryScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<SummaryScreen> createState() => _SummaryScreenState();
+}
 
-    double precio = 0;
+class _SummaryScreenState extends State<SummaryScreen> {
+  PaymentMethod? paymentMethod;
+  @override
+  Widget build(BuildContext context) {
 
     String peluqueros() {
       String peluqueros = '';
       for (int i = 0; i < variablesGlobales.peluqueros.length; i++) {
         peluqueros += variablesGlobales.peluqueros[i].nombre + ", ";
       }
-      peluqueros = peluqueros.substring(0, peluqueros.length - 2);;
+      peluqueros = peluqueros.substring(0, peluqueros.length - 2);
       return peluqueros;
+    }
+
+    double calcularPrecio(){
+      double precio = 0;
+      for (int i = 0; i < variablesGlobales.servicios.length; i++) {
+        precio += variablesGlobales.servicios[i].precio;
+      }
+      return precio;
     }
 
     String servicios() {
       String servicios = '';
       for (int i = 0; i < variablesGlobales.servicios.length; i++) {
         servicios += variablesGlobales.servicios[i].nombre + ', ';
-        precio += variablesGlobales.servicios[i].precio;
       }
       servicios = servicios.substring(0, servicios.length - 2);
       return servicios;
     }
-
-    List horas() {
-      List list = [];
-      for (int i = 0; i < variablesGlobales.info['hora'].length; i++) {
-        list.add(variablesGlobales.info['hora'][i].hour);
-      }
-      return list;
+    
+    String fechaHora() {
+      String fechaHora = '';
+      fechaHora = "${variablesGlobales.fecha.split(" ")[0]} ${variablesGlobales.horas[0].split("(")[1].split(")")[0]}";
+      variablesGlobales.fechaHora = fechaHora;
+      return fechaHora;
     }
 
-    PaymentMethod? paymentMethod;
-
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Finalizar reserva'),
-          actions: const [
-
-          ],
-        ),
-        bottomNavigationBar: buttonNavigationBar(),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-            child: Column(
-              children: [
-                const Text(
-                  'Resumen de tu pedido',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: Card(
-                    elevation: 5,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(
-                            variablesGlobales.peluqueria!.nombre,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        ListTile(
-                          visualDensity: VisualDensity(vertical: -4),
-                          leading: Text(
-                            'Peluqueros',
-                            style: TextStyle(color: Colors.black54),
-                          ),
-                          trailing: Text(peluqueros(),
-                              style: TextStyle(color: Colors.black54)),
-                        ),
-                        ListTile(
-                          visualDensity: VisualDensity(vertical: -4),
-                          leading: Text(
-                            'Fecha y hora',
-                            style: TextStyle(color: Colors.black54),
-                          ),
-                          trailing: Text("XX/XX/XXXX XX:XX",
-                              style: TextStyle(color: Colors.black54)),
-                        ),
-                        ListTile(
-                          visualDensity: VisualDensity(vertical: -4),
-                          leading: Text(
-                            'Servicios',
-                            style: TextStyle(color: Colors.black54),
-                          ),
-                          trailing: Text(servicios(),
-                              style: TextStyle(color: Colors.black54)),
-                        ),
-                        Divider(
-                          indent: 15,
-                          endIndent: 15,
-                        ),
-                        ListTile(
-                          title: Text(
-                            'Total',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          trailing: Text(precio.toString() + '€',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 25)),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Divider(
-                  indent: 0,
-                  endIndent: 0,
-                ),
-                ListTile(
-                  leading: Icon(Icons.credit_card),
-                  title: Text(
-                    'Tarjeta Bancaria',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  trailing: Radio<PaymentMethod>(
-                    value: PaymentMethod.paypal,
-                    groupValue: paymentMethod,
-                    onChanged: (value) {
-                      paymentMethod = PaymentMethod.creditCard;
-                    },
-                  )
-                ),
-                Divider(
-                  indent: 0,
-                  endIndent: 0,
-                ),
-                ListTile(
-                    leading: Icon(Icons.mobile_friendly),
-                    title: Text(
-                      'Bizum',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    trailing: Radio<PaymentMethod>(
-                      value: PaymentMethod.paypal,
-                      groupValue: paymentMethod,
-                      onChanged: (value) {
-                        paymentMethod = PaymentMethod.paypal;
-                      },
-                    )),
-                Divider(
-                  indent: 0,
-                  endIndent: 0,
-                ),
-                ListTile(
-                  leading: Icon(Icons.attach_money),
-                  title: Text(
-                    'Efectivo',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  trailing: Radio<PaymentMethod>(
-                    value: PaymentMethod.paypal,
-                    groupValue: paymentMethod,
-                    onChanged: (value) {
-                      paymentMethod = PaymentMethod.paypal;
-                    },
-                  )
-                ),
-                SizedBox(height: 10,),
-                ElevatedButton(
-                  child: const SizedBox(
-                    width: double.infinity,
-                    child: Center(child: Text('Continuar')),
-                  ),
-                  onPressed: () {
-                    final route = MaterialPageRoute(
-                      builder: (context) => const CreditCardScreen());
-                  Navigator.push(context, route);
-                  },
-                ),
-              ],
+    return  ChangeNotifierProvider<ReservasServices>(
+      create: (_) => ReservasServices(),
+      child: Consumer<ReservasServices>(
+        builder: (context, serviciosServices, _) {
+        return Scaffold(
+            appBar: AppBar(
+              title: const Text('Finalizar reserva'),
             ),
-          ),
-        ));
+            bottomNavigationBar: const ButtonNavigationBar(),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Resumen de tu pedido',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      child: Card(
+                        elevation: 5,
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Text(
+                                variablesGlobales.peluqueria!.nombre,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                            ),
+                            ListTile(
+                              visualDensity: const VisualDensity(vertical: -4),
+                              leading: const Text(
+                                'Peluqueros',
+                                maxLines: 2,
+                                style: TextStyle(
+                                  color: Colors.black87
+                                ),
+                              ),
+                              trailing: Text(
+                                peluqueros(),
+                                style: const TextStyle(color: Colors.black54)
+                              ),
+                            ),
+                            ListTile(
+                              visualDensity: const VisualDensity(vertical: -4),
+                              leading: const Text(
+                                'Fecha y hora',
+                                style: TextStyle(
+                                  color: Colors.black87
+                                ),
+                              ),
+                              trailing: Text(
+                                fechaHora(),
+                                style: const TextStyle(color: Colors.black54)
+                              ),
+                            ),
+                            ListTile(
+                              visualDensity: const VisualDensity(vertical: -4),
+                              leading: const Text(
+                                'Servicios',
+                                style: TextStyle(
+                                  color: Colors.black87
+                                ),
+                              ),
+                              trailing: Text(
+                                servicios(),
+                                maxLines: 2,
+                                style: const TextStyle(
+                                  color: Colors.black54
+                                )
+                              ),
+                            ),
+                            const Divider(
+                              indent: 15,
+                              endIndent: 15,
+                            ),
+                            ListTile(
+                              title: const Text(
+                                'Total',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              trailing: Text(
+                                '${calcularPrecio()}€',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold, 
+                                  fontSize: 25
+                                )
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const Divider(
+                      indent: 0,
+                      endIndent: 0,
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.credit_card),
+                      title: const Text(
+                        'Tarjeta Bancaria',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      trailing: Radio(
+                        value: PaymentMethod.creditCard,
+                        groupValue: paymentMethod,
+                        onChanged: (value) {
+                          setState(() {
+                            paymentMethod = value;
+                          });
+                        },
+                      )
+                    ),
+                    const Divider(
+                      indent: 0,
+                      endIndent: 0,
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.mobile_friendly),
+                      title: const Text(
+                        'Bizum',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      trailing: Radio(
+                        value: PaymentMethod.bizum,
+                        groupValue: paymentMethod,
+                        onChanged: (value) {
+                          setState(() {
+                            paymentMethod = value;
+                          });
+                        },
+                      )
+                    ),
+                    const Divider(
+                      indent: 0,
+                      endIndent: 0,
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.attach_money),
+                      title: const Text(
+                        'Efectivo',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      trailing: Radio(
+                        value: PaymentMethod.cash,
+                        groupValue: paymentMethod,
+                        onChanged: !variablesGlobales.usuario.efectivo 
+                          ? null 
+                          : (PaymentMethod? value) {
+                            setState(() {
+                              paymentMethod = value;
+                            });
+                          },
+                      )
+                    ),
+                    const SizedBox( height: 10,),
+                    ElevatedButton(
+                      child: const SizedBox(
+                        width: double.infinity,
+                        child: Center(child: Text('Continuar')),
+                      ),
+                      onPressed: () async {
+                        Reserva reserva = Reserva(
+                          eliminado: false,
+                          fechaHora: variablesGlobales.fechaHora, 
+                          idUsuario: variablesGlobales.usuario.id!, 
+                          importe: calcularPrecio(), 
+                          metodoPago: '', 
+                          peluqueria: variablesGlobales.peluqueria!.nombre, 
+                          peluqueros: peluqueros(), 
+                          servicios: servicios(),
+                        );
+                        if (paymentMethod == PaymentMethod.bizum) {
+                          reserva.metodoPago = 'Bizum - ${conceptoBizum()}';
+                          await serviciosServices.createReserva(reserva);
+                          final route = MaterialPageRoute(
+                            builder: (context) => const ReservationsScreen());
+                            Navigator.push(context, route);
+                        }
+                        if (paymentMethod == PaymentMethod.cash) {
+                          reserva.metodoPago = 'Efectivo';
+                          await serviciosServices.createReserva(reserva);
+                          final route = MaterialPageRoute(
+                            builder: (context) => const ReservationsScreen());
+                            Navigator.push(context, route);
+                        }
+                        if(paymentMethod == PaymentMethod.creditCard){
+                          final route = MaterialPageRoute(
+                            builder: (context) => const CreditCardScreen());
+                            Navigator.push(context, route);
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            )
+          );
+        }
+      )
+    );
   }
 }
 
-enum PaymentMethod { paypal, creditCard, cash }
+enum PaymentMethod { bizum, creditCard, cash }
+
+// El concepto no puede ser muy largo, ya que si no da error
+// en la ventana de reservas 
+String conceptoBizum() {
+  String concepto = '';
+  concepto += variablesGlobales.fechaHora.split(" ")[0].replaceAll("-", "");
+  concepto += variablesGlobales.fechaHora.split(" ")[1].replaceAll(":", "");
+  return concepto;
+}
