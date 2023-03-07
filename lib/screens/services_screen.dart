@@ -17,7 +17,6 @@ class ServicesScreen extends StatefulWidget {
 }
 
 class _ServicesScreenState extends State<ServicesScreen> {
-
   bool sliderEnable = false;
   final List<Servicio> serviciosSeleccionados = [];
 
@@ -225,6 +224,7 @@ String mostrarServiciosSeleccionados(List<Servicio> serviciosSeleccionados) {
 
     servicios = servicios.substring(0, servicios.length - 2);
   }
+
 
   return servicios;
 }

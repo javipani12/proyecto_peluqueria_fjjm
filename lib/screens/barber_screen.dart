@@ -17,7 +17,6 @@ class BarberScreen extends StatefulWidget {
 }
 
 class _BarberScreenState extends State<BarberScreen> {
-
   bool sliderEnable = false;
   final List<Peluquero> peluquerosSeleccionados = [];
 
@@ -214,6 +213,7 @@ void alertaPeluqueros(BuildContext context) {
     )  
   );
 }
+
 
 String mostrarPeluquerosSeleccionados(List<Peluquero> peluquerosSeleccionados) {
   String peluqueros = '';

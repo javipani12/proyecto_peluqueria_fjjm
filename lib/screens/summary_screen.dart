@@ -43,7 +43,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
       servicios = servicios.substring(0, servicios.length - 2);
       return servicios;
     }
-
+    
     String fechaHora() {
       String fechaHora = '';
       fechaHora = "${variablesGlobales.fecha.split(" ")[0]} ${variablesGlobales.horas[0].split("(")[1].split(")")[0]}";

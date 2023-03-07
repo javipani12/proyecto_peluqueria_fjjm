@@ -4,6 +4,7 @@ import 'package:table_calendar/table_calendar.dart';
 class AppThemes {
   static const Color primary = Colors.blueGrey;
 
+
   static final ThemeData lightTheme = ThemeData.light().copyWith(
     primaryColor: primary,
     appBarTheme: const AppBarTheme(

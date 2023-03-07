@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_peluqueria_fjjm/themes/app_themes.dart';
 import 'package:proyecto_peluqueria_fjjm/widgets/widgets.dart';
 import 'package:proyecto_peluqueria_fjjm/models/models.dart';
 import 'screens.dart';
@@ -106,6 +107,7 @@ class _ListadoPeluquerias extends StatelessWidget {
                   fit: BoxFit.cover,
                   placeholder: const AssetImage('assets/jar-loading.gif'),
                   fadeInDuration: const Duration(milliseconds: 360),
+
                   image: NetworkImage(peluqueria.foto),
                 ),
                 Container(
