@@ -67,7 +67,9 @@ class _ServicesScreenState extends State<ServicesScreen> {
                         height: 190,
                         margin: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: !serviciosSeleccionados.contains(servicio)
+                          ?Colors.white
+                          : Colors.teal[300],
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(

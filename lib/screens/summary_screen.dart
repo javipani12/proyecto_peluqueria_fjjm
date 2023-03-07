@@ -54,7 +54,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
     return  ChangeNotifierProvider<ReservasServices>(
       create: (_) => ReservasServices(),
       child: Consumer<ReservasServices>(
-        builder: (context, serviciosServices, _) {
+        builder: (context, reservasServices, _) {
         return Scaffold(
             appBar: AppBar(
               title: const Text('Finalizar reserva'),
@@ -237,14 +237,14 @@ class _SummaryScreenState extends State<SummaryScreen> {
                         );
                         if (paymentMethod == PaymentMethod.bizum) {
                           reserva.metodoPago = 'Bizum - ${conceptoBizum()}';
-                          await serviciosServices.createReserva(reserva);
+                          await reservasServices.createReserva(reserva);
                           final route = MaterialPageRoute(
                             builder: (context) => const ReservationsScreen());
                             Navigator.push(context, route);
                         }
                         if (paymentMethod == PaymentMethod.cash) {
                           reserva.metodoPago = 'Efectivo';
-                          await serviciosServices.createReserva(reserva);
+                          await reservasServices.createReserva(reserva);
                           final route = MaterialPageRoute(
                             builder: (context) => const ReservationsScreen());
                             Navigator.push(context, route);

@@ -68,7 +68,9 @@ class _BarberScreenState extends State<BarberScreen> {
                         height: 190,
                         margin: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: !peluquerosSeleccionados.contains(peluquero)
+                          ? Colors.white
+                          : Colors.teal[300],
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
