@@ -192,9 +192,7 @@ class _RegisterScreenBody extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        final route = MaterialPageRoute(
-                            builder: (context) => const PolityScreen());
-                        Navigator.push(context, route);
+
                       },
                       child: Text('Aceptar política de privacidad'),
                     ),
@@ -209,9 +207,7 @@ class _RegisterScreenBody extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        final route = MaterialPageRoute(
-                            builder: (context) => const EnvioScreen());
-                        Navigator.push(context, route);
+                        
                       },
                       child: Text('Aceptar enviar publicidad'),
                     ),

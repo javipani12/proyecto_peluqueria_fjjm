@@ -32,10 +32,10 @@ class AppThemes {
 
     // TextButton Theme
     textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-      foregroundColor: primary,
-      side: BorderSide(color: Colors.blue, width: 2),
-    )),
+      style: TextButton.styleFrom(
+        foregroundColor: primary,
+      )
+    ),
 
     // Botón volver hacia atrás
     floatingActionButtonTheme: const FloatingActionButtonThemeData(

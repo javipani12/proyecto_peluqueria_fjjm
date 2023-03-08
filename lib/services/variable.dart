@@ -10,7 +10,8 @@ Usuario usuario = Usuario(
     lastname: '',
     name: '',
     password: '',
-    phoneNumber: '');
+    phoneNumber: '',
+    saldo: 0);
 
 Peluqueria? peluqueria;
 
